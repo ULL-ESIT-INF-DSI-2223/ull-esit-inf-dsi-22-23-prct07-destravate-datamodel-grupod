@@ -4,7 +4,7 @@ import { Reto } from "./retos";
 import { Stats } from "./stats";
 import { Grupo } from "./grupos";
 
-import * as inquirer from "inquirer";
+import inquirer from "inquirer";
 
 export class App {
   private usuarios: Usuario[];

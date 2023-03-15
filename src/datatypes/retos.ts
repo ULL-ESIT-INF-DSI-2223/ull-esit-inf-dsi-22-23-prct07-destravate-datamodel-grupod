@@ -1,7 +1,9 @@
-export class Reto {
+import { Datatype } from "./datatype";
+
+export class Reto implements Datatype {
   private static retoCount = 0;
-  private _id: number;
-  private _nombre: string;
+  public id: number;
+  public nombre: string;
   private _ruta: number[];
   private _tipo_reto: string;
   private _km_totales: number;
@@ -16,8 +18,8 @@ export class Reto {
     km_totales: number,
     usuarios_realizando_reto: number[]
   ) {
-    this._id = Reto.retoCount++;
-    this._nombre = nombre;
+    this.id = Reto.retoCount++;
+    this.nombre = nombre;
     this._ruta = ruta;
     this._tipo_reto = tipo_reto;
     this._km_totales = km_totales;

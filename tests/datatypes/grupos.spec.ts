@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Grupo } from "../src/grupos";
+import { Grupo } from "../../src/datatypes/grupos";
 
 describe("Clase Grupos", () => {
   it("Debe existir la clase Grupo", () => {

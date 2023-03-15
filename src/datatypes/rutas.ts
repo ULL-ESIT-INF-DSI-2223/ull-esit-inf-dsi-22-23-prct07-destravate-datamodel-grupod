@@ -1,9 +1,11 @@
+import { Datatype } from "./datatype";
+
 type coordenadas = [number, number];
 
-export class Ruta {
+export class Ruta implements Datatype {
   private static rutacount = 0;
-  private id: number;
-  private nombre: string;
+  public id: number;
+  public nombre: string;
   private cordenadas_incio: coordenadas;
   private cordenadas_fin: coordenadas;
   private longitud: number;

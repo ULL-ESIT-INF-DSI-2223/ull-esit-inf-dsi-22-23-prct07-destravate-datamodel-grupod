@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Stats } from "../src/stats";
+import { Stats } from "../../src/datatypes/stats";
 
 describe("Clase Stats", () => {
   it("Debe existir la clase Stats", () => {

@@ -2,7 +2,7 @@ import { Stats } from "./stats";
 
 type Actividad = "correr" | "bicicleta" | undefined;
 
-class Usuario {
+export class Usuario {
   private static usercount = 0;
   private userid: number;
   private username: string;

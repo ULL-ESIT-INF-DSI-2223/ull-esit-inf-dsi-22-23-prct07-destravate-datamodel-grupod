@@ -1,6 +1,6 @@
 import { Stats } from "./stats";
 
-class Grupo {
+export class Grupo {
   private static groupcount = 0;
   private groupid: number;
   private groupname: string;

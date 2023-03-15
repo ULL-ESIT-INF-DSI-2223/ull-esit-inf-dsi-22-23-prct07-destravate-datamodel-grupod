@@ -4,7 +4,7 @@ import { Reto } from "../datatypes/retos";
 import { Ruta } from "../datatypes/rutas";
 
 export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
-  private collection: Map<number, T>;
+  protected collection: Map<number, T>;
   constructor() {
     this.collection = new Map<number, T>();
   }

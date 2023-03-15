@@ -1,8 +1,10 @@
-import { Usuario } from "./usuarios";
-import { Ruta } from "./rutas";
-import { Reto } from "./retos";
-import { Stats } from "./stats";
-import { Grupo } from "./grupos";
+import { Usuario } from "./datatypes/usuarios";
+import { Ruta } from "./datatypes/rutas";
+import { Reto } from "./datatypes/retos";
+import { Stats } from "./datatypes/stats";
+import { Grupo } from "./datatypes/grupos";
+
+import { JsonUsuario } from "./jsonadapters/jsonusuarios";
 
 import inquirer from "inquirer";
 
@@ -23,7 +25,7 @@ export class App {
 
   public async mainMenu() {
     console.log("Bienvenido a la aplicación de rutas");
-    let answer = await inquirer.prompt({
+    const answer = await inquirer.prompt({
       type: "list",
       name: "option",
       message: "¿Qué quieres hacer?",
@@ -33,9 +35,11 @@ export class App {
         "Gestionar retos",
         "Gestionar grupos",
         "Gestionar estadísticas",
-        "Salir"
-      ]
+        "Salir",
+      ],
     });
   }
-
 }
+
+const jsonadapters = new JsonUsuario();
+jsonadapters.addElement(new Usuario("Pepe"));

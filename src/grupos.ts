@@ -1,4 +1,4 @@
-import { Stats } from "./Stats";
+import { Stats } from "./stats";
 
 export class Grupo {
   private static groupcount = 0;

@@ -1,4 +1,4 @@
-import { Stats } from "./Stats";
+import { Stats } from "./stats";
 
 type Actividad = "correr" | "bicicleta" | undefined;
 

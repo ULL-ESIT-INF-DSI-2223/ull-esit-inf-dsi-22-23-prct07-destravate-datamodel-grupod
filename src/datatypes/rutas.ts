@@ -16,26 +16,19 @@ export class Ruta implements Datatype {
 
   public static ids_rutas: number[] = [];
 
-  constructor(
-    nombre: string,
-    cordenadas_incio: coordenadas,
-    cordenadas_fin: coordenadas,
-    longitud: number,
-    desnivel: number,
-    usuarios_ya_realizados: number[],
-    tipo_ruta: string,
-    calificacion: number
-  ) {
+  constructor(nombre: string) {
     this.id = Ruta.rutacount++;
     this.nombre = nombre;
-    this.cordenadas_incio = cordenadas_incio;
-    this.cordenadas_fin = cordenadas_fin;
-    this.longitud = longitud;
-    this.desnivel = desnivel;
-    this.usuarios_ya_realizados = usuarios_ya_realizados;
-    this.tipo_ruta = tipo_ruta;
-    this.calificacion = calificacion;
+    this.cordenadas_incio = [0, 0];
+    this.cordenadas_fin = [0, 0];
+    this.longitud = 0;
+    this.desnivel = 0;
+    this.usuarios_ya_realizados = [];
+    this.tipo_ruta = "";
+    this.calificacion = 0;
   }
 
-  
+  public getNombre(): string {
+    return this.nombre;
+  }
 }

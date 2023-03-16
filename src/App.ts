@@ -21,21 +21,41 @@ export class App {
     this.stats = new Stats();
   }
 
-  public async mainMenu() {
-    console.log("Bienvenido a la aplicación de rutas");
-    let answer = await inquirer.prompt({
-      type: "list",
-      name: "option",
-      message: "¿Qué quieres hacer?",
-      choices: [
-        "Gestionar usuarios",
-        "Gestionar rutas",
-        "Gestionar retos",
-        "Gestionar grupos",
-        "Gestionar estadísticas",
-        "Salir"
-      ]
-    });
+  public mainMeny():void {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "mainMenu",
+          message: "¿Qué quieres hacer?",
+          choices: [
+            "Crear un usuario",
+            "Crear una ruta",
+            "Crear un reto",
+            "Crear un grupo",
+            "Salir",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.mainMenu) {
+          case "Crear un usuario":
+            break;
+          case "Crear una ruta":
+            break;
+          case "Crear un reto":
+            break;
+          case "Crear un grupo":
+            break;
+          case "Salir":
+            console.log("¡Hasta pronto!");
+            break;
+        }
+      });
+    
   }
+
+  
+
 
 }

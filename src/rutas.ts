@@ -34,4 +34,6 @@ export class Ruta {
     this.tipo_ruta = tipo_ruta;
     this.calificacion = calificacion;
   }
+
+  
 }

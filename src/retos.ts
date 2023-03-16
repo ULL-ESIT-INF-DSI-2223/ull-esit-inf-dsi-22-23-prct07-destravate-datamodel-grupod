@@ -23,4 +23,6 @@ export class Reto {
     this._km_totales = km_totales;
     this._usuarios_realizando_reto = usuarios_realizando_reto;
   }
+
+  
 }

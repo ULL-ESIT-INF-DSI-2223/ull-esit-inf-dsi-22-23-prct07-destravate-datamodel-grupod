@@ -15,7 +15,7 @@ type schemaType = {
   }[];
 };
 
-export class JsonRetoss extends RetoCollection {
+export class JsonRetos extends RetoCollection {
   private db: lowdb.LowdbSync<schemaType>;
   constructor() {
     super();

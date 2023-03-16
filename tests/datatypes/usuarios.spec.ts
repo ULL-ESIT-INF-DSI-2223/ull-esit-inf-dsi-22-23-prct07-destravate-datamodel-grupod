@@ -73,6 +73,7 @@ describe("Clase Usuario", () => {
     expect(usuario.getRetosActivos()).to.be.deep.equal([10, 20, 30]);
   });
   it("Se debe poder acceder al historico de rutas del usuario", () => {
+    const today = new Date();
     const usuario = new Usuario(
       "Usuario 1",
       "correr",
@@ -80,10 +81,10 @@ describe("Clase Usuario", () => {
       new Stats(),
       [],
       [],
-      [{ fecha: new Date(), rutaid: 1 }]
+      [{ fecha: today, rutaid: 1 }]
     );
     expect(usuario.getHistoricoRutas()).to.be.deep.equal([
-      { fecha: new Date(), rutaid: 1 },
+      { fecha: today, rutaid: 1 },
     ]);
   });
 });

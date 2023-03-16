@@ -18,7 +18,7 @@ type schemaType = {
   }[];
 };
 
-export class JsonRetoss extends RutaCollection {
+export class JsonRutas extends RutaCollection {
   private db: lowdb.LowdbSync<schemaType>;
   constructor() {
     super();

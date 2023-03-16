@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Usuario } from "../src/usuarios";
+import { Usuario } from "../../src/datatypes/usuarios";
 
 describe("Clase Usuario", () => {
   it("Debe existir la clase Usuario", () => {

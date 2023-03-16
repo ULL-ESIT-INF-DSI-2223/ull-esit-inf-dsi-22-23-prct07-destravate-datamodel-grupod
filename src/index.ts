@@ -1,8 +1,10 @@
-import { Usuario } from "./usuarios";
-import { Ruta } from "./rutas";
-import { Reto } from "./retos";
-import { Stats } from "./stats";
-import { Grupo } from "./grupos";
+import { Usuario } from "./datatypes/usuarios";
+import { Ruta } from "./datatypes/rutas";
+import { Reto } from "./datatypes/retos";
+import { Stats } from "./datatypes/stats";
+import { Grupo } from "./datatypes/grupos";
+
+import { JsonUsuario } from "./jsonadapters/jsonusuarios";
 
 import inquirer from "inquirer";
 
@@ -54,8 +56,7 @@ export class App {
       });
     
   }
-
-  
-
-
 }
+
+const jsonadapters = new JsonUsuario();
+jsonadapters.addElement(new Usuario("Pepe"));

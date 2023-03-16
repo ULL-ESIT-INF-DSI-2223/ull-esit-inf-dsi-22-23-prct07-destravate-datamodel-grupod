@@ -1,8 +1,8 @@
 import "mocha";
 import { expect } from "chai";
-import { Ruta } from "../src/rutas";
+import { Ruta } from "../../src/datatypes/rutas";
 
-describe("Clase Rutass", () => {
+describe("Clase Rutas", () => {
   it("Debe existir la clase Rutas", () => {
     expect(Ruta).to.exist;
   });

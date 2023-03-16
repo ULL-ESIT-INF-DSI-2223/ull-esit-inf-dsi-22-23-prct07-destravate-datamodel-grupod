@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Reto } from "../src/retos";
+import { Reto } from "../../src/datatypes/retos";
 
 describe("Clase Retos", () => {
   it("Debe existir la clase Reto", () => {

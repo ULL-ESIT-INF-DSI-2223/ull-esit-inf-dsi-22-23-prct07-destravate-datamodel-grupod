@@ -1,11 +1,12 @@
 import { Stats } from "./stats";
+import { Datatype } from "./datatype";
 
 type Actividad = "correr" | "bicicleta" | undefined;
 
-export class Usuario {
+export class Usuario implements Datatype {
   private static usercount = 0;
-  private userid: number;
-  private username: string;
+  public id: number;
+  public nombre: string;
   private actividad: Actividad;
   private amigos: number[];
   private stats: Stats;
@@ -16,8 +17,8 @@ export class Usuario {
     rutaid: number;
   }[];
   constructor(username: string) {
-    this.userid = Usuario.usercount++;
-    this.username = username;
+    this.id = Usuario.usercount++;
+    this.nombre = username;
     this.actividad = undefined;
     this.amigos = [];
     this.stats = new Stats();

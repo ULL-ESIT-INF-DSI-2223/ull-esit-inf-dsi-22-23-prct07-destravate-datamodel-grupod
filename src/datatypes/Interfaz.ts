@@ -213,72 +213,112 @@ export class App {
   }
 }
 
-let Usuario1 = new Usuario("Pepe");
-let Usuario2 = new Usuario("Juan");
-let Usuario3 = new Usuario("Maria");
-let Usuario4 = new Usuario("Luis");
-let Usuario5 = new Usuario("Ana");
-let Usuario6 = new Usuario("Jose");
-let Usuario7 = new Usuario("Luisa");
-let Usuario8 = new Usuario("Pedro");
-let Usuario9 = new Usuario("Antonio");
-let Usuario10 = new Usuario("Marta");
-let Usuario11 = new Usuario("Rosa");
-let Usuario12 = new Usuario("Lorena");
-let Usuario13 = new Usuario("Sara");
-let Usuario14 = new Usuario("Laura");
-let Usuario15 = new Usuario("Pablo");
-let Usuario16 = new Usuario("Carlos");
-let Usuario17 = new Usuario("Miguel");
-let Usuario18 = new Usuario("Sergio");
-let Usuario19 = new Usuario("Javier");
-let Usuario20 = new Usuario("Raul");
+let Ruta1 = new Ruta(
+  "Ruta1",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta2 = new Ruta(
+  "Ruta2",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta3 = new Ruta(
+  "Ruta3",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta4 = new Ruta(
+  "Ruta4",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta5 = new Ruta(
+  "Ruta5",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta6 = new Ruta(
+  "Ruta6",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta7 = new Ruta(
+  "Ruta7",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta8 = new Ruta(
+  "Ruta8",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta9 = new Ruta(
+  "Ruta9",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+let Ruta10 = new Ruta(
+  "Ruta10",
+  [0, 0],
+  [1, 1],
+  1,
+  12,
+  [123],
+  "bicicleta",
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
 
-let Ruta1 = new Ruta("Ruta1");
-let Ruta2 = new Ruta("Ruta2");
-let Ruta3 = new Ruta("Ruta3");
-let Ruta4 = new Ruta("Ruta4");
-let Ruta5 = new Ruta("Ruta5");
-let Ruta6 = new Ruta("Ruta6");
-let Ruta7 = new Ruta("Ruta7");
-let Ruta8 = new Ruta("Ruta8");
-let Ruta9 = new Ruta("Ruta9");
-let Ruta10 = new Ruta("Ruta10");
-
-let Reto1 = new Reto("Reto1");
-let Reto2 = new Reto("Reto2");
-let Reto3 = new Reto("Reto3");
-
-let Grupo1 = new Grupo("Grupo1");
-let Grupo2 = new Grupo("Grupo2");
-let Grupo3 = new Grupo("Grupo3");
-let Grupo4 = new Grupo("Grupo4");
-let Grupo5 = new Grupo("Grupo5");
+let Reto1 = new Reto("Reto1", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
+let Reto2 = new Reto("Reto2", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
+let Reto3 = new Reto("Reto3", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
 
 let app = new App();
-
-app.setUsuarios([
-  Usuario1,
-  Usuario2,
-  Usuario3,
-  Usuario4,
-  Usuario5,
-  Usuario6,
-  Usuario7,
-  Usuario8,
-  Usuario9,
-  Usuario10,
-  Usuario11,
-  Usuario12,
-  Usuario13,
-  Usuario14,
-  Usuario15,
-  Usuario16,
-  Usuario17,
-  Usuario18,
-  Usuario19,
-  Usuario20,
-]);
 
 app.setRutas([
   Ruta1,
@@ -294,8 +334,6 @@ app.setRutas([
 ]);
 
 app.setRetos([Reto1, Reto2, Reto3]);
-
-app.setGrupos([Grupo1, Grupo2, Grupo3, Grupo4, Grupo5]);
 
 app.mainMenu();
 

@@ -8,8 +8,9 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   constructor() {
     this.collection = new Map<number, T>();
   }
-  addElement(element: T): void {
+  addElement(element: T): number {
     this.collection.set(element.id, element);
+    return element.id;
   }
   removeElement(id: number): void {
     this.collection.delete(id);

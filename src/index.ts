@@ -23,7 +23,7 @@ export class App {
     this.stats = new Stats();
   }
 
-  public mainMeny():void {
+  public mainMeny(): void {
     inquirer
       .prompt([
         {
@@ -54,9 +54,5 @@ export class App {
             break;
         }
       });
-    
   }
 }
-
-const jsonadapters = new JsonUsuario();
-jsonadapters.addElement(new Usuario("Pepe"));

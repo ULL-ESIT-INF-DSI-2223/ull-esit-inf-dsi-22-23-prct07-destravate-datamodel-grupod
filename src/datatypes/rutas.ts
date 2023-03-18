@@ -35,4 +35,20 @@ export class Ruta implements Datatype {
   public getNombre(): string {
     return this.nombre;
   }
+
+  public getUsuarios(): number[] {
+    return this.usuarios_ya_realizados;
+  }
+
+  public getDistancia(): number {
+    return this.longitud;
+  }
+
+  public getTipoRuta(): string {
+    return this.tipo_ruta;
+  }
+  
+  public getCalificacionMedia(): number {
+    return this.calificacion_media;
+  }
 }

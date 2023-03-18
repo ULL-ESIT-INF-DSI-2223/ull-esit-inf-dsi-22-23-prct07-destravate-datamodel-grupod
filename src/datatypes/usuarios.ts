@@ -39,4 +39,8 @@ export class Usuario implements Datatype {
   }[] {
     return this.historico_rutas;
   }
+
+  public getNombre(): string {
+    return this.nombre;
+  }
 }

@@ -1,8 +1,8 @@
 import { Usuario } from "./datatypes/usuarios";
 import { Ruta } from "./datatypes/rutas";
-import { Reto } from "./datatypes/retos";
+//import { Reto } from "./datatypes/retos";
 import { Stats } from "./datatypes/stats";
-import { Grupo } from "./datatypes/grupos";
+//import { Grupo } from "./datatypes/grupos";
 import { UsuarioCollection } from "./collections/usuario_collection";
 import { RutaCollection } from "./collections/rutas_collection";
 import { RetoCollection } from "./collections/retos_collection";

@@ -25,9 +25,7 @@ export class Ruta implements Datatype {
     this.desnivel = desnivel;
     this.usuarios_ya_realizados = usuarios_ya_realizados;
     this.tipo_ruta = tipo_ruta;
-    for (let i = 0; i < calificacion.length; i++) {
-      this.calificacion.push(calificacion[i]);
-    }
+    this.calificacion = calificacion;
     this.calificacion_media =
       this.calificacion.reduce((a, b) => a + b, 0) / this.calificacion.length;
   }

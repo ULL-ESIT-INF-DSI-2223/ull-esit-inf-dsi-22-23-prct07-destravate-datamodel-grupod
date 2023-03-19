@@ -1,11 +1,13 @@
-import { App } from "./interfaz";
+import { App } from "./app";
 import { Ruta } from "./datatypes/rutas";
 import { Reto } from "./datatypes/retos";
 import { RutaCollection } from "./collections/rutas_collection";
 import { RetoCollection } from "./collections/retos_collection";
+import { JsonRutas } from "./jsonadapters/jsonrutas";
+import { JsonRetos } from "./jsonadapters/jsonretos";
 
-const rutas = new RutaCollection();
-const retos = new RetoCollection();
+const rutas = new JsonRutas();
+const retos = new JsonRetos();
 
 rutas.addElement(
   new Ruta(
@@ -137,7 +139,6 @@ const app = new App();
 
 app.setRutas(rutas);
 app.setRetos(retos);
-
 app.start();
 
 // const jsonadapters = new JsonUsuario();

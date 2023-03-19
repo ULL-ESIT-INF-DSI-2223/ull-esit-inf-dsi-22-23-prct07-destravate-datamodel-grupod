@@ -14,6 +14,10 @@ import fs from "fs";
 
 import readline from "readline";
 import inquirer from "inquirer";
+import { JsonUsuarios } from "./jsonadapters/jsonusuarios";
+import { JsonGrupos } from "./jsonadapters/jsongrupos";
+import { JsonRutas } from "./jsonadapters/jsonrutas";
+import { JsonRetos } from "./jsonadapters/jsonretos";
 
 enum Commandos {
   CrearUsuario = "Crear un usuario",
@@ -39,10 +43,10 @@ export class App {
   private grupos: GrupoCollection;
 
   constructor() {
-    this.usuarios = new UsuarioCollection();
-    this.rutas = new RutaCollection();
-    this.retos = new RetoCollection();
-    this.grupos = new GrupoCollection();
+    this.usuarios = new JsonUsuarios();
+    this.rutas = new JsonRutas();
+    this.retos = new JsonRetos();
+    this.grupos = new JsonGrupos();
   }
 
   public setUsuarios(usuarios: UsuarioCollection): void {
@@ -144,6 +148,7 @@ export class App {
           case Commandos.CrearUsuario:
             break;
           case Commandos.MostrarUsuarios:
+            this.mostrarUsuarios();
             break;
           case Commandos.ModificarUsuario:
             break;
@@ -645,6 +650,21 @@ export class App {
     for (let i = 0; i < rutasDeBicicleta.length; i++) {
       console.log(rutasDeBicicleta[i].getNombre());
     }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
+  }
+  public mostrarUsuarios(): void {
+    console.clear();
+    console.log("Mostrar todos los usuarios");
+    this.usuarios.forEach((usuario) => {
+      console.log(usuario.getNombre());
+    });
     console.log("Pulsa enter para volver al menu principal");
     const rl = readline.createInterface({
       input: process.stdin,

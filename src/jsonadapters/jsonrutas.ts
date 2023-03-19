@@ -14,7 +14,7 @@ type schemaType = {
     desnivel: number;
     usuarios_ya_realizados: number[];
     tipo_ruta: string;
-    calificacion: number;
+    calificacion: number[];
   }[];
 };
 

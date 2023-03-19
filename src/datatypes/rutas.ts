@@ -47,7 +47,7 @@ export class Ruta implements Datatype {
   public getTipoRuta(): string {
     return this.tipo_ruta;
   }
-  
+
   public getCalificacionMedia(): number {
     return this.calificacion_media;
   }

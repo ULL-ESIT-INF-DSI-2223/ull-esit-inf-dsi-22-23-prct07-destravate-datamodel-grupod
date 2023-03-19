@@ -1,14 +1,17 @@
-import { Usuario } from "./usuarios";
-import { Ruta } from "./rutas";
-import { Reto } from "./retos";
-import { Stats } from "./stats";
-import { Grupo } from "./grupos";
+import { Usuario } from "./datatypes/usuarios";
+import { Ruta } from "./datatypes/rutas";
+import { Reto } from "./datatypes/retos";
+import { Stats } from "./datatypes/stats";
+import { Grupo } from "./datatypes/grupos";
+import { UsuarioCollection } from "./collections/usuario_collection";
+import { RutaCollection } from "./collections/rutas_collection";
+import { RetoCollection } from "./collections/retos_collection";
+import { GrupoCollection } from "./collections/grupos_collection";
 
 // import { JsonUsuario } from "./jsonadapters/jsonusuarios";
 
-import * as readline from "readline";
-
-const inquirer = require("inquirer");
+import readline from "readline";
+import inquirer from "inquirer";
 
 enum Commandos {
   CrearUsuario = "Crear un usuario",
@@ -28,33 +31,33 @@ enum Commandos {
 }
 
 export class App {
-  private usuarios: Usuario[];
-  private rutas: Ruta[];
-  private retos: Reto[];
-  private grupos: Grupo[];
+  private usuarios: UsuarioCollection;
+  private rutas: RutaCollection;
+  private retos: RetoCollection;
+  private grupos: GrupoCollection;
   private stats: Stats;
 
   constructor() {
-    this.usuarios = [];
-    this.rutas = [];
-    this.retos = [];
-    this.grupos = [];
+    this.usuarios = new UsuarioCollection();
+    this.rutas = new RutaCollection();
+    this.retos = new RetoCollection();
+    this.grupos = new GrupoCollection();
     this.stats = new Stats();
   }
 
-  public setUsuarios(usuarios: Usuario[]): void {
+  public setUsuarios(usuarios: UsuarioCollection): void {
     this.usuarios = usuarios;
   }
 
-  public setRutas(rutas: Ruta[]): void {
+  public setRutas(rutas: RutaCollection): void {
     this.rutas = rutas;
   }
 
-  public setRetos(retos: Reto[]): void {
+  public setRetos(retos: RetoCollection): void {
     this.retos = retos;
   }
 
-  public setGrupos(grupos: Grupo[]): void {
+  public setGrupos(grupos: GrupoCollection): void {
     this.grupos = grupos;
   }
 
@@ -73,7 +76,7 @@ export class App {
           choices: ["Iniciar sesión", "Registrarse"],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         if (answers["command"] === "Iniciar sesión") {
           this.login();
         } else {
@@ -92,9 +95,9 @@ export class App {
           message: "Introduce tu nombre de usuario",
         },
       ])
-      .then((answers: any) => {
-        let username = answers["username"];
-        let user = this.usuarios.find((u) => u.getNombre() === username);
+      .then((answers) => {
+        const username = answers["username"];
+        const user = this.usuarios.findElement(username);
         if (user !== undefined) {
           this.mainMenu();
         } else {
@@ -114,14 +117,14 @@ export class App {
           message: "Introduce tu nombre de usuario",
         },
       ])
-      .then((answers: any) => {
-        let username = answers["username"];
-        let user = this.usuarios.find((u) => u.getNombre() === username);
+      .then((answers) => {
+        const username = answers["username"];
+        const user = this.usuarios.findElement(username);
         if (user !== undefined) {
           console.log("Usuario ya existente");
           this.register();
         } else {
-          this.usuarios.push(
+          this.usuarios.addElement(
             new Usuario(username, undefined, [], new Stats(), [], [], [])
           );
           this.mainMenu();
@@ -140,7 +143,7 @@ export class App {
           choices: Object.values(Commandos),
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers["command"]) {
           case Commandos.CrearUsuario:
             break;
@@ -193,7 +196,7 @@ export class App {
           ],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por orden alfabético":
             this.mostrarRutasAlfabeticamente();
@@ -240,7 +243,7 @@ export class App {
           ],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por orden alfabético ascendente":
             this.mostrarRutasAlfabeticamenteAscendente();
@@ -255,23 +258,23 @@ export class App {
   public mostrarRutasAlfabeticamenteAscendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por orden alfabético ascendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
-            if (this.rutas[i].getNombre() < rutasOrdenadas[j].getNombre()) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getNombre() < rutasOrdenadas[i].getNombre()) {
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -281,7 +284,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -289,23 +292,23 @@ export class App {
   public mostrarRutasAlfabeticamenteDescendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por orden alfabético descendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
-            if (this.rutas[i].getNombre() > rutasOrdenadas[j].getNombre()) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getNombre() > rutasOrdenadas[i].getNombre()) {
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -315,7 +318,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -334,7 +337,7 @@ export class App {
           ],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por cantidad de usuarios ascendente":
             this.mostrarRutasPorCantidadDeUsuariosAscendente();
@@ -349,26 +352,25 @@ export class App {
   public mostrarRutasPorCantidadDeUsuariosAscendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por cantidad de usuarios ascendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
             if (
-              this.rutas[i].getUsuarios().length <
-              rutasOrdenadas[j].getUsuarios().length
+              ruta.getUsuarios().length < rutasOrdenadas[i].getUsuarios().length
             ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -378,7 +380,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -386,26 +388,25 @@ export class App {
   public mostrarRutasPorCantidadDeUsuariosDescendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por cantidad de usuarios descendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
             if (
-              this.rutas[i].getUsuarios().length >
-              rutasOrdenadas[j].getUsuarios().length
+              ruta.getUsuarios().length > rutasOrdenadas[i].getUsuarios().length
             ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -415,7 +416,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -434,7 +435,7 @@ export class App {
           ],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por distancia ascendente":
             this.mostrarRutasPorDistanciaAscendente();
@@ -449,25 +450,23 @@ export class App {
   public mostrarRutasPorDistanciaAscendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por distancia ascendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
-            if (
-              this.rutas[i].getDistancia() < rutasOrdenadas[j].getDistancia()
-            ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getDistancia() < rutasOrdenadas[i].getDistancia()) {
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -477,7 +476,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -485,25 +484,23 @@ export class App {
   public mostrarRutasPorDistanciaDescendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por distancia descendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
-            if (
-              this.rutas[i].getDistancia() > rutasOrdenadas[j].getDistancia()
-            ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getDistancia() > rutasOrdenadas[i].getDistancia()) {
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -513,7 +510,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -532,7 +529,7 @@ export class App {
           ],
         },
       ])
-      .then((answers: any) => {
+      .then((answers) => {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por calificacion media ascendente":
             this.mostrarRutasPorCalificacionMediaAscendente();
@@ -547,26 +544,26 @@ export class App {
   public mostrarRutasPorCalificacionMediaAscendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por calificacion media ascendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
             if (
-              this.rutas[i].getCalificacionMedia() <
-              rutasOrdenadas[j].getCalificacionMedia()
+              ruta.getCalificacionMedia() <
+              rutasOrdenadas[i].getCalificacionMedia()
             ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -576,7 +573,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -584,26 +581,26 @@ export class App {
   public mostrarRutasPorCalificacionMediaDescendente(): void {
     console.clear();
     console.log("Mostrar todas las rutas por calificacion media descendente");
-    let rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length > 0) {
-      for (let i = 0; i < this.rutas.length; i++) {
-        if (i == 0) {
-          rutasOrdenadas.push(this.rutas[i]);
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
         } else {
-          for (let j = 0; j < rutasOrdenadas.length; j++) {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
             if (
-              this.rutas[i].getCalificacionMedia() >
-              rutasOrdenadas[j].getCalificacionMedia()
+              ruta.getCalificacionMedia() >
+              rutasOrdenadas[i].getCalificacionMedia()
             ) {
-              rutasOrdenadas.splice(j, 0, this.rutas[i]);
+              rutasOrdenadas.splice(i, 0, ruta);
               break;
-            } else if (j == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(this.rutas[i]);
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
               break;
             }
           }
         }
-      }
+      });
     }
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
@@ -613,7 +610,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -621,12 +618,12 @@ export class App {
   public mostrarRutasDeCorrer(): void {
     console.clear();
     console.log("Mostrar todas las rutas de correr");
-    let rutasDeCorrer: Ruta[] = [];
-    for (let i = 0; i < this.rutas.length; i++) {
-      if (this.rutas[i].getTipoRuta() == "correr") {
-        rutasDeCorrer.push(this.rutas[i]);
+    const rutasDeCorrer: Ruta[] = [];
+    this.rutas.forEach((ruta) => {
+      if (ruta.getTipoRuta() == "correr") {
+        rutasDeCorrer.push(ruta);
       }
-    }
+    });
     for (let i = 0; i < rutasDeCorrer.length; i++) {
       console.log(rutasDeCorrer[i].getNombre());
     }
@@ -635,7 +632,7 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
@@ -643,12 +640,12 @@ export class App {
   public mostrarRutasDeBicicleta(): void {
     console.clear();
     console.log("Mostrar todas las rutas de bicicleta");
-    let rutasDeBicicleta: Ruta[] = [];
-    for (let i = 0; i < this.rutas.length; i++) {
-      if (this.rutas[i].getTipoRuta() == "bicicleta") {
-        rutasDeBicicleta.push(this.rutas[i]);
+    const rutasDeBicicleta: Ruta[] = [];
+    this.rutas.forEach((ruta) => {
+      if (ruta.getTipoRuta() == "bicicleta") {
+        rutasDeBicicleta.push(ruta);
       }
-    }
+    });
     for (let i = 0; i < rutasDeBicicleta.length; i++) {
       console.log(rutasDeBicicleta[i].getNombre());
     }
@@ -657,135 +654,8 @@ export class App {
       input: process.stdin,
       output: process.stdout,
     });
-    rl.on("line", (input) => {
+    rl.on("line", () => {
       this.mainMenu();
     });
   }
 }
-
-let Ruta1 = new Ruta(
-  "Ruta1",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta2 = new Ruta(
-  "Ruta2",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta3 = new Ruta(
-  "Ruta3",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta4 = new Ruta(
-  "Ruta4",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta5 = new Ruta(
-  "Ruta5",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta6 = new Ruta(
-  "Ruta6",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta7 = new Ruta(
-  "Ruta7",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta8 = new Ruta(
-  "Ruta8",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta9 = new Ruta(
-  "Ruta9",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-let Ruta10 = new Ruta(
-  "Ruta10",
-  [0, 0],
-  [1, 1],
-  1,
-  12,
-  [123],
-  "bicicleta",
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-);
-
-let Reto1 = new Reto("Reto1", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
-let Reto2 = new Reto("Reto2", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
-let Reto3 = new Reto("Reto3", [123], "bicicleta", 200, [1, 2, 3, 4, 6]);
-
-let app = new App();
-
-app.setRutas([
-  Ruta1,
-  Ruta2,
-  Ruta3,
-  Ruta4,
-  Ruta5,
-  Ruta6,
-  Ruta7,
-  Ruta8,
-  Ruta9,
-  Ruta10,
-]);
-
-app.setRetos([Reto1, Reto2, Reto3]);
-
-app.start();
-
-// const jsonadapters = new JsonUsuario();
-// jsonadapters.addElement(new Usuario("Pepe"));

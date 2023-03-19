@@ -18,4 +18,13 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }
+  findElement(element: T): T | undefined {
+    return this.collection.get(element.id);
+  }
+  length(): number {
+    return this.collection.size;
+  }
+  forEach(callback: (element: T) => void): void {
+    this.collection.forEach(callback);
+  }
 }

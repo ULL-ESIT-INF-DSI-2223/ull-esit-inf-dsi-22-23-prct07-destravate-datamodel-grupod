@@ -1,0 +1,144 @@
+import { App } from "./interfaz";
+import { Ruta } from "./datatypes/rutas";
+import { Reto } from "./datatypes/retos";
+import { RutaCollection } from "./collections/rutas_collection";
+import { RetoCollection } from "./collections/retos_collection";
+
+const rutas = new RutaCollection();
+const retos = new RetoCollection();
+
+rutas.addElement(
+  new Ruta(
+    "Ruta1",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+
+rutas.addElement(
+  new Ruta(
+    "Ruta2",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta3",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta4",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta5",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta6",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta7",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta8",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta9",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+rutas.addElement(
+  new Ruta(
+    "Ruta10",
+    [0, 0],
+    [1, 1],
+    1,
+    12,
+    [123],
+    "bicicleta",
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  )
+);
+
+retos.addElement(new Reto("Reto1", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
+retos.addElement(new Reto("Reto2", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
+retos.addElement(new Reto("Reto3", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
+
+const app = new App();
+
+app.setRutas(rutas);
+app.setRetos(retos);
+
+app.start();
+
+// const jsonadapters = new JsonUsuario();
+// jsonadapters.addElement(new Usuario("Pepe"));

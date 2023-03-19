@@ -21,7 +21,7 @@ type schemaType = {
   }[];
 };
 
-export class JsonUsuario extends UsuarioCollection {
+export class JsonUsuarios extends UsuarioCollection {
   private db: lowdb.LowdbSync<schemaType>;
   constructor() {
     super();

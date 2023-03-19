@@ -13,20 +13,20 @@ describe("RutaCollection", () => {
   });
   it("Se debe poder añadir un ruta a la colección", () => {
     const rutas = new RutaCollection();
-    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", 1);
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", [1]);
     rutas.addElement(ruta);
     expect(rutas.getElement(ruta.id)).to.be.equal(ruta);
   });
   it("Se debe poder eliminar un ruta de la colección", () => {
     const rutas = new RutaCollection();
-    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", 1);
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", [1]);
     rutas.addElement(ruta);
     rutas.removeElement(ruta.id);
     expect(rutas.getElement(ruta.id)).to.be.undefined;
   });
   it("Se debe poder obtener un ruta de la colección", () => {
     const rutas = new RutaCollection();
-    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", 1);
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", [1]);
     rutas.addElement(ruta);
     expect(rutas.getElement(ruta.id)).to.be.equal(ruta);
   });

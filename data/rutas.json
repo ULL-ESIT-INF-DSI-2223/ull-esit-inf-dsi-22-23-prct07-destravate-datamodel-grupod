@@ -2,14 +2,6 @@
   "rutas": [
     {
       "nombre": "Ruta1",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -28,19 +20,11 @@
         9,
         10
       ],
-      "id": 0,
+      "id": 14,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta2",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -59,19 +43,11 @@
         9,
         10
       ],
-      "id": 1,
+      "id": 15,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta3",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -90,19 +66,11 @@
         9,
         10
       ],
-      "id": 2,
+      "id": 16,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta4",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -121,19 +89,11 @@
         9,
         10
       ],
-      "id": 3,
+      "id": 17,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta5",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -152,19 +112,11 @@
         9,
         10
       ],
-      "id": 4,
+      "id": 18,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta6",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -183,19 +135,11 @@
         9,
         10
       ],
-      "id": 5,
+      "id": 19,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta7",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -214,19 +158,11 @@
         9,
         10
       ],
-      "id": 6,
+      "id": 20,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta8",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -245,19 +181,11 @@
         9,
         10
       ],
-      "id": 7,
+      "id": 21,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta9",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -276,19 +204,11 @@
         9,
         10
       ],
-      "id": 8,
+      "id": 22,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta10",
-      "cordenadas_incio": [
-        0,
-        0
-      ],
-      "cordenadas_fin": [
-        1,
-        1
-      ],
       "longitud": 1,
       "desnivel": 12,
       "usuarios_ya_realizados": [
@@ -307,7 +227,7 @@
         9,
         10
       ],
-      "id": 9,
+      "id": 23,
       "calificacion_media": 5.5
     }
   ]

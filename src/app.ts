@@ -8,6 +8,8 @@ import { RutaCollection } from "./collections/rutas_collection";
 import { RetoCollection } from "./collections/retos_collection";
 import { GrupoCollection } from "./collections/grupos_collection";
 
+import fs from "fs";
+
 // import { JsonUsuario } from "./jsonadapters/jsonusuarios";
 
 import readline from "readline";
@@ -35,14 +37,12 @@ export class App {
   private rutas: RutaCollection;
   private retos: RetoCollection;
   private grupos: GrupoCollection;
-  private stats: Stats;
 
   constructor() {
     this.usuarios = new UsuarioCollection();
     this.rutas = new RutaCollection();
     this.retos = new RetoCollection();
     this.grupos = new GrupoCollection();
-    this.stats = new Stats();
   }
 
   public setUsuarios(usuarios: UsuarioCollection): void {
@@ -59,10 +59,6 @@ export class App {
 
   public setGrupos(grupos: GrupoCollection): void {
     this.grupos = grupos;
-  }
-
-  public setStats(stats: Stats): void {
-    this.stats = stats;
   }
 
   public start(): void {

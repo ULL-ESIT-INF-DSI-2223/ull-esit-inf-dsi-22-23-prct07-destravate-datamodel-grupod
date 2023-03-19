@@ -7,7 +7,7 @@ describe("Clase Rutas", () => {
     expect(Ruta).to.exist;
   });
   it("Se debe poder crear una instancia de Rutas", () => {
-    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", 1);
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "ruta1", [1]);
     expect(ruta).to.be.an.instanceOf(Ruta);
   });
 });

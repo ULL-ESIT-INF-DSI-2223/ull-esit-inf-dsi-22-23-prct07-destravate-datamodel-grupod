@@ -43,4 +43,16 @@ export class Usuario implements Datatype {
   public getNombre(): string {
     return this.nombre;
   }
+
+  public getKmRecorridosSemana(): number {
+    return this.stats.getWeekDistance();
+  }
+
+  public getKmRecorridosMes(): number {
+    return this.stats.getMonthDistance();
+  }
+
+  public getKmRecorridosAnio(): number {
+    return this.stats.getYearDistance();
+  }
 }

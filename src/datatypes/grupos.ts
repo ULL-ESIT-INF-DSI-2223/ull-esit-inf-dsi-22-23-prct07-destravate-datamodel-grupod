@@ -15,4 +15,20 @@ export class Grupo implements Datatype {
   ) {
     this.id = Grupo.groupcount++;
   }
+
+  public getMiembros(): number[] {
+    return this.miembros;
+  }
+
+  public getKmRecorridosAnio(): number {
+    return this.group_stats.getYearDistance();
+  }
+
+  public getKmRecorridosMes(): number {
+    return this.group_stats.getMonthDistance();
+  }
+
+  public getKmRecorridosSemana(): number {
+    return this.group_stats.getWeekDistance();
+  }
 }

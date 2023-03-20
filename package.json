@@ -39,6 +39,7 @@
     "typedoc": "^0.23.26"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "inquirer": "^7.3.3",
     "lowdb": "^1.0.0",
     "ts-mixer": "^6.0.3",

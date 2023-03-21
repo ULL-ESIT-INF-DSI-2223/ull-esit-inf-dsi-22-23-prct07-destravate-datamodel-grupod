@@ -7,11 +7,6 @@ import { UsuarioCollection } from "./collections/usuario_collection";
 import { RutaCollection } from "./collections/rutas_collection";
 import { RetoCollection } from "./collections/retos_collection";
 import { GrupoCollection } from "./collections/grupos_collection";
-
-import fs from "fs";
-
-// import { JsonUsuario } from "./jsonadapters/jsonusuarios";
-
 import readline from "readline";
 import inquirer from "inquirer";
 import { JsonUsuarios } from "./jsonadapters/jsonusuarios";
@@ -107,7 +102,6 @@ export class App {
         }
       });
   }
-
   public register(): void {
     console.clear();
     inquirer
@@ -1108,7 +1102,10 @@ export class App {
           gruposOrdenados.push(grupo);
         } else {
           for (let i = 0; i < gruposOrdenados.length; i++) {
-            if (grupo.getMiembros().length < gruposOrdenados[i].getMiembros().length) {
+            if (
+              grupo.getMiembros().length <
+              gruposOrdenados[i].getMiembros().length
+            ) {
               gruposOrdenados.splice(i, 0, grupo);
               break;
             } else if (i == gruposOrdenados.length - 1) {
@@ -1134,7 +1131,10 @@ export class App {
           gruposOrdenados.push(grupo);
         } else {
           for (let i = 0; i < gruposOrdenados.length; i++) {
-            if (grupo.getMiembros().length > gruposOrdenados[i].getMiembros().length) {
+            if (
+              grupo.getMiembros().length >
+              gruposOrdenados[i].getMiembros().length
+            ) {
               gruposOrdenados.splice(i, 0, grupo);
               break;
             } else if (i == gruposOrdenados.length - 1) {

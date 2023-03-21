@@ -18,8 +18,10 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }
-  findElement(element: T): T | undefined {
-    return this.collection.get(element.id);
+  findElement(nombre: string): T | undefined {
+    return [...this.collection.values()].find(
+      (element) => element.nombre === nombre
+    );
   }
   length(): number {
     return this.collection.size;

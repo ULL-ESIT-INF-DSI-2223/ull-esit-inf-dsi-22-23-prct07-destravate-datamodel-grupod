@@ -98,7 +98,19 @@ export class App {
           this.mainMenu();
         } else {
           console.log("Usuario no encontrado");
-          this.login();
+          inquirer.prompt([
+            {
+              type: "list",
+              name: "command",
+              message: "¿Que quieres hacer?",
+              choices: ["Volver a intentarlo", "Registrarse"],
+            },
+          ]);
+          if (answers["command"] === "Volver a intentarlo") {
+            this.login();
+          } else {
+            this.register();
+          }
         }
       });
   }
@@ -170,7 +182,7 @@ export class App {
 
           case Commandos.Salir:
             console.log("Hasta luego!");
-            console.clear();
+            process.exit(0);
             break;
         }
       });

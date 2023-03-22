@@ -2,7 +2,10 @@
   "usuarios": [
     {
       "nombre": "Febe",
-      "amigos": [],
+      "actividad": "bicicleta",
+      "amigos": [
+        1
+      ],
       "stats": {
         "week_distance": 0,
         "week_slope": 0,
@@ -11,7 +14,9 @@
         "year_distance": 0,
         "year_slope": 0
       },
-      "rutas_favoritas": [],
+      "rutas_favoritas": [
+        0
+      ],
       "retos_activos": [],
       "historico_rutas": [],
       "id": 0
@@ -31,6 +36,23 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 1
+    },
+    {
+      "nombre": "mineinpink",
+      "actividad": "correr",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 2
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { Stats } from "./stats";
 import { Datatype } from "./datatype";
+import { Ruta } from "./rutas";
 
 export type Actividad = "correr" | "bicicleta" | undefined;
 
@@ -54,5 +55,28 @@ export class Usuario implements Datatype {
 
   public getKmRecorridosAnio(): number {
     return this.stats.getYearDistance();
+  }
+  cambiarNombre(nombre: string) {
+    this.nombre = nombre;
+  }
+  cambiarActividad(actividad: Actividad) {
+    this.actividad = actividad;
+  }
+  addAmigo(amigo: number) {
+    this.amigos.push(amigo);
+  }
+  addRutaFavorita(ruta: number) {
+    this.rutas_favoritas.push(ruta);
+  }
+  addRetoActivo(reto: number) {
+    this.retos_activos.push(reto);
+  }
+  addHistoricoRuta(ruta: Ruta) {
+    const entrada = {
+      fecha: new Date(),
+      rutaid: ruta.id,
+    };
+    this.historico_rutas.push(entrada);
+    this.stats.updateStats(ruta.getDistancia(), ruta.getDesnivel());
   }
 }

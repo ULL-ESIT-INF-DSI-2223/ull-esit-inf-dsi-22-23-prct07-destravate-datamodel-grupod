@@ -15,6 +15,9 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   removeElement(id: number): void {
     this.collection.delete(id);
   }
+  updateElement(element: T): void {
+    this.collection.set(element.id, element);
+  }
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }

@@ -1,4 +1,5 @@
-export class Stats {
+export class Stats
+ {
   week_distance: number;
   week_slope: number;
   month_distance: number;

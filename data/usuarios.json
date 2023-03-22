@@ -47,6 +47,86 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 2
+    },
+    {
+      "nombre": "jose",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 3
+    },
+    {
+      "nombre": "pedro",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 4
+    },
+    {
+      "nombre": "pablo",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 5
+    },
+    {
+      "nombre": "juan",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 6
+    },
+    {
+      "nombre": "andres",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 7
     }
   ]
 }

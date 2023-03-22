@@ -14,4 +14,12 @@ export class Reto implements Datatype {
   ) {
     this.id = Reto.retoCount++;
   }
+
+  public getKmTotales(): number {
+    return this.km_totales;
+  }
+
+  public getUsuariosRealizandoReto(): number[] {
+    return this.usuarios_realizando_reto;
+  }
 }

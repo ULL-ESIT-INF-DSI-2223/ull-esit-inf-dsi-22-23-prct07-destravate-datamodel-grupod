@@ -182,18 +182,9 @@ export class App {
 
           case Commandos.Salir:
             console.log("Hasta luego!");
-            process.exit(0);
             break;
         }
       });
-    console.log("Pulsa enter para volver al menu principal");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-    rl.on("line", () => {
-      this.mainMenu();
-    });
   }
 
   public mostrarRutas(): void {
@@ -297,6 +288,14 @@ export class App {
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
     }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
   }
 
   public mostrarRutasAlfabeticamenteDescendente(): void {

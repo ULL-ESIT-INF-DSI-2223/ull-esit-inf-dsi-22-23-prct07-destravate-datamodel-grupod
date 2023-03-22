@@ -164,12 +164,16 @@ export class App {
           case Commandos.MostrarRetos:
             break;
           case Commandos.CrearUsuario:
+            this.crearUsuario();
             break;
           case Commandos.CrearGrupo:
+            this.crearGrupo();
             break;
           case Commandos.CrearRuta:
+            this.crearRuta();
             break;
           case Commandos.CrearReto:
+            this.crearReto();
             break;
           case Commandos.ModificarUsuario:
             break;
@@ -1159,5 +1163,94 @@ export class App {
     for (let i = 0; i < gruposOrdenados.length; i++) {
       console.log(gruposOrdenados[i].nombre);
     }
+  }
+  crearUsuario() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del usuario",
+        },
+        {
+          type: "list",
+          name: "actividad",
+          message: "Introduce la actividad que mas practica el usuario",
+          choices: ["correr", "bicicleta"],
+        },
+      ])
+      .then((answers) => {
+        if (answers.nombre == "") {
+          console.log("Error al crear el usuario, nombre vacio");
+          this.crearUsuario();
+        } else {
+          const user = this.usuarios.findElement(answers.nombre);
+          if (user != undefined) {
+            console.log("El usuario ya existe");
+            this.crearUsuario();
+          } else {
+            this.usuarios.addElement(
+              new Usuario(
+                answers.nombre,
+                answers.actividad,
+                [],
+                new Stats(),
+                [],
+                [],
+                []
+              )
+            );
+            console.log("Usuario creado correctamente");
+          }
+        }
+      });
+  }
+  crearGrupo() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del grupo",
+        },
+        {
+          type: "input",
+          name: "miembros",
+          message: "Introduce los miembros del grupo separados por comas",
+        },
+      ])
+      .then((answers) => {
+        if (answers.nombre == "") {
+          console.log("Error al crear el grupo, nombre vacio");
+          this.crearGrupo();
+        } else {
+          const grupo = this.grupos.findElement(answers.nombre);
+          if (grupo != undefined) {
+            console.log("El grupo ya existe");
+            this.crearGrupo();
+          } else {
+            const miembros: number[] = [];
+            const miembrosString = answers.miembros.split(",");
+            for (let i = 0; i < miembrosString.length; i++) {
+              const usuario = this.usuarios.findElement(miembrosString[i]);
+              if (usuario != undefined) {
+                miembros.push(usuario.id);
+              }
+            }
+            this.grupos.addElement(
+              new Grupo(answers.nombre, miembros, new Stats(), [], [], [])
+            );
+            console.log("Grupo creado correctamente");
+          }
+        }
+      });
+  }
+  crearRuta() {
+    console.clear();
+  }
+  crearReto() {
+    console.clear();
   }
 }

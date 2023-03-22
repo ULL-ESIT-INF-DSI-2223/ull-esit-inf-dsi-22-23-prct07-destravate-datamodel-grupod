@@ -1,3 +1,21 @@
 {
-  "grupos": []
+  "grupos": [
+    {
+      "nombre": "Corredores",
+      "miembros": [],
+      "group_stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "clasificacion": [],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
+      "owner": 0,
+      "id": 0
+    }
+  ]
 }

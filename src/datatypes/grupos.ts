@@ -11,7 +11,8 @@ export class Grupo implements Datatype {
     private group_stats: Stats,
     private clasificacion: number[],
     private rutas_favoritas: number[],
-    private historico_rutas: { fecha: Date; rutaid: number }[]
+    private historico_rutas: { fecha: Date; rutaid: number }[],
+    private owner: number
   ) {
     this.id = Grupo.groupcount++;
   }
@@ -30,5 +31,8 @@ export class Grupo implements Datatype {
 
   public getKmRecorridosSemana(): number {
     return this.group_stats.getWeekDistance();
+  }
+  setOwner(owner: number) {
+    this.owner = owner;
   }
 }

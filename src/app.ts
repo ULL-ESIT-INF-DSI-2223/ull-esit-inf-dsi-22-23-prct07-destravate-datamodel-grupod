@@ -13,7 +13,6 @@ import { JsonUsuarios } from "./jsonadapters/jsonusuarios";
 import { JsonGrupos } from "./jsonadapters/jsongrupos";
 import { JsonRutas } from "./jsonadapters/jsonrutas";
 import { JsonRetos } from "./jsonadapters/jsonretos";
-import { isConstructorDeclaration } from "typescript";
 
 enum Commandos {
   CrearUsuario = "Crear un usuario",
@@ -28,6 +27,10 @@ enum Commandos {
   ModificarRuta = "Modificar una ruta",
   ModificarReto = "Modificar un reto",
   ModificarGrupo = "Modificar un grupo",
+  EliminarUsuario = "Eliminar un usuario",
+  EliminarRuta = "Eliminar una ruta",
+  EliminarReto = "Eliminar un reto",
+  EliminarGrupo = "Eliminar un grupo",
   Salir = "Salir",
 }
 
@@ -36,12 +39,22 @@ export class App {
   private rutas: RutaCollection;
   private retos: RetoCollection;
   private grupos: GrupoCollection;
+  private current_user: Usuario;
 
   constructor() {
     this.usuarios = new JsonUsuarios();
     this.rutas = new JsonRutas();
     this.retos = new JsonRetos();
     this.grupos = new JsonGrupos();
+    this.current_user = new Usuario(
+      "none",
+      undefined,
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
   }
 
   public setUsuarios(usuarios: UsuarioCollection): void {
@@ -94,6 +107,7 @@ export class App {
         const username = answers["username"];
         const user = this.usuarios.findElement(username);
         if (user !== undefined) {
+          this.current_user = user;
           this.mainMenu();
         } else {
           console.log("Usuario no encontrado");
@@ -130,9 +144,17 @@ export class App {
           console.log("Usuario ya existente");
           this.register();
         } else {
-          this.usuarios.addElement(
-            new Usuario(username, undefined, [], new Stats(), [], [], [])
+          const user = new Usuario(
+            username,
+            undefined,
+            [],
+            new Stats(),
+            [],
+            [],
+            []
           );
+          this.usuarios.addElement(user);
+          this.current_user = user;
           this.mainMenu();
         }
       });
@@ -186,6 +208,18 @@ export class App {
             break;
           case Commandos.ModificarReto:
             this.modificarReto();
+            break;
+          case Commandos.EliminarUsuario:
+            this.eliminarUsuario();
+            break;
+          case Commandos.EliminarGrupo:
+            this.eliminarGrupo();
+            break;
+          case Commandos.EliminarRuta:
+            this.eliminarRuta();
+            break;
+          case Commandos.EliminarReto:
+            this.eliminarReto();
             break;
 
           case Commandos.Salir:
@@ -1221,7 +1255,7 @@ export class App {
                 []
               )
             );
-            console.log("Usuario creado correctamente");
+            this.mainMenu();
           }
         }
       });
@@ -1260,9 +1294,17 @@ export class App {
               }
             }
             this.grupos.addElement(
-              new Grupo(answers.nombre, miembros, new Stats(), [], [], [])
+              new Grupo(
+                answers.nombre,
+                miembros,
+                new Stats(),
+                [],
+                [],
+                [],
+                this.current_user.id
+              )
             );
-            console.log("Grupo creado correctamente");
+            this.mainMenu();
           }
         }
       });
@@ -1553,9 +1595,311 @@ export class App {
 
   crearRuta() {
     console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre de la ruta",
+        },
+        {
+          type: "input",
+          name: "longitud",
+          message: "Introduce la longitud de la ruta",
+        },
+        {
+          type: "input",
+          name: "desnivel",
+          message: "Introduce el desnivel de la ruta",
+        },
+        {
+          type: "input",
+          name: "coordenadas_inicio",
+          message:
+            "Introduce las coordenadas de inicio de la ruta separadas por comas",
+        },
+        {
+          type: "input",
+          name: "coordenadas_fin",
+          message:
+            "Introduce las coordenadas de fin de la ruta separadas por comas",
+        },
+        {
+          type: "input",
+          name: "tipo_ruta",
+          message: "Introduce el tipo de ruta",
+        },
+      ])
+      .then((answers) => {
+        if (
+          answers.nombre == "" ||
+          answers.longitud < 0 ||
+          answers.desnivel < 0 ||
+          answers.coordenadas_inicio[0] == "" ||
+          answers.coordenadas_inicio[1] == "" ||
+          answers.coordenadas_fin[0] == "" ||
+          answers.coordenadas_fin[1] == "" ||
+          answers.tipo_ruta == ""
+        ) {
+          console.log("Error al crear la ruta, datos incorrectos");
+          this.crearRuta();
+        } else {
+          const ruta = this.rutas.findElement(answers.nombre);
+          if (ruta != undefined) {
+            console.log("La ruta ya existe");
+            this.crearRuta();
+          } else {
+            const coordenadas_inicio = answers.coordenadas_inicio.split(",");
+            const coordenadas_fin = answers.coordenadas_fin.split(",");
+            this.rutas.addElement(
+              new Ruta(
+                answers.nombre,
+                [coordenadas_inicio[0], coordenadas_inicio[1]],
+                [coordenadas_fin[0], coordenadas_fin[1]],
+                answers.longitud,
+                answers.desnivel,
+                [],
+                answers.tipo_ruta,
+                []
+              )
+            );
+            this.mainMenu();
+          }
+        }
+      });
   }
   crearReto() {
     console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del reto",
+        },
+        {
+          type: "input",
+          name: "tipo_reto",
+          message: "Introduce el tipo de reto",
+        },
+        {
+          type: "input",
+          name: "km_totales",
+          message: "Introduce los km totales del reto",
+        },
+      ])
+      .then((answers) => {
+        if (
+          answers.nombre == "" ||
+          answers.tipo_reto == "" ||
+          answers.km_totales < 0
+        ) {
+          console.log("Error al crear el reto, datos incorrectos");
+          this.crearReto();
+        } else {
+          const reto = this.retos.findElement(answers.nombre);
+          if (reto != undefined) {
+            console.log("El reto ya existe");
+            this.crearReto();
+          } else {
+            this.retos.addElement(
+              new Reto(
+                answers.nombre,
+                [],
+                answers.tipo_reto,
+                answers.km_totales,
+                []
+              )
+            );
+            this.mainMenu();
+          }
+        }
+      });
+  }
+  modificarUsuario() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "usuario",
+          message: "Introduce el nombre del usuario",
+        },
+      ])
+      .then((answers) => {
+        const usuario = this.usuarios.findElement(answers.usuario);
+        if (usuario != undefined) {
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "actividad",
+                message: "¿Que desea hacer?",
+                choices: [
+                  "Cambiar nombre",
+                  "Cambiar actividad",
+                  "Añadir amigo",
+                  "Añadir ruta favorita",
+                  "Añadir reto",
+                  "Añadir rutas",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.actividad) {
+                case "Cambiar nombre":
+                  this.cambiarNombre(usuario);
+                  break;
+                case "Cambiar actividad":
+                  this.cambiarActividad(usuario);
+                  break;
+                case "Añadir amigo":
+                  this.anadirAmigo(usuario);
+                  break;
+                case "Añadir ruta favorita":
+                  this.anadirRutaFavorita(usuario);
+                  break;
+                case "Añadir reto":
+                  this.anadirReto(usuario);
+                  break;
+                case "Añadir rutas":
+                  this.anadirRutas(usuario);
+                  break;
+              }
+            });
+        }
+      });
+  }
+  cambiarNombre(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nuevo nombre",
+        },
+      ])
+      .then((answers) => {
+        if (answers.nombre == "") {
+          console.log("Error al cambiar el nombre, nombre vacio");
+          this.cambiarNombre(usuario);
+        } else {
+          const usuario2 = this.usuarios.findElement(answers.nombre);
+          if (usuario2 != undefined) {
+            console.log("El nombre ya existe");
+            this.cambiarNombre(usuario);
+          } else {
+            usuario.cambiarNombre(answers.nombre);
+            this.usuarios.updateElement(usuario);
+            this.mainMenu();
+          }
+        }
+      });
+  }
+  cambiarActividad(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "actividad",
+          message: "Selecciona la nueva actividad",
+          choices: ["correr", "bicicleta"],
+        },
+      ])
+      .then((answers) => {
+        usuario.cambiarActividad(answers.actividad);
+        this.mainMenu();
+      });
+  }
+  anadirAmigo(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del amigo",
+        },
+      ])
+      .then((answers) => {
+        const usuario2 = this.usuarios.findElement(answers.nombre);
+        if (usuario2 != undefined) {
+          usuario.addAmigo(usuario2.id);
+          this.usuarios.updateElement(usuario);
+          this.mainMenu();
+        } else {
+          console.log("El usuario no existe");
+          this.anadirAmigo(usuario);
+        }
+      });
+  }
+  anadirRutaFavorita(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre de la ruta",
+        },
+      ])
+      .then((answers) => {
+        const ruta = this.rutas.findElement(answers.nombre);
+        if (ruta != undefined) {
+          usuario.addRutaFavorita(ruta.id);
+          this.usuarios.updateElement(usuario);
+          this.mainMenu();
+        } else {
+          console.log("La ruta no existe");
+          this.anadirRutaFavorita(usuario);
+        }
+      });
+  }
+  anadirReto(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del reto",
+        },
+      ])
+      .then((answers) => {
+        const reto = this.retos.findElement(answers.nombre);
+        if (reto != undefined) {
+          usuario.addRetoActivo(reto.id);
+          this.usuarios.updateElement(usuario);
+          this.mainMenu();
+        } else {
+          console.log("El reto no existe");
+          this.anadirReto(usuario);
+        }
+      });
+  }
+  anadirRutas(usuario: Usuario) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre de la ruta",
+        },
+      ])
+      .then((answers) => {
+        const ruta = this.rutas.findElement(answers.nombre);
+        if (ruta != undefined) {
+          usuario.addHistoricoRuta(ruta);
+          this.usuarios.updateElement(usuario);
+          this.mainMenu();
+        } else {
+          console.log("La ruta no existe");
+          this.anadirRutas(usuario);
+        }
+      });
   }
 
   modificarReto(): void {
@@ -1693,63 +2037,75 @@ export class App {
       });
   }
 
-  modificarUsuario(): void {
+  modificarRuta(): void {}
+
+  modificarGrupo(): void {}
+
+  eliminarUsuario(): void {
     console.clear();
     inquirer
       .prompt([
         {
           type: "list",
           name: "usuarios",
-          message: "¿Que usuario quieres modificar?",
+          message: "¿Que usuario quieres eliminar?",
           choices: this.usuarios.getNombres(),
         },
       ])
       .then((answers) => {
-        const usuario: Usuario = this.usuarios.getUsuario(answers.usuarios);
-        inquirer
-          .prompt([
-            {
-              type: "list",
-              name: "modificar",
-              message: "¿Que quieres modificar?",
-              choices: [
-                "Nombre",
-                "Actividad",
-                "Amigos",
-                "Stats",
-                "Rutas Favoritas",
-                "Retos Activos",
-                "Historico rutas",
-              ],
-            },
-          ])
-          .then((answers) => {
-            switch (answers.modificar) {
-              case "Nombre":
-                this.modificarNombreUsuario(usuario);
-                break;
-            }
-          });
+        this.usuarios.removeElement(answers.usuarios);
+        console.log("Usuario eliminado correctamente");
       });
   }
 
-  modificarNombreUsuario(usuario: Usuario): void {
+  eliminarReto(): void {
     console.clear();
     inquirer
       .prompt([
         {
-          type: "input",
-          name: "nombre",
-          message: "Introduce el nuevo nombre del usuario",
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres eliminar?",
+          choices: this.retos.getNombres(),
         },
       ])
       .then((answers) => {
-        usuario.nombre = answers.nombre;
-        console.log("Nombre modificado correctamente");
+        this.retos.removeElement(answers.retos);
+        console.log("Reto eliminado correctamente");
       });
   }
 
-  modificarRuta(): void {}
+  eliminarRuta(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Que ruta quieres eliminar?",
+          choices: this.rutas.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.rutas.removeElement(answers.rutas);
+        console.log("Ruta eliminada correctamente");
+      });
+  }
 
-  modificarGrupo(): void {}
+  eliminarGrupo(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupos",
+          message: "¿Que grupo quieres eliminar?",
+          choices: this.grupos.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.grupos.removeElement(answers.grupos);
+        console.log("Grupo eliminado correctamente");
+      });
+  }
 }

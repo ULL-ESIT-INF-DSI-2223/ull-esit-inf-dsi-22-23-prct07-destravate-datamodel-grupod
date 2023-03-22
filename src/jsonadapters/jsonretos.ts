@@ -49,4 +49,8 @@ export class JsonRetos extends RetoCollection {
   storeRetos(): void {
     this.db.set("retos", [...this.collection.values()]).write();
   }
+  updateElement(element: Reto): void {
+    super.updateElement(element);
+    this.storeRetos();
+  }
 }

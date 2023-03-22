@@ -17,6 +17,7 @@ type schemaType = {
       fecha: Date;
       rutaid: number;
     }[];
+    owner: number;
   }[];
 };
 
@@ -35,7 +36,8 @@ export class JsonGrupos extends GrupoCollection {
           item.group_stats,
           item.clasificacion,
           item.rutas_favoritas,
-          item.historico_rutas
+          item.historico_rutas,
+          item.owner
         );
         super.addElement(grupo);
       });
@@ -54,5 +56,9 @@ export class JsonGrupos extends GrupoCollection {
   }
   storeGrupos(): void {
     this.db.set("grupos", [...this.collection.values()]).write();
+  }
+  updateElement(element: Grupo): void {
+    super.updateElement(element);
+    this.storeGrupos();
   }
 }

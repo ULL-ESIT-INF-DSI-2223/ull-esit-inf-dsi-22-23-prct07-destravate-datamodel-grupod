@@ -55,4 +55,8 @@ export class JsonRutas extends RutaCollection {
   storeRutas(): void {
     this.db.set("rutas", [...this.collection.values()]).write();
   }
+  updateElement(element: Ruta): void {
+    super.updateElement(element);
+    this.storeRutas();
+  }
 }

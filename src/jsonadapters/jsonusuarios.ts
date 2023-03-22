@@ -57,4 +57,8 @@ export class JsonUsuarios extends UsuarioCollection {
   storeUsuario(): void {
     this.db.set("usuarios", [...this.collection.values()]).write();
   }
+  updateElement(element: Usuario): void {
+    super.updateElement(element);
+    this.storeUsuario();
+  }
 }

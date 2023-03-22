@@ -41,7 +41,9 @@ export class Ruta implements Datatype {
   public getDistancia(): number {
     return this.longitud;
   }
-
+  public getDesnivel(): number {
+    return this.desnivel;
+  }
   public getTipoRuta(): string {
     return this.tipo_ruta;
   }

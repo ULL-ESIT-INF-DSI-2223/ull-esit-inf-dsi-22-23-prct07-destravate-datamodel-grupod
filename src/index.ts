@@ -7,7 +7,6 @@ import { JsonRutas } from "./jsonadapters/jsonrutas";
 import { JsonRetos } from "./jsonadapters/jsonretos";
 
 // const rutas = new JsonRutas();
-// const retos = new JsonRetos();
 
 // rutas.addElement(
 //   new Ruta(
@@ -131,16 +130,6 @@ import { JsonRetos } from "./jsonadapters/jsonretos";
 //   )
 // );
 
-// retos.addElement(new Reto("Reto1", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
-// retos.addElement(new Reto("Reto2", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
-// retos.addElement(new Reto("Reto3", [123], "bicicleta", 200, [1, 2, 3, 4, 6]));
-
 const app = new App();
 
-// app.setRutas(rutas);
-// app.setRetos(retos);
-
 app.start();
-
-// const jsonadapters = new JsonUsuario();
-// jsonadapters.addElement(new Usuario("Pepe"));

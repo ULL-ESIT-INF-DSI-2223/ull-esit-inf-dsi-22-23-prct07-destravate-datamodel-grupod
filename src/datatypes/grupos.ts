@@ -32,7 +32,19 @@ export class Grupo implements Datatype {
   public getKmRecorridosSemana(): number {
     return this.group_stats.getWeekDistance();
   }
+  public getOwner(): number {
+    return this.owner;
+  }
   setOwner(owner: number) {
     this.owner = owner;
+  }
+  cambiarNombre(nombre: string) {
+    this.nombre = nombre;
+  }
+  addMiembro(miembro: number) {
+    this.miembros.push(miembro);
+  }
+  addRutaFavorita(ruta: number) {
+    this.rutas_favoritas.push(ruta);
   }
 }

@@ -197,6 +197,7 @@ export class App {
             this.modificarUsuario();
             break;
           case Commandos.ModificarGrupo:
+            this.modificarGrupo();
             break;
           case Commandos.ModificarRuta:
             break;
@@ -1579,6 +1580,147 @@ export class App {
         } else {
           console.log("La ruta no existe");
           this.anadirRutas(usuario);
+        }
+      });
+  }
+  modificarGrupo() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "grupo",
+          message: "Introduce el nombre del grupo",
+        },
+      ])
+      .then((answers) => {
+        const grupo = this.grupos.findElement(answers.grupo);
+        if (grupo != undefined) {
+          if (grupo.getOwner() !== this.current_user.id) {
+            console.log("No eres el propietario del grupo");
+            this.mainMenu();
+          } else {
+            inquirer
+              .prompt([
+                {
+                  type: "list",
+                  name: "actividad",
+                  message: "¿Que desea hacer?",
+                  choices: [
+                    "Cambiar nombre",
+                    "Añadir miembro",
+                    "Añadir ruta favorita",
+                    "Eliminar grupo",
+                  ],
+                },
+              ])
+              .then((answers) => {
+                switch (answers.actividad) {
+                  case "Cambiar nombre":
+                    this.cambiarNombreGrupo(grupo);
+                    break;
+                  case "Añadir miembro":
+                    this.addMiembro(grupo);
+                    break;
+                  case "Añadir ruta favorita":
+                    this.addRutaFavoritaGrupo(grupo);
+                    break;
+                  case "Eliminar grupo":
+                    this.eliminarGrupo(grupo);
+                    break;
+                }
+              });
+          }
+        }
+      });
+  }
+  cambiarNombreGrupo(grupo: Grupo) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nuevo nombre",
+        },
+      ])
+      .then((answers) => {
+        if (answers.nombre == "") {
+          console.log("Error al cambiar el nombre, nombre vacio");
+          this.cambiarNombreGrupo(grupo);
+        } else {
+          const grupo2 = this.grupos.findElement(answers.nombre);
+          if (grupo2 != undefined) {
+            console.log("El nombre ya existe");
+            this.cambiarNombreGrupo(grupo);
+          } else {
+            grupo.cambiarNombre(answers.nombre);
+            this.grupos.updateElement(grupo);
+            this.mainMenu();
+          }
+        }
+      });
+  }
+  addMiembro(grupo: Grupo) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del miembro",
+        },
+      ])
+      .then((answers) => {
+        const usuario = this.usuarios.findElement(answers.nombre);
+        if (usuario != undefined) {
+          grupo.addMiembro(usuario.id);
+          this.grupos.updateElement(grupo);
+          this.mainMenu();
+        } else {
+          console.log("El usuario no existe");
+          this.addMiembro(grupo);
+        }
+      });
+  }
+  addRutaFavoritaGrupo(grupo: Grupo) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre de la ruta",
+        },
+      ])
+      .then((answers) => {
+        const ruta = this.rutas.findElement(answers.nombre);
+        if (ruta != undefined) {
+          grupo.addRutaFavorita(ruta.id);
+          this.grupos.updateElement(grupo);
+          this.mainMenu();
+        } else {
+          console.log("La ruta no existe");
+          this.addRutaFavoritaGrupo(grupo);
+        }
+      });
+  }
+  eliminarGrupo(grupo: Grupo) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "confirm",
+          name: "confirmacion",
+          message: "¿Estas seguro de que quiere eliminar el grupo?",
+        },
+      ])
+      .then((answers) => {
+        if (answers.confirmacion) {
+          this.grupos.removeElement(grupo.id);
+          this.mainMenu();
+        } else {
+          this.mainMenu();
         }
       });
   }

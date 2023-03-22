@@ -32,4 +32,8 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   forEach(callback: (element: T) => void): void {
     this.collection.forEach(callback);
   }
+
+  getNombres(): string[] {
+    return [...this.collection.values()].map((element) => element.nombre);
+  }
 }

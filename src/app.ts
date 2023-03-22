@@ -25,9 +25,18 @@ enum Commandos {
   MostrarRetos = "Mostrar retos",
   ModificarReto = "Modificar un reto",
   CrearGrupo = "Crear un grupo",
+  MostrarUsuarios = "Mostrar usuarios",
+  MostrarRutas = "Mostrar rutas",
+  MostrarRetos = "Mostrar retos",
   MostrarGrupos = "Mostrar grupos",
+  ModificarUsuario = "Modificar un usuario",
+  ModificarRuta = "Modificar una ruta",
+  ModificarReto = "Modificar un reto",
   ModificarGrupo = "Modificar un grupo",
-
+  EliminarUsuario = "Eliminar un usuario",
+  EliminarRuta = "Eliminar una ruta",
+  EliminarReto = "Eliminar un reto",
+  EliminarGrupo = "Eliminar un grupo",
   Salir = "Salir",
 }
 
@@ -180,6 +189,7 @@ export class App {
             this.mostrarRutas();
             break;
           case Commandos.MostrarRetos:
+            this.mostrarRetos();
             break;
           case Commandos.CrearUsuario:
             this.crearUsuario();
@@ -198,10 +208,25 @@ export class App {
             break;
           case Commandos.ModificarGrupo:
             this.modificarGrupo();
+            this.modificarGrupo();
             break;
           case Commandos.ModificarRuta:
+            this.modificarRuta();
             break;
           case Commandos.ModificarReto:
+            this.modificarReto();
+            break;
+          case Commandos.EliminarUsuario:
+            this.eliminarUsuario();
+            break;
+          case Commandos.EliminarGrupo:
+            this.eliminarGrupo();
+            break;
+          case Commandos.EliminarRuta:
+            this.eliminarRuta();
+            break;
+          case Commandos.EliminarReto:
+            this.eliminarReto();
             break;
 
           case Commandos.Salir:
@@ -480,6 +505,14 @@ export class App {
     for (let i = 0; i < rutasOrdenadas.length; i++) {
       console.log(rutasOrdenadas[i].getNombre());
     }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
   }
 
   public mostrarRutasPorDistanciaDescendente(): void {
@@ -964,6 +997,14 @@ export class App {
     for (let i = 0; i < gruposOrdenados.length; i++) {
       console.log(gruposOrdenados[i].nombre);
     }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
   }
 
   public mostrarGruposPorKmRecorridos(): void {
@@ -1275,6 +1316,290 @@ export class App {
         }
       });
   }
+
+  public mostrarRetos(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Como quieres ver la lista de retos?",
+          choices: [
+            "Mostrar todos los retos por nombre",
+            "Mostrar todos los retos por numero de km totales",
+            "Mostrar todos los retos por numero de km usuarios registrados",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.retos) {
+          case "Mostrar todos los retos por numero de participantes":
+            this.mostrarRetosPorNombre();
+            break;
+          case "Mostrar todos los retos por numero de km recorridos":
+            this.mostrarRetosPorKmTotales();
+            break;
+          case "Mostrar todos los retos por numero de km recorridos en la semana":
+            this.mostrarRetosPorUsuariosRegistrados();
+            break;
+        }
+      });
+  }
+
+  public mostrarRetosPorNombre(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Como quieres ver la lista de retos?",
+          choices: [
+            "Mostrar todos los retos por nombre ascendente",
+            "Mostrar todos los retos por nombre descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.retos) {
+          case "Mostrar todos los retos por nombre ascendente":
+            this.mostrarRetosPorNombreAscendente();
+            break;
+          case "Mostrar todos los retos por nombre descendente":
+            this.mostrarRetosPorNombreDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRetosPorNombreAscendente(): void {
+    console.clear();
+    console.log("Mostrar todos los retos por nombre ascendente");
+    const retosOrdenados: Reto[] = [];
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (reto.nombre < retosOrdenados[i].nombre) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
+  public mostrarRetosPorNombreDescendente(): void {
+    console.clear();
+    console.log("Mostrar todos los retos por nombre descendente");
+    const retosOrdenados: Reto[] = [];
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (reto.nombre > retosOrdenados[i].nombre) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
+  public mostrarRetosPorKmTotales(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Como quieres ver la lista de retos?",
+          choices: [
+            "Mostrar todos los retos por numero de km totales ascendente",
+            "Mostrar todos los retos por numero de km totales descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.retos) {
+          case "Mostrar todos los retos por numero de km totales ascendente":
+            this.mostrarRetosPorKmTotalesAscendente();
+            break;
+          case "Mostrar todos los retos por numero de km totales descendente":
+            this.mostrarRetosPorKmTotalesDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRetosPorKmTotalesAscendente(): void {
+    console.clear();
+    console.log("Mostrar todos los retos por numero de km totales ascendente");
+    const retosOrdenados: Reto[] = [];
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (reto.getKmTotales() < retosOrdenados[i].getKmTotales()) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
+  public mostrarRetosPorKmTotalesDescendente(): void {
+    console.clear();
+    console.log("Mostrar todos los retos por numero de km totales descendente");
+    const retosOrdenados: Reto[] = [];
+    console.log("cuantos retos hay" + this.retos.length());
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (reto.getKmTotales() > retosOrdenados[i].getKmTotales()) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
+  public mostrarRetosPorUsuariosRegistrados(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Como quieres ver la lista de retos?",
+          choices: [
+            "Mostrar todos los retos por numero de usuarios registrados ascendente",
+            "Mostrar todos los retos por numero de usuarios registrados descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.retos) {
+          case "Mostrar todos los retos por numero de usuarios registrados ascendente":
+            this.mostrarRetosPorUsuariosRegistradosAscendente();
+            break;
+          case "Mostrar todos los retos por numero de usuarios registrados descendente":
+            this.mostrarRetosPorUsuariosRegistradosDescendente();
+            break;
+        }
+      });
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
+  }
+
+  public mostrarRetosPorUsuariosRegistradosAscendente(): void {
+    console.clear();
+    console.log(
+      "Mostrar todos los retos por numero de usuarios registrados ascendente"
+    );
+    const retosOrdenados: Reto[] = [];
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (
+              reto.getUsuariosRealizandoReto() <
+              retosOrdenados[i].getUsuariosRealizandoReto()
+            ) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
+  public mostrarRetosPorUsuariosRegistradosDescendente(): void {
+    console.clear();
+    console.log(
+      "Mostrar todos los retos por numero de usuarios registrados descendente"
+    );
+    const retosOrdenados: Reto[] = [];
+    if (this.retos.length() > 0) {
+      this.retos.forEach((reto) => {
+        if (retosOrdenados.length == 0) {
+          retosOrdenados.push(reto);
+        } else {
+          for (let i = 0; i < retosOrdenados.length; i++) {
+            if (
+              reto.getUsuariosRealizandoReto() >
+              retosOrdenados[i].getUsuariosRealizandoReto()
+            ) {
+              retosOrdenados.splice(i, 0, reto);
+              break;
+            } else if (i == retosOrdenados.length - 1) {
+              retosOrdenados.push(reto);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < retosOrdenados.length; i++) {
+      console.log(retosOrdenados[i].nombre);
+    }
+  }
+
   crearRuta() {
     console.clear();
     inquirer
@@ -1581,6 +1906,213 @@ export class App {
           console.log("La ruta no existe");
           this.anadirRutas(usuario);
         }
+      });
+  }
+
+  modificarReto(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres modificar?",
+          choices: this.retos.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        const reto: Reto = this.retos.getReto(answers.retos);
+        inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "modificar",
+              message: "¿Que quieres modificar?",
+              choices: [
+                "Nombre",
+                "Tipo de reto",
+                "Km totales",
+                "Usuarios realizando el reto",
+                "Rutas del reto",
+              ],
+            },
+          ])
+          .then((answers) => {
+            switch (answers.modificar) {
+              case "Nombre":
+                this.modificarNombreReto(reto);
+                break;
+              case "Fecha de inicio":
+                this.modificarTipoReto(reto);
+                break;
+              case "Fecha de fin":
+                this.modificarKmTotalesReto(reto);
+                break;
+              case "Km totales":
+                this.modificarUsuariosRealizandoReto(reto);
+                break;
+              case "Km diarios":
+                this.modificarRutasReto(reto);
+                break;
+            }
+          });
+      });
+  }
+
+  modificarNombreReto(reto: Reto): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nuevo nombre del reto",
+        },
+      ])
+      .then((answers) => {
+        reto.nombre = answers.nombre;
+        console.log("Nombre modificado correctamente");
+      });
+  }
+
+  modificarTipoReto(reto: Reto): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "tipo",
+          message: "Introduce el nuevo tipo de reto",
+        },
+      ])
+      .then((answers) => {
+        reto.setTipoReto(answers.tipo);
+        console.log("Tipo de reto modificado correctamente");
+      });
+  }
+
+  modificarKmTotalesReto(reto: Reto): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "kmTotales",
+          message: "Introduce los nuevos km totales del reto",
+        },
+      ])
+      .then((answers) => {
+        reto.setKmTotales(answers.kmTotales);
+        console.log("Km totales modificados correctamente");
+      });
+  }
+
+  modificarUsuariosRealizandoReto(reto: Reto): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "usuariosRealizandoReto",
+          message:
+            "Introduce los nuevos usuarios realizando el reto separados por comas",
+        },
+      ])
+      .then((answers) => {
+        let usuariosRealizandoReto: number[] = [];
+        usuariosRealizandoReto = answers.usuariosRealizandoReto.split(",");
+        reto.setUsuariosRealizandoReto(usuariosRealizandoReto);
+        console.log("Usuarios realizando el reto modificados correctamente");
+      });
+  }
+
+  modificarRutasReto(reto: Reto): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "rutas",
+          message: "Introduce las nuevas rutas del reto separadas por comas",
+        },
+      ])
+      .then((answers) => {
+        let rutas: number[] = [];
+        rutas = answers.rutas.split(",");
+        reto.setRuta(rutas);
+        console.log("Rutas modificadas correctamente");
+      });
+  }
+
+  modificarRuta(): void {}
+
+  modificarGrupo(): void {}
+
+  eliminarUsuario(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "usuarios",
+          message: "¿Que usuario quieres eliminar?",
+          choices: this.usuarios.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.usuarios.removeElement(answers.usuarios);
+        console.log("Usuario eliminado correctamente");
+      });
+  }
+
+  eliminarReto(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres eliminar?",
+          choices: this.retos.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.retos.removeElement(answers.retos);
+        console.log("Reto eliminado correctamente");
+      });
+  }
+
+  eliminarRuta(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Que ruta quieres eliminar?",
+          choices: this.rutas.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.rutas.removeElement(answers.rutas);
+        console.log("Ruta eliminada correctamente");
+      });
+  }
+
+  eliminarGrupo(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupos",
+          message: "¿Que grupo quieres eliminar?",
+          choices: this.grupos.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        this.grupos.removeElement(answers.grupos);
+        console.log("Grupo eliminado correctamente");
       });
   }
   modificarGrupo() {

@@ -164,12 +164,16 @@ export class App {
             this.mostrarRetos();
             break;
           case Commandos.CrearUsuario:
+            this.crearUsuario();
             break;
           case Commandos.CrearGrupo:
+            this.crearGrupo();
             break;
           case Commandos.CrearRuta:
+            this.crearRuta();
             break;
           case Commandos.CrearReto:
+            this.crearReto();
             break;
           case Commandos.ModificarUsuario:
             break;
@@ -1176,287 +1180,93 @@ export class App {
       console.log(gruposOrdenados[i].nombre);
     }
   }
-
-  public mostrarRetos(): void {
+  crearUsuario() {
     console.clear();
     inquirer
       .prompt([
         {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del usuario",
+        },
+        {
           type: "list",
-          name: "retos",
-          message: "¿Como quieres ver la lista de retos?",
-          choices: [
-            "Mostrar todos los retos por nombre",
-            "Mostrar todos los retos por numero de km totales",
-            "Mostrar todos los retos por numero de km usuarios registrados",
-          ],
+          name: "actividad",
+          message: "Introduce la actividad que mas practica el usuario",
+          choices: ["correr", "bicicleta"],
         },
       ])
       .then((answers) => {
-        switch (answers.retos) {
-          case "Mostrar todos los retos por numero de participantes":
-            this.mostrarRetosPorNombre();
-            break;
-          case "Mostrar todos los retos por numero de km recorridos":
-            this.mostrarRetosPorKmTotales();
-            break;
-          case "Mostrar todos los retos por numero de km recorridos en la semana":
-            this.mostrarRetosPorUsuariosRegistrados();
-            break;
+        if (answers.nombre == "") {
+          console.log("Error al crear el usuario, nombre vacio");
+          this.crearUsuario();
+        } else {
+          const user = this.usuarios.findElement(answers.nombre);
+          if (user != undefined) {
+            console.log("El usuario ya existe");
+            this.crearUsuario();
+          } else {
+            this.usuarios.addElement(
+              new Usuario(
+                answers.nombre,
+                answers.actividad,
+                [],
+                new Stats(),
+                [],
+                [],
+                []
+              )
+            );
+            console.log("Usuario creado correctamente");
+          }
         }
       });
   }
-
-  public mostrarRetosPorNombre(): void {
+  crearGrupo() {
     console.clear();
     inquirer
       .prompt([
         {
-          type: "list",
-          name: "retos",
-          message: "¿Como quieres ver la lista de retos?",
-          choices: [
-            "Mostrar todos los retos por nombre ascendente",
-            "Mostrar todos los retos por nombre descendente",
-          ],
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del grupo",
         },
-      ])
-      .then((answers) => {
-        switch (answers.retos) {
-          case "Mostrar todos los retos por nombre ascendente":
-            this.mostrarRetosPorNombreAscendente();
-            break;
-          case "Mostrar todos los retos por nombre descendente":
-            this.mostrarRetosPorNombreDescendente();
-            break;
-        }
-      });
-  }
-
-  public mostrarRetosPorNombreAscendente(): void {
-    console.clear();
-    console.log("Mostrar todos los retos por nombre ascendente");
-    const retosOrdenados: Reto[] = [];
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
-        } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (reto.nombre < retosOrdenados[i].nombre) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
-  }
-
-  public mostrarRetosPorNombreDescendente(): void {
-    console.clear();
-    console.log("Mostrar todos los retos por nombre descendente");
-    const retosOrdenados: Reto[] = [];
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
-        } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (reto.nombre > retosOrdenados[i].nombre) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
-  }
-
-  public mostrarRetosPorKmTotales(): void {
-    console.clear();
-    inquirer
-      .prompt([
         {
-          type: "list",
-          name: "retos",
-          message: "¿Como quieres ver la lista de retos?",
-          choices: [
-            "Mostrar todos los retos por numero de km totales ascendente",
-            "Mostrar todos los retos por numero de km totales descendente",
-          ],
+          type: "input",
+          name: "miembros",
+          message: "Introduce los miembros del grupo separados por comas",
         },
       ])
       .then((answers) => {
-        switch (answers.retos) {
-          case "Mostrar todos los retos por numero de km totales ascendente":
-            this.mostrarRetosPorKmTotalesAscendente();
-            break;
-          case "Mostrar todos los retos por numero de km totales descendente":
-            this.mostrarRetosPorKmTotalesDescendente();
-            break;
-        }
-      });
-  }
-
-  public mostrarRetosPorKmTotalesAscendente(): void {
-    console.clear();
-    console.log("Mostrar todos los retos por numero de km totales ascendente");
-    const retosOrdenados: Reto[] = [];
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
+        if (answers.nombre == "") {
+          console.log("Error al crear el grupo, nombre vacio");
+          this.crearGrupo();
         } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (reto.getKmTotales() < retosOrdenados[i].getKmTotales()) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
+          const grupo = this.grupos.findElement(answers.nombre);
+          if (grupo != undefined) {
+            console.log("El grupo ya existe");
+            this.crearGrupo();
+          } else {
+            const miembros: number[] = [];
+            const miembrosString = answers.miembros.split(",");
+            for (let i = 0; i < miembrosString.length; i++) {
+              const usuario = this.usuarios.findElement(miembrosString[i]);
+              if (usuario != undefined) {
+                miembros.push(usuario.id);
+              }
             }
+            this.grupos.addElement(
+              new Grupo(answers.nombre, miembros, new Stats(), [], [], [])
+            );
+            console.log("Grupo creado correctamente");
           }
         }
       });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
   }
-
-  public mostrarRetosPorKmTotalesDescendente(): void {
+  crearRuta() {
     console.clear();
-    console.log("Mostrar todos los retos por numero de km totales descendente");
-    const retosOrdenados: Reto[] = [];
-    console.log("cuantos retos hay" + this.retos.length());
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
-        } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (reto.getKmTotales() > retosOrdenados[i].getKmTotales()) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
   }
-
-  public mostrarRetosPorUsuariosRegistrados(): void {
+  crearReto() {
     console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "retos",
-          message: "¿Como quieres ver la lista de retos?",
-          choices: [
-            "Mostrar todos los retos por numero de usuarios registrados ascendente",
-            "Mostrar todos los retos por numero de usuarios registrados descendente",
-          ],
-        },
-      ])
-      .then((answers) => {
-        switch (answers.retos) {
-          case "Mostrar todos los retos por numero de usuarios registrados ascendente":
-            this.mostrarRetosPorUsuariosRegistradosAscendente();
-            break;
-          case "Mostrar todos los retos por numero de usuarios registrados descendente":
-            this.mostrarRetosPorUsuariosRegistradosDescendente();
-            break;
-        }
-      });
-    console.log("Pulsa enter para volver al menu principal");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-    rl.on("line", () => {
-      this.mainMenu();
-    });
-  }
-
-  public mostrarRetosPorUsuariosRegistradosAscendente(): void {
-    console.clear();
-    console.log(
-      "Mostrar todos los retos por numero de usuarios registrados ascendente"
-    );
-    const retosOrdenados: Reto[] = [];
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
-        } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (
-              reto.getUsuariosRealizandoReto() <
-              retosOrdenados[i].getUsuariosRealizandoReto()
-            ) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
-  }
-
-  public mostrarRetosPorUsuariosRegistradosDescendente(): void {
-    console.clear();
-    console.log(
-      "Mostrar todos los retos por numero de usuarios registrados descendente"
-    );
-    const retosOrdenados: Reto[] = [];
-    if (this.retos.length() > 0) {
-      this.retos.forEach((reto) => {
-        if (retosOrdenados.length == 0) {
-          retosOrdenados.push(reto);
-        } else {
-          for (let i = 0; i < retosOrdenados.length; i++) {
-            if (
-              reto.getUsuariosRealizandoReto() >
-              retosOrdenados[i].getUsuariosRealizandoReto()
-            ) {
-              retosOrdenados.splice(i, 0, reto);
-              break;
-            } else if (i == retosOrdenados.length - 1) {
-              retosOrdenados.push(reto);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < retosOrdenados.length; i++) {
-      console.log(retosOrdenados[i].nombre);
-    }
   }
 }

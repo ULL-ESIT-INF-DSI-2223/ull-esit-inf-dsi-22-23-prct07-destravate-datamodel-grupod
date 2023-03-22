@@ -31,6 +31,7 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 1
+<<<<<<< HEAD
     },
     {
       "nombre": "marco",
@@ -127,6 +128,8 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 7
+=======
+>>>>>>> 87753130c2f70ee5e7d11c87449956f0c956a31b
     }
   ]
 }

@@ -34,7 +34,12 @@ export class Ruta implements Datatype {
   public getUsuarios(): number[] {
     return this.usuarios_ya_realizados;
   }
-
+  public getCoordenadasInicio(): Coordenadas {
+    return this.cordenadas_incio;
+  }
+  public getCoordenadasFin(): Coordenadas {
+    return this.cordenadas_fin;
+  }
   public getDistancia(): number {
     return this.distancia;
   }
@@ -44,7 +49,6 @@ export class Ruta implements Datatype {
   public getTipoRuta(): Actividad {
     return this.tipo_ruta;
   }
-
   public getCalificacionMedia(): number {
     return this.calificacion_media;
   }

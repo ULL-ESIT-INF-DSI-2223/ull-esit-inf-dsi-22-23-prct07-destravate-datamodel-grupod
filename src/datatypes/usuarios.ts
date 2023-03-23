@@ -60,6 +60,9 @@ export class Usuario implements Datatype {
   addAmigo(amigo: number) {
     this.amigos.push(amigo);
   }
+  removeAmigo(amigo: number) {
+    this.amigos = this.amigos.filter((a) => a !== amigo);
+  }
   addRutaFavorita(ruta: number) {
     this.rutas_favoritas.push(ruta);
   }

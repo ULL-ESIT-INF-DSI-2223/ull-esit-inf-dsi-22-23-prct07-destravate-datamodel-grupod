@@ -1,4 +1,4 @@
-import { App } from "./app";
+import { App } from "./app/app";
 import { Ruta } from "./datatypes/rutas";
 import { Reto } from "./datatypes/retos";
 import { RutaCollection } from "./collections/rutas_collection";

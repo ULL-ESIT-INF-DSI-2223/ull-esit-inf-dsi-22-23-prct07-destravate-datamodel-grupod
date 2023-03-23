@@ -14,7 +14,6 @@ import { JsonRetos } from "../jsonadapters/jsonretos";
 import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { Admin } from "./Admin";
 
-
 export class Gestor {
   private usuarios: UsuarioCollection;
   private rutas: RutaCollection;
@@ -22,7 +21,16 @@ export class Gestor {
   private grupos: GrupoCollection;
   private current_user: Usuario;
 
-  constructor() {
+  public static instance: Gestor;
+
+  public static getInstance(): Gestor {
+    if (!Gestor.instance) {
+      Gestor.instance = new Gestor();
+    }
+    return Gestor.instance;
+  }
+
+  private constructor() {
     this.usuarios = new JsonUsuarios();
     this.rutas = new JsonRutas();
     this.retos = new JsonRetos();
@@ -39,6 +47,7 @@ export class Gestor {
   }
 
   public start(): void {
+    console.clear();
     console.log("Bienvenido a DeStravaTe");
     inquirer
       .prompt([

@@ -131,6 +131,6 @@ import { Gestor } from "./app/Gestor";
 //   )
 // );
 
-const gestor = new Gestor();
+const gestor = Gestor.getInstance();
 
 gestor.start();

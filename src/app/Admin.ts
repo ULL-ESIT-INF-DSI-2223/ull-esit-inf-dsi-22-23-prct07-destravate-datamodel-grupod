@@ -13,6 +13,8 @@ import { JsonUsuarios } from "../jsonadapters/jsonusuarios";
 import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
+import { getShebang } from "typescript";
+import { Gestor } from "./Gestor";
 
 enum Commandos {
   // MostrarUsuarios = "Mostrar usuarios",
@@ -72,8 +74,6 @@ export class Admin {
   public setGrupos(grupos: GrupoCollection): void {
     this.grupos = grupos;
   }
-
-  
 
   public mainMenu(): void {
     console.clear();
@@ -136,9 +136,10 @@ export class Admin {
           case Commandos.EliminarReto:
             this.eliminarReto();
             break;
-
           case Commandos.Salir:
             console.log("Hasta luego!");
+            const gestor = Gestor.getInstance();
+            gestor.start();
             break;
         }
       });

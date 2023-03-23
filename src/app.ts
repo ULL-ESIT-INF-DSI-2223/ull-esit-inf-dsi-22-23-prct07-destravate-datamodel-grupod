@@ -16,14 +16,8 @@ import { JsonRetos } from "./jsonadapters/jsonretos";
 
 enum Commandos {
   CrearUsuario = "Crear un usuario",
-  MostrarUsuarios = "Mostrar usuarios",
-  ModificarUsuario = "Modificar un usuario",
   CrearRuta = "Crear una ruta",
-  MostrarRutas = "Mostrar rutas",
-  ModificarRuta = "Modificar una ruta",
   CrearReto = "Crear un reto",
-  MostrarRetos = "Mostrar retos",
-  ModificarReto = "Modificar un reto",
   CrearGrupo = "Crear un grupo",
   MostrarUsuarios = "Mostrar usuarios",
   MostrarRutas = "Mostrar rutas",
@@ -207,7 +201,6 @@ export class App {
             this.modificarUsuario();
             break;
           case Commandos.ModificarGrupo:
-            this.modificarGrupo();
             this.modificarGrupo();
             break;
           case Commandos.ModificarRuta:
@@ -2165,9 +2158,6 @@ export class App {
                   case "Añadir ruta favorita":
                     this.addRutaFavoritaGrupo(grupo);
                     break;
-                  case "Eliminar grupo":
-                    this.eliminarGrupo(grupo);
-                    break;
                 }
               });
           }
@@ -2245,23 +2235,6 @@ export class App {
         }
       });
   }
-  eliminarGrupo(grupo: Grupo) {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "confirm",
-          name: "confirmacion",
-          message: "¿Estas seguro de que quiere eliminar el grupo?",
-        },
-      ])
-      .then((answers) => {
-        if (answers.confirmacion) {
-          this.grupos.removeElement(grupo.id);
-          this.mainMenu();
-        } else {
-          this.mainMenu();
-        }
-      });
-  }
+
+  modificarRuta() {}
 }

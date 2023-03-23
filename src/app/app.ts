@@ -1,18 +1,18 @@
-import { Usuario } from "./datatypes/usuarios";
-import { Ruta } from "./datatypes/rutas";
-import { Reto } from "./datatypes/retos";
-import { Stats } from "./datatypes/stats";
-import { Grupo } from "./datatypes/grupos";
-import { UsuarioCollection } from "./collections/usuario_collection";
-import { RutaCollection } from "./collections/rutas_collection";
-import { RetoCollection } from "./collections/retos_collection";
-import { GrupoCollection } from "./collections/grupos_collection";
+import { Usuario } from "../datatypes/usuarios";
+import { Ruta } from "../datatypes/rutas";
+import { Reto } from "../datatypes/retos";
+import { Stats } from "../datatypes/stats";
+import { Grupo } from "../datatypes/grupos";
+import { UsuarioCollection } from "../collections/usuario_collection";
+import { RutaCollection } from "../collections/rutas_collection";
+import { RetoCollection } from "../collections/retos_collection";
+import { GrupoCollection } from "../collections/grupos_collection";
 import readline from "readline";
 import inquirer from "inquirer";
-import { JsonUsuarios } from "./jsonadapters/jsonusuarios";
-import { JsonGrupos } from "./jsonadapters/jsongrupos";
-import { JsonRutas } from "./jsonadapters/jsonrutas";
-import { JsonRetos } from "./jsonadapters/jsonretos";
+import { JsonUsuarios } from "../jsonadapters/jsonusuarios";
+import { JsonGrupos } from "../jsonadapters/jsongrupos";
+import { JsonRutas } from "../jsonadapters/jsonrutas";
+import { JsonRetos } from "../jsonadapters/jsonretos";
 
 enum Commandos {
   // MostrarUsuarios = "Mostrar usuarios",
@@ -451,9 +451,10 @@ export class App {
     inquirer
       .prompt([
         {
-          type: "input",
+          type: "list",
           name: "usuario",
-          message: "Introduce el nombre del usuario",
+          message: "¿Que usuario desea modificar?",
+          choices: this.usuarios.getNombres(),
         },
       ])
       .then((answers) => {
@@ -776,9 +777,10 @@ export class App {
     inquirer
       .prompt([
         {
-          type: "input",
+          type: "list",
           name: "grupo",
-          message: "Introduce el nombre del grupo",
+          message: "¿Que grupo quieres modificar?",
+          choices: this.grupos.getNombres(),
         },
       ])
       .then((answers) => {
@@ -798,7 +800,7 @@ export class App {
                     "Cambiar nombre",
                     "Añadir miembro",
                     "Añadir ruta favorita",
-                    "Eliminar grupo",
+                    "Salir",
                   ],
                 },
               ])
@@ -812,6 +814,9 @@ export class App {
                     break;
                   case "Añadir ruta favorita":
                     this.addRutaFavoritaGrupo(grupo);
+                    break;
+                  case "Salir":
+                    this.mainMenu();
                     break;
                 }
               });

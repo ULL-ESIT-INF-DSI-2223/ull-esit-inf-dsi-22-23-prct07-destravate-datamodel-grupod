@@ -1,7 +1,7 @@
 {
   "usuarios": [
     {
-      "nombre": "febe",
+      "nombre": "Febe",
       "actividad": "correr",
       "amigos": [
         1,
@@ -134,6 +134,23 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 7
+    },
+    {
+      "nombre": "Sergio",
+      "actividad": "correr",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 8
     }
   ]
 }

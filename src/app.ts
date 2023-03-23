@@ -221,7 +221,6 @@ export class App {
           case Commandos.EliminarReto:
             this.eliminarReto();
             break;
-
           case Commandos.Salir:
             console.log("Hasta luego!");
             break;

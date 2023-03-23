@@ -1,9 +1,10 @@
 {
   "usuarios": [
     {
-      "nombre": "Febe",
-      "actividad": "bicicleta",
+      "nombre": "febe",
+      "actividad": "correr",
       "amigos": [
+        1,
         1
       ],
       "stats": {

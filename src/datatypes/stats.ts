@@ -1,5 +1,4 @@
-export class Stats
- {
+export class Stats {
   week_distance: number;
   week_slope: number;
   month_distance: number;
@@ -32,7 +31,7 @@ export class Stats
   getYearSlope() {
     return this.year_slope;
   }
-  updateStats(distance: number, slope: number) {
+  public updateStats(distance: number, slope: number) {
     this.week_distance += distance;
     this.week_slope += slope;
     this.month_distance += distance;

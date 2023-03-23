@@ -1,7 +1,4 @@
-import { getSourceMapRange } from "typescript";
 import { Usuario } from "../datatypes/usuarios";
-import { Ruta } from "../datatypes/rutas";
-import { Reto } from "../datatypes/retos";
 import { Grupo } from "../datatypes/grupos";
 import { Stats } from "../datatypes/stats";
 import inquirer from "inquirer";

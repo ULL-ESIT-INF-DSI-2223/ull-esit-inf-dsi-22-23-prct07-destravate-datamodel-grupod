@@ -1,8 +1,8 @@
 {
   "retos": [
     {
-      "nombre": "Reto1",
-      "ruta": [
+      "nombre": "RetoX",
+      "rutas": [
         123
       ],
       "tipo_reto": "bicicleta",
@@ -14,11 +14,11 @@
         4,
         6
       ],
-      "id": 0
+      "id": 3
     },
     {
       "nombre": "Reto2",
-      "ruta": [
+      "rutas": [
         123
       ],
       "tipo_reto": "bicicleta",
@@ -30,11 +30,11 @@
         4,
         6
       ],
-      "id": 1
+      "id": 4
     },
     {
       "nombre": "Reto3",
-      "ruta": [
+      "rutas": [
         123
       ],
       "tipo_reto": "bicicleta",
@@ -46,7 +46,7 @@
         4,
         6
       ],
-      "id": 2
+      "id": 5
     }
   ]
 }

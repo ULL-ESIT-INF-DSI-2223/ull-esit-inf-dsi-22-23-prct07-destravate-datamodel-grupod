@@ -566,13 +566,8 @@ export class Admin {
         },
       ])
       .then((answers) => {
-        // no Funciona el getElement de la lista de retos por
-        // lo que no se puede modificar ya que devuelve undefined
-        const reto = this.retos.getElement(answers.retos);
-        if (reto === undefined) {
-          console.log("El reto no existe");
-          this.modificarReto();
-        } else {
+        const reto = this.retos.findElement(answers.retos);
+        if (reto != undefined) {
           inquirer
             .prompt([
               {
@@ -607,6 +602,9 @@ export class Admin {
                   break;
               }
             });
+        } else {
+          console.log("El reto no existe");
+          this.modificarReto();
         }
       });
   }
@@ -623,6 +621,7 @@ export class Admin {
       ])
       .then((answers) => {
         reto.nombre = answers.nombre;
+        this.retos.updateElement(reto);
         console.log("Nombre modificado correctamente");
       });
   }
@@ -639,6 +638,7 @@ export class Admin {
       ])
       .then((answers) => {
         reto.setTipoReto(answers.tipo);
+        this.retos.updateElement(reto);
         console.log("Tipo de reto modificado correctamente");
       });
   }
@@ -655,6 +655,7 @@ export class Admin {
       ])
       .then((answers) => {
         reto.setKmTotales(answers.kmTotales);
+        this.retos.updateElement(reto);
         console.log("Km totales modificados correctamente");
       });
   }
@@ -674,6 +675,7 @@ export class Admin {
         let usuariosRealizandoReto: number[] = [];
         usuariosRealizandoReto = answers.usuariosRealizandoReto.split(",");
         reto.setUsuariosRealizandoReto(usuariosRealizandoReto);
+        this.retos.updateElement(reto);
         console.log("Usuarios realizando el reto modificados correctamente");
       });
   }
@@ -692,6 +694,7 @@ export class Admin {
         let rutas: number[] = [];
         rutas = answers.rutas.split(",");
         reto.setRuta(rutas);
+        this.retos.updateElement(reto);
         console.log("Rutas modificadas correctamente");
       });
   }

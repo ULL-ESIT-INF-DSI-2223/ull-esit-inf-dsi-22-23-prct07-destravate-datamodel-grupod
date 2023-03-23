@@ -12,7 +12,7 @@ export class Ruta implements Datatype {
     public nombre: string,
     private cordenadas_incio: Coordenadas,
     private cordenadas_fin: Coordenadas,
-    private longitud: number,
+    private distancia: number,
     private desnivel: number,
     private usuarios_ya_realizados: number[],
     private tipo_ruta: string,
@@ -21,7 +21,7 @@ export class Ruta implements Datatype {
     this.id = Ruta.rutacount++;
     this.cordenadas_incio = cordenadas_incio;
     this.cordenadas_fin = cordenadas_fin;
-    this.longitud = longitud;
+    this.distancia = distancia;
     this.desnivel = desnivel;
     this.usuarios_ya_realizados = usuarios_ya_realizados;
     this.tipo_ruta = tipo_ruta;
@@ -39,7 +39,7 @@ export class Ruta implements Datatype {
   }
 
   public getDistancia(): number {
-    return this.longitud;
+    return this.distancia;
   }
   public getDesnivel(): number {
     return this.desnivel;
@@ -50,5 +50,17 @@ export class Ruta implements Datatype {
 
   public getCalificacionMedia(): number {
     return this.calificacion_media;
+  }
+  public cambiarNombre(nombre: string): void {
+    this.nombre = nombre;
+  }
+  public cambiarDistancia(distancia: number): void {
+    this.distancia = distancia;
+  }
+  public cambiarDesnivel(desnivel: number): void {
+    this.desnivel = desnivel;
+  }
+  public cambiarTipoRuta(tipo_ruta: string): void {
+    this.tipo_ruta = tipo_ruta;
   }
 }

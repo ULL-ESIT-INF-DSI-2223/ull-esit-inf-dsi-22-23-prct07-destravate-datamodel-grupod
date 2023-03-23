@@ -813,6 +813,148 @@ export class Admin {
 
   modificarRuta() {
     console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "ruta",
+          message: "¿Que ruta quieres modificar?",
+          choices: this.rutas.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        const ruta = this.rutas.findElement(answers.ruta);
+        if (ruta != undefined) {
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "actividad",
+                message: "¿Que desea hacer?",
+                choices: [
+                  "Cambiar nombre",
+                  "Cambiar distancia",
+                  "Cambiar desnivel",
+                  "Cambiar tipo",
+                  "Salir",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.actividad) {
+                case "Cambiar nombre":
+                  this.cambiarNombreRuta(ruta);
+                  break;
+                case "Cambiar distancia":
+                  this.cambiarDistanciaRuta(ruta);
+                  break;
+                case "Cambiar desnivel":
+                  this.cambiarDesnivelRuta(ruta);
+                  break;
+                case "Cambiar tipo":
+                  this.cambiarTipoRuta(ruta);
+                  break;
+                case "Salir":
+                  this.mainMenu();
+                  break;
+              }
+            });
+        }
+      });
+  }
+
+  cambiarNombreRuta(ruta: Ruta) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nuevo nombre",
+        },
+      ])
+      .then((answers) => {
+        if (answers.nombre == "") {
+          console.log("Error al cambiar el nombre, nombre vacio");
+          this.cambiarNombreRuta(ruta);
+        } else {
+          const ruta2 = this.rutas.findElement(answers.nombre);
+          if (ruta2 != undefined) {
+            console.log("El nombre ya existe");
+            this.cambiarNombreRuta(ruta);
+          } else {
+            ruta.cambiarNombre(answers.nombre);
+            this.rutas.updateElement(ruta);
+            this.mainMenu();
+          }
+        }
+      });
+  }
+
+  cambiarDistanciaRuta(ruta: Ruta) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "distancia",
+          message: "Introduce la nueva distancia",
+        },
+      ])
+      .then((answers) => {
+        if (answers.distancia == "" || answers.distancia.parseInt() < 0) {
+          console.log(
+            "Error al cambiar la distancia, distancia vacia o negativa"
+          );
+          this.cambiarDistanciaRuta(ruta);
+        } else {
+          ruta.cambiarDistancia(answers.distancia);
+          this.rutas.updateElement(ruta);
+          this.mainMenu();
+        }
+      });
+  }
+
+  cambiarDesnivelRuta(ruta: Ruta) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "desnivel",
+          message: "Introduce el nueva desnivel",
+        },
+      ])
+      .then((answers) => {
+        if (answers.desnivel == "" || answers.desnivel.parseInt() < 0) {
+          console.log(
+            "Error al cambiar la desnivel, desnivel vacio o negativo"
+          );
+          this.cambiarDesnivelRuta(ruta);
+        } else {
+          ruta.cambiarDesnivel(answers.desnivel);
+          this.rutas.updateElement(ruta);
+          this.mainMenu();
+        }
+      });
+  }
+
+  cambiarTipoRuta(ruta: Ruta) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "tipo",
+          message: "Introduce el nuevo tipo",
+          choices: ["Circular", "Lineal"],
+        },
+      ])
+      .then((answers) => {
+        ruta.cambiarTipoRuta(answers.tipo);
+        this.rutas.updateElement(ruta);
+        this.mainMenu();
+      });
   }
 
   eliminarUsuario(): void {

@@ -2044,10 +2044,6 @@ export class App {
       });
   }
 
-  modificarRuta(): void {}
-
-  modificarGrupo(): void {}
-
   eliminarUsuario(): void {
     console.clear();
     inquirer
@@ -2111,6 +2107,17 @@ export class App {
         },
       ])
       .then((answers) => {
+        const grupo = this.grupos.findElement(answers.grupos);
+        if (grupo == undefined) {
+          console.log("No existe el grupo");
+          this.mainMenu();
+        } else if (grupo.getOwner() !== this.current_user.id) {
+          console.log("No eres el propietario del grupo");
+          this.mainMenu();
+        } else {
+          console.log("No eres el propietario del grupo");
+          this.mainMenu();
+        }
         this.grupos.removeElement(answers.grupos);
         console.log("Grupo eliminado correctamente");
       });

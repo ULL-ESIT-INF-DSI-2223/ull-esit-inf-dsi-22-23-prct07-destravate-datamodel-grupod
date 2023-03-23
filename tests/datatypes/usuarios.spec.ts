@@ -175,4 +175,17 @@ describe("Clase Usuario", () => {
     usuario.addHistoricoRuta(ruta);
     expect(usuario.getHistoricoRutas().length).to.be.equal(1);
   });
+  it("Se debe poder eliminar un amigo del usuario", () => {
+    const usuario = new Usuario(
+      "Usuario 1",
+      "correr",
+      [5, 6, 7],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+    usuario.removeAmigo(6);
+    expect(usuario.getAmigos()).to.be.deep.equal([5, 7]);
+  });
 });

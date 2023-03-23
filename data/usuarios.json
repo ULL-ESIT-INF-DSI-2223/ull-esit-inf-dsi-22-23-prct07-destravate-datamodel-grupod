@@ -4,8 +4,7 @@
       "nombre": "Febe",
       "actividad": "correr",
       "amigos": [
-        1,
-        1
+        2
       ],
       "stats": {
         "week_distance": 0,
@@ -20,7 +19,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 10
+      "id": 0
     },
     {
       "nombre": "dani",
@@ -36,7 +35,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 11
+      "id": 1
     },
     {
       "nombre": "mineinpink",
@@ -53,7 +52,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 12
+      "id": 2
     },
     {
       "nombre": "jose",
@@ -69,7 +68,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 13
+      "id": 3
     },
     {
       "nombre": "pedro",
@@ -85,7 +84,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 14
+      "id": 4
     },
     {
       "nombre": "pablo",
@@ -101,7 +100,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 15
+      "id": 5
     },
     {
       "nombre": "juan",
@@ -117,7 +116,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 16
+      "id": 6
     },
     {
       "nombre": "andres",
@@ -133,7 +132,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 17
+      "id": 7
     },
     {
       "nombre": "Sergio",
@@ -150,7 +149,7 @@
       "rutas_favoritas": [],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 18
+      "id": 8
     }
   ]
 }

@@ -7,13 +7,11 @@ import { UsuarioCollection } from "../collections/usuario_collection";
 import { RutaCollection } from "../collections/rutas_collection";
 import { RetoCollection } from "../collections/retos_collection";
 import { GrupoCollection } from "../collections/grupos_collection";
-import readline from "readline";
 import inquirer from "inquirer";
 import { JsonUsuarios } from "../jsonadapters/jsonusuarios";
 import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
-import { getShebang } from "typescript";
 import { Gestor } from "./Gestor";
 
 enum Commandos {

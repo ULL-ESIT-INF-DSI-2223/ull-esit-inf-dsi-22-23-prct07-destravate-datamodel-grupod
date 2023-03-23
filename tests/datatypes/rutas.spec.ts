@@ -50,4 +50,12 @@ describe("Clase Rutas", () => {
     ruta.cambiarTipoRuta("bicicleta");
     expect(ruta.getTipoRuta()).to.be.deep.eq("bicicleta");
   });
+  it("Se debe poder obtener las coordenadas de inicio de la ruta", () => {
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "correr", [1]);
+    expect(ruta.getCoordenadasInicio()).to.be.deep.eq([1, 1]);
+  });
+  it("Se debe poder obtener las coordenadas de fin de la ruta", () => {
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "correr", [1]);
+    expect(ruta.getCoordenadasFin()).to.be.deep.eq([2, 2]);
+  });
 });

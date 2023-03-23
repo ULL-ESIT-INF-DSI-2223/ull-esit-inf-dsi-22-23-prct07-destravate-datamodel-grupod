@@ -136,11 +136,12 @@ export class Admin {
           case Commandos.EliminarReto:
             this.eliminarReto();
             break;
-          case Commandos.Salir:
+          case Commandos.Salir: {
             console.log("Hasta luego!");
             const gestor = Gestor.getInstance();
             gestor.start();
             break;
+          }
         }
       });
   }

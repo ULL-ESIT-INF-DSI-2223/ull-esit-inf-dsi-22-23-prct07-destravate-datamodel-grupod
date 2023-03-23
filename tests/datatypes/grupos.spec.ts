@@ -8,7 +8,7 @@ describe("Clase Grupos", () => {
     expect(Grupo).to.exist;
   });
   it("Se debe poder crear una instancia de Grupo", () => {
-    const grupos = new Grupo("Grupo 1", [], new Stats(), [], [], []);
+    const grupos = new Grupo("Grupo 1", [], new Stats(), [], [], [], -1);
     expect(grupos).to.be.an.instanceOf(Grupo);
   });
 });

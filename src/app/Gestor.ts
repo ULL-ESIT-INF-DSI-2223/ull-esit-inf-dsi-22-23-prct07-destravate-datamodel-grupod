@@ -141,5 +141,7 @@ export class Gestor {
       });
   }
 
-  public mainMenu(): void {}
+  public mainMenu(): void {
+    console.log();
+  }
 }

@@ -13,13 +13,13 @@ import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { Admin } from "./Admin";
 
 enum ComandosGestor {
-  CerrarSesión = "Cerrar sesión",
   VerUsuarios = "Ver usuarios",
-  GestionarAmigos = "Gestionar amigos",
   VerRutas = "Ver rutas",
-  UnirseGrupo = "Unirse a un grupo",
   VerGrupos = "Ver grupos",
+  UnirseGrupo = "Unirse a un grupo",
+  GestionarAmigos = "Gestionar amigos",
   GestionarGrupos = "Gestionar grupos",
+  CerrarSesión = "Cerrar sesión",
 }
 
 export class Gestor {
@@ -78,7 +78,7 @@ export class Gestor {
           this.register();
           return;
         } else {
-          const admin = new Admin();
+          const admin = Admin.getInstance();
           admin.mainMenu();
           return;
         }

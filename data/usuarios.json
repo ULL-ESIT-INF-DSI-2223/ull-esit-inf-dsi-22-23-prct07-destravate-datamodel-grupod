@@ -23,7 +23,9 @@
     },
     {
       "nombre": "dani",
-      "amigos": [],
+      "amigos": [
+        0
+      ],
       "stats": {
         "week_distance": 0,
         "week_slope": 0,
@@ -150,6 +152,22 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 8
+    },
+    {
+      "nombre": "papapanatas",
+      "amigos": [],
+      "stats": {
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
+      },
+      "rutas_favoritas": [],
+      "retos_activos": [],
+      "historico_rutas": [],
+      "id": 10
     }
   ]
 }

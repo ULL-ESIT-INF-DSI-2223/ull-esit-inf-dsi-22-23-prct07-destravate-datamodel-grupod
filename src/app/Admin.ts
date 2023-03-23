@@ -13,10 +13,11 @@ import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
 import { Gestor } from "./Gestor";
+import readline from "readline";
 
 enum Commandos {
-  // MostrarUsuarios = "Mostrar usuarios",
-  // MostrarRutas = "Mostrar rutas",
+  MostrarUsuarios = "Mostrar usuarios",
+  MostrarRutas = "Mostrar rutas",
   // MostrarRetos = "Mostrar retos",
   // MostrarGrupos = "Mostrar grupos",
   CrearUsuario = "Crear un usuario",
@@ -34,6 +35,11 @@ enum Commandos {
   Salir = "Salir",
 }
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
 export class Admin {
   private usuarios: UsuarioCollection;
   private rutas: RutaCollection;
@@ -41,7 +47,16 @@ export class Admin {
   private grupos: GrupoCollection;
   private current_user: Usuario;
 
-  constructor() {
+  public static getInstance(): Admin {
+    if (!Admin.instance) {
+      Admin.instance = new Admin();
+    }
+    return Admin.instance;
+  }
+
+  private static instance: Admin;
+
+  private constructor() {
     this.usuarios = new JsonUsuarios();
     this.rutas = new JsonRutas();
     this.retos = new JsonRetos();
@@ -75,6 +90,11 @@ export class Admin {
 
   public mainMenu(): void {
     console.clear();
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
     inquirer
       .prompt([
         {
@@ -86,15 +106,15 @@ export class Admin {
       ])
       .then((answers) => {
         switch (answers["command"]) {
-          // case Commandos.MostrarUsuarios:
-          //   this.mostrarUsuarios();
-          //   break;
+          case Commandos.MostrarUsuarios:
+            this.mostrarUsuarios();
+            break;
           // case Commandos.MostrarGrupos:
           //   this.mostrarGrupos();
           //   break;
-          // case Commandos.MostrarRutas:
-          //   this.mostrarRutas();
-          //   break;
+          case Commandos.MostrarRutas:
+            this.mostrarRutas();
+            break;
           // case Commandos.MostrarRetos:
           //   this.mostrarRetos();
           //   break;
@@ -1050,7 +1070,7 @@ export class Admin {
       });
   }
 
-  public mostrarRutas(): void {
+  mostrarRutas(): void {
     console.clear();
     inquirer
       .prompt([
@@ -1059,415 +1079,349 @@ export class Admin {
           name: "rutas",
           message: "¿Como quieres ver la lista de rutas?",
           choices: [
-            "Mostrar todas las rutas por orden alfabético",
-            "Mostrar todas las rutas por cantidad de usuarios",
-            "Mostrar todas las rutas por distancia",
-            "Mostrar todas las rutas por calificacion media",
+            "Mostrar todas las rutas por orden alfabético ascedente",
+            "Mostrar todas las rutas por orden alfabético descendente",
+            "Mostrar todas las rutas por cantidad de usuarios ascendente",
+            "Mostrar todas las rutas por cantidad de usuarios descendente",
+            "Mostrar todas las rutas por distancia ascendente",
+            "Mostrar todas las rutas por distancia descendente",
+            "Mostrar todas las rutas por calificacion media ascendente",
+            "Mostrar todas las rutas por calificacion media descendente",
             "Mostrar todas las rutas de correr",
             "Mostrar todas las rutas de bicicleta",
+            "Volver al menu principal",
           ],
         },
       ])
       .then((answers) => {
         switch (answers.rutas) {
-          case "Mostrar todas las rutas por orden alfabético":
-            this.mostrarRutasAlfabeticamente();
-            break;
-
-          case "Mostrar todas las rutas por cantidad de usuarios":
-            this.mostrarRutasPorCantidadDeUsuarios();
-            break;
-
-          case "Mostrar todas las rutas por distancia":
-            this.mostrarRutasPorDistancia();
-            break;
-
-          case "Mostrar todas las rutas por calificacion media":
-            this.mostrarRutasPorCalificacionMedia();
-            break;
-
-          case "Mostrar todas las rutas de correr":
-            this.mostrarRutasDeCorrer();
-            break;
-
-          case "Mostrar todas las rutas de bicicleta":
-            this.mostrarRutasDeBicicleta();
-            break;
-
-          default:
-            console.log("¡Hasta pronto!");
-            break;
-        }
-      });
-  }
-
-  public mostrarRutasAlfabeticamente(): void {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "rutas",
-          message: "¿Como quieres ver la lista de rutas?",
-          choices: [
-            "Mostrar todas las rutas por orden alfabético ascendente",
-            "Mostrar todas las rutas por orden alfabético descendente",
-          ],
-        },
-      ])
-      .then((answers) => {
-        switch (answers.rutas) {
-          case "Mostrar todas las rutas por orden alfabético ascendente":
+          case "Mostrar todas las rutas por orden alfabético ascedente":
             this.mostrarRutasAlfabeticamenteAscendente();
+            // PARA PENSAR
+            // console.log("Pulsa enter para volver al menu principal");
+            // const rl = readline.createInterface({
+            //   input: process.stdin,
+            //   output: process.stdout,
+            // });
+            // rl.on("line", () => {
+            //   this.mainMenu();
+            // });
             break;
           case "Mostrar todas las rutas por orden alfabético descendente":
             this.mostrarRutasAlfabeticamenteDescendente();
             break;
-        }
-      });
-  }
-
-  public mostrarRutasAlfabeticamenteAscendente(): void {
-    console.clear();
-    console.log("Mostrar todas las rutas por orden alfabético ascendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.nombre.toLowerCase() < rutasOrdenadas[i].nombre.toLowerCase()
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
-    console.log("Pulsa enter para volver al menu principal");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-    rl.on("line", () => {
-      this.mainMenu();
-    });
-  }
-
-  public mostrarRutasAlfabeticamenteDescendente(): void {
-    console.clear();
-    console.log("Mostrar todas las rutas por orden alfabético descendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.nombre.toLowerCase() > rutasOrdenadas[i].nombre.toLowerCase()
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
-  }
-
-  public mostrarRutasPorCantidadDeUsuarios(): void {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "rutas",
-          message: "¿Como quieres ver la lista de rutas?",
-          choices: [
-            "Mostrar todas las rutas por cantidad de usuarios ascendente",
-            "Mostrar todas las rutas por cantidad de usuarios descendente",
-          ],
-        },
-      ])
-      .then((answers) => {
-        switch (answers.rutas) {
           case "Mostrar todas las rutas por cantidad de usuarios ascendente":
-            this.mostrarRutasPorCantidadDeUsuariosAscendente();
+            this.mostrarRutasCantidadUsuariosAscendente();
             break;
           case "Mostrar todas las rutas por cantidad de usuarios descendente":
-            this.mostrarRutasPorCantidadDeUsuariosDescendente();
+            this.mostrarRutasCantidadUsuariosDescendente();
             break;
-        }
-      });
-  }
-
-  public mostrarRutasPorCantidadDeUsuariosAscendente(): void {
-    console.clear();
-    console.log("Mostrar todas las rutas por cantidad de usuarios ascendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.getUsuarios().length < rutasOrdenadas[i].getUsuarios().length
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
-  }
-
-  public mostrarRutasPorCantidadDeUsuariosDescendente(): void {
-    console.clear();
-    console.log("Mostrar todas las rutas por cantidad de usuarios descendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.getUsuarios().length > rutasOrdenadas[i].getUsuarios().length
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
-  }
-
-  public mostrarRutasPorDistancia(): void {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "rutas",
-          message: "¿Como quieres ver la lista de rutas?",
-          choices: [
-            "Mostrar todas las rutas por distancia ascendente",
-            "Mostrar todas las rutas por distancia descendente",
-          ],
-        },
-      ])
-      .then((answers) => {
-        switch (answers.rutas) {
           case "Mostrar todas las rutas por distancia ascendente":
-            this.mostrarRutasPorDistanciaAscendente();
+            this.mostrarRutasDistanciaAscendente();
             break;
           case "Mostrar todas las rutas por distancia descendente":
-            this.mostrarRutasPorDistanciaDescendente();
+            this.mostrarRutasDistanciaDescendente();
+            break;
+          case "Mostrar todas las rutas por calificacion media ascendente":
+            this.mostrarRutasCalificacionAscendente();
+            break;
+          case "Mostrar todas las rutas por calificacion media descendente":
+            this.mostrarRutasCalificacionDescendente();
+            break;
+          case "Mostrar todas las rutas de correr":
+            this.mostrarRutasCorrer();
+            break;
+          case "Mostrar todas las rutas de bicicleta":
+            this.mostrarRutasBicicleta();
+            break;
+          case "Volver al menu principal":
+            this.mainMenu();
             break;
         }
       });
   }
 
-  public mostrarRutasPorDistanciaAscendente(): void {
+  mostrarRutasAlfabeticamenteAscendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas por distancia ascendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (ruta.getDistancia() < rutasOrdenadas[i].getDistancia()) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
-    console.log("Pulsa enter para volver al menu principal");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-    rl.on("line", () => {
-      this.mainMenu();
-    });
+    const rutas = this.rutas.getNombres();
+    rutas.sort();
+    console.log(rutas);
   }
 
-  public mostrarRutasPorDistanciaDescendente(): void {
+  mostrarRutasAlfabeticamenteDescendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas por distancia descendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (ruta.getDistancia() > rutasOrdenadas[i].getDistancia()) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
+    const rutas = this.rutas.getNombres();
+    rutas.sort();
+    rutas.reverse();
+    console.log(rutas);
+  }
+
+  mostrarRutasCantidadUsuariosAscendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getUsuarios().length > b.getUsuarios().length) {
+        return 1;
+      }
+      if (a.getUsuarios().length < b.getUsuarios().length) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(rutas);
+  }
+
+  mostrarRutasCantidadUsuariosDescendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getUsuarios().length > b.getUsuarios().length) {
+        return -1;
+      }
+      if (a.getUsuarios().length < b.getUsuarios().length) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(rutas);
+  }
+
+  mostrarRutasDistanciaAscendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getDistancia() > b.getDistancia()) {
+        return 1;
+      }
+      if (a.getDistancia() < b.getDistancia()) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(rutas);
+  }
+
+  mostrarRutasDistanciaDescendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getDistancia() > b.getDistancia()) {
+        return -1;
+      }
+      if (a.getDistancia() < b.getDistancia()) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(rutas);
+  }
+
+  mostrarRutasCalificacionAscendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getCalificacionMedia() > b.getCalificacionMedia()) {
+        return 1;
+      }
+      if (a.getCalificacionMedia() < b.getCalificacionMedia()) {
+        return -1;
+      }
+      return 0;
+    });
+    for (const ruta of rutas) {
+      console.log(ruta.nombre + " " + ruta.getCalificacionMedia());
     }
   }
 
-  public mostrarRutasPorCalificacionMedia(): void {
+  mostrarRutasCalificacionDescendente(): void {
+    console.clear();
+    const rutas = this.rutas;
+    rutas.sort((a, b) => {
+      if (a.getCalificacionMedia() > b.getCalificacionMedia()) {
+        return -1;
+      }
+      if (a.getCalificacionMedia() < b.getCalificacionMedia()) {
+        return 1;
+      }
+      return 0;
+    });
+    for (const ruta of rutas) {
+      console.log(ruta.nombre + " " + ruta.getCalificacionMedia());
+    }
+  }
+
+  mostrarRutasCorrer(): void {
+    console.clear();
+    const rutas = this.rutas;
+    const rutasCorrer = rutas.filter((ruta) => ruta.getTipoRuta() === "correr");
+    console.log(rutasCorrer);
+  }
+
+  mostrarRutasBicicleta(): void {
+    console.clear();
+    const rutas = this.rutas;
+    const rutasBicicleta = rutas.filter(
+      (ruta) => ruta.getTipoRuta() === "bicicleta"
+    );
+    console.log(rutasBicicleta);
+  }
+
+  mostrarUsuarios(): void {
     console.clear();
     inquirer
       .prompt([
         {
           type: "list",
-          name: "rutas",
-          message: "¿Como quieres ver la lista de rutas?",
+          name: "usuarios",
+          message: "¿Qué quieres hacer?",
           choices: [
-            "Mostrar todas las rutas por calificacion media ascendente",
-            "Mostrar todas las rutas por calificacion media descendente",
+            "Mostrar todos los usuarios por orden alfabético ascedente",
+            "Mostrar todos los usuarios por orden alfabético descendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados semana actual ascendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados semana actual descendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados mes actual ascendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados mes actual descendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados año actual ascendente",
+            "Mostrar todos los usuarios por cantidad de Km realizados año actual descendente",
+            "Volver al menu principal",
           ],
         },
       ])
       .then((answers) => {
-        switch (answers.rutas) {
-          case "Mostrar todas las rutas por calificacion media ascendente":
-            this.mostrarRutasPorCalificacionMediaAscendente();
+        switch (answers.usuarios) {
+          case "Mostrar todos los usuarios por orden alfabético ascedente":
+            this.mostrarUsuariosAlfabeticamenteAscendente();
             break;
-          case "Mostrar todas las rutas por calificacion media descendente":
-            this.mostrarRutasPorCalificacionMediaDescendente();
+          case "Mostrar todos los usuarios por orden alfabético descendente":
+            this.mostrarUsuariosAlfabeticamenteDescendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados semana actual ascendente":
+            this.mostrarUsuariosKmSemanaAscendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados semana actual descendente":
+            this.mostrarUsuariosKmSemanaDescendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados mes actual ascendente":
+            this.mostrarUsuariosKmMesAscendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados mes actual descendente":
+            this.mostrarUsuariosKmMesDescendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados año actual ascendente":
+            this.mostrarUsuariosKmAñoAscendente();
+            break;
+          case "Mostrar todos los usuarios por cantidad de Km realizados año actual descendente":
+            this.mostrarUsuariosKmAñoDescendente();
+            break;
+          case "Volver al menu principal":
+            this.mainMenu();
             break;
         }
       });
   }
 
-  public mostrarRutasPorCalificacionMediaAscendente(): void {
+  mostrarUsuariosAlfabeticamenteAscendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas por calificacion media ascendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.getCalificacionMedia() <
-              rutasOrdenadas[i].getCalificacionMedia()
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
+    const usuarios = this.usuarios.getNombres();
+    usuarios.sort();
+    console.log(usuarios);
   }
 
-  public mostrarRutasPorCalificacionMediaDescendente(): void {
+  mostrarUsuariosAlfabeticamenteDescendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas por calificacion media descendente");
-    const rutasOrdenadas: Ruta[] = [];
-    if (this.rutas.length() > 0) {
-      this.rutas.forEach((ruta) => {
-        if (rutasOrdenadas.length == 0) {
-          rutasOrdenadas.push(ruta);
-        } else {
-          for (let i = 0; i < rutasOrdenadas.length; i++) {
-            if (
-              ruta.getCalificacionMedia() >
-              rutasOrdenadas[i].getCalificacionMedia()
-            ) {
-              rutasOrdenadas.splice(i, 0, ruta);
-              break;
-            } else if (i == rutasOrdenadas.length - 1) {
-              rutasOrdenadas.push(ruta);
-              break;
-            }
-          }
-        }
-      });
-    }
-    for (let i = 0; i < rutasOrdenadas.length; i++) {
-      console.log(rutasOrdenadas[i].nombre);
-    }
+    const usuarios = this.usuarios.getNombres();
+    usuarios.sort();
+    usuarios.reverse();
+    console.log(usuarios);
   }
 
-  public mostrarRutasDeCorrer(): void {
+  mostrarUsuariosKmSemanaAscendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas de correr");
-    const rutasDeCorrer: Ruta[] = [];
-    this.rutas.forEach((ruta) => {
-      if (ruta.getTipoRuta() == "correr") {
-        rutasDeCorrer.push(ruta);
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosSemana() > b.getKmRecorridosSemana()) {
+        return 1;
       }
+      if (a.getKmRecorridosSemana() < b.getKmRecorridosSemana()) {
+        return -1;
+      }
+      return 0;
     });
-    for (let i = 0; i < rutasDeCorrer.length; i++) {
-      console.log(rutasDeCorrer[i].nombre);
-    }
+    console.log(usuarios);
   }
 
-  public mostrarRutasDeBicicleta(): void {
+  mostrarUsuariosKmSemanaDescendente(): void {
     console.clear();
-    console.log("Mostrar todas las rutas de bicicleta");
-    const rutasDeBicicleta: Ruta[] = [];
-    this.rutas.forEach((ruta) => {
-      if (ruta.getTipoRuta() == "bicicleta") {
-        rutasDeBicicleta.push(ruta);
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosSemana() > b.getKmRecorridosSemana()) {
+        return -1;
       }
+      if (a.getKmRecorridosSemana() < b.getKmRecorridosSemana()) {
+        return 1;
+      }
+      return 0;
     });
-    for (let i = 0; i < rutasDeBicicleta.length; i++) {
-      console.log(rutasDeBicicleta[i].nombre);
-    }
+    console.log(usuarios);
+  }
+
+  mostrarUsuariosKmMesAscendente(): void {
+    console.clear();
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosMes() > b.getKmRecorridosMes()) {
+        return 1;
+      }
+      if (a.getKmRecorridosMes() < b.getKmRecorridosMes()) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(usuarios);
+  }
+
+  mostrarUsuariosKmMesDescendente(): void {
+    console.clear();
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosMes() > b.getKmRecorridosMes()) {
+        return -1;
+      }
+      if (a.getKmRecorridosMes() < b.getKmRecorridosMes()) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(usuarios);
+  }
+
+  mostrarUsuariosKmAñoAscendente(): void {
+    console.clear();
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosAnio() > b.getKmRecorridosAnio()) {
+        return 1;
+      }
+      if (a.getKmRecorridosAnio() < b.getKmRecorridosAnio()) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(usuarios);
+  }
+
+  mostrarUsuariosKmAñoDescendente(): void {
+    console.clear();
+    const usuarios = this.usuarios;
+    usuarios.sort((a, b) => {
+      if (a.getKmRecorridosAnio() > b.getKmRecorridosAnio()) {
+        return -1;
+      }
+      if (a.getKmRecorridosAnio() < b.getKmRecorridosAnio()) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(usuarios);
   }
 }

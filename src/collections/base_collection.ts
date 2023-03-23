@@ -36,4 +36,20 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   getNombres(): string[] {
     return [...this.collection.values()].map((element) => element.nombre);
   }
+
+  sort(funcion: (a: T, b: T) => number): T[] {
+    return [...this.collection.values()].sort(funcion);
+  }
+
+  filter(funcion: (element: T) => boolean): T[] {
+    return [...this.collection.values()].filter(funcion);
+  }
+
+  SymbolIterator(): IterableIterator<T> {
+    return this.collection.values();
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.SymbolIterator();
+  }
 }

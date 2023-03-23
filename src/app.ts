@@ -356,6 +356,7 @@ export class App {
           type: "input",
           name: "tipo_ruta",
           message: "Introduce el tipo de ruta",
+          choices: ["correr", "bicicleta"],
         },
       ])
       .then((answers) => {
@@ -406,9 +407,10 @@ export class App {
           message: "Introduce el nombre del reto",
         },
         {
-          type: "input",
+          type: "list",
           name: "tipo_reto",
           message: "Introduce el tipo de reto",
+          choices: ["correr", "bicicleta"],
         },
         {
           type: "input",

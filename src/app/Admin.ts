@@ -34,7 +34,7 @@ enum Commandos {
   Salir = "Salir",
 }
 
-export class App {
+export class Admin {
   private usuarios: UsuarioCollection;
   private rutas: RutaCollection;
   private retos: RetoCollection;
@@ -73,92 +73,7 @@ export class App {
     this.grupos = grupos;
   }
 
-  public start(): void {
-    console.log("Bienvenido a DeStravaTe");
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          name: "command",
-          message: "¿Que quieres hacer?",
-          choices: ["Iniciar sesión", "Registrarse"],
-        },
-      ])
-      .then((answers) => {
-        if (answers["command"] === "Iniciar sesión") {
-          this.login();
-        } else {
-          this.register();
-        }
-      });
-  }
-
-  public login(): void {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "input",
-          name: "username",
-          message: "Introduce tu nombre de usuario",
-        },
-      ])
-      .then((answers) => {
-        const username = answers["username"];
-        const user = this.usuarios.findElement(username);
-        if (user !== undefined) {
-          this.current_user = user;
-          this.mainMenu();
-        } else {
-          console.log("Usuario no encontrado");
-          inquirer.prompt([
-            {
-              type: "list",
-              name: "command",
-              message: "¿Que quieres hacer?",
-              choices: ["Volver a intentarlo", "Registrarse"],
-            },
-          ]);
-          if (answers["command"] === "Volver a intentarlo") {
-            this.login();
-          } else {
-            this.register();
-          }
-        }
-      });
-  }
-  public register(): void {
-    console.clear();
-    inquirer
-      .prompt([
-        {
-          type: "input",
-          name: "username",
-          message: "Introduce tu nombre de usuario",
-        },
-      ])
-      .then((answers) => {
-        const username = answers["username"];
-        const user = this.usuarios.findElement(username);
-        if (user !== undefined) {
-          console.log("Usuario ya existente");
-          this.register();
-        } else {
-          const user = new Usuario(
-            username,
-            undefined,
-            [],
-            new Stats(),
-            [],
-            [],
-            []
-          );
-          this.usuarios.addElement(user);
-          this.current_user = user;
-          this.mainMenu();
-        }
-      });
-  }
+  
 
   public mainMenu(): void {
     console.clear();
@@ -353,7 +268,7 @@ export class App {
             "Introduce las coordenadas de fin de la ruta separadas por comas",
         },
         {
-          type: "input",
+          type: "list",
           name: "tipo_ruta",
           message: "Introduce el tipo de ruta",
           choices: ["correr", "bicicleta"],
@@ -914,6 +829,7 @@ export class App {
       .then((answers) => {
         this.usuarios.removeElement(answers.usuarios);
         console.log("Usuario eliminado correctamente");
+        this.mainMenu();
       });
   }
 
@@ -931,6 +847,7 @@ export class App {
       .then((answers) => {
         this.retos.removeElement(answers.retos);
         console.log("Reto eliminado correctamente");
+        this.mainMenu();
       });
   }
 
@@ -948,6 +865,7 @@ export class App {
       .then((answers) => {
         this.rutas.removeElement(answers.rutas);
         console.log("Ruta eliminada correctamente");
+        this.mainMenu();
       });
   }
 
@@ -977,6 +895,31 @@ export class App {
         }
         this.grupos.removeElement(answers.grupos);
         console.log("Grupo eliminado correctamente");
+      });
+  }
+
+  añadirAmigo(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "nombre",
+          message: "Elige el usuario que quieres añadir",
+          choices: this.usuarios.getNombres(),
+        },
+      ])
+      .then((answers) => {
+        const usuario = this.usuarios.findElement(answers.nombre);
+        if (usuario == undefined) {
+          console.log("El usuario no existe");
+          this.añadirAmigo();
+        } else {
+          this.current_user.addAmigo(usuario.id);
+          this.usuarios.updateElement(this.current_user);
+          console.log("Amigo añadido correctamente");
+          this.mainMenu();
+        }
       });
   }
 }

@@ -1,10 +1,11 @@
-import { App } from "./app/app";
 import { Ruta } from "./datatypes/rutas";
 import { Reto } from "./datatypes/retos";
 import { RutaCollection } from "./collections/rutas_collection";
 import { RetoCollection } from "./collections/retos_collection";
 import { JsonRutas } from "./jsonadapters/jsonrutas";
 import { JsonRetos } from "./jsonadapters/jsonretos";
+import { Admin } from "./app/Admin";
+import { Gestor } from "./app/Gestor";
 
 // const rutas = new JsonRutas();
 
@@ -130,6 +131,6 @@ import { JsonRetos } from "./jsonadapters/jsonretos";
 //   )
 // );
 
-const app = new App();
+const gestor = new Gestor();
 
-app.start();
+gestor.start();

@@ -2,26 +2,50 @@
   "retos": [
     {
       "nombre": "Reto1",
-      "ruta": [123],
+      "ruta": [
+        123
+      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
-      "usuarios_realizando_reto": [1, 2, 3, 4, 6],
+      "usuarios_realizando_reto": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
       "id": 0
     },
     {
       "nombre": "Reto2",
-      "ruta": [123],
+      "ruta": [
+        123
+      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
-      "usuarios_realizando_reto": [1, 2, 3, 4, 6],
+      "usuarios_realizando_reto": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
       "id": 1
     },
     {
       "nombre": "Reto3",
-      "ruta": [123],
+      "ruta": [
+        123
+      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
-      "usuarios_realizando_reto": [1, 2, 3, 4, 6],
+      "usuarios_realizando_reto": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
       "id": 2
     }
   ]

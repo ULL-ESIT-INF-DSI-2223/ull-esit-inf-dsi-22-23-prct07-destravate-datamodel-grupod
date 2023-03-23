@@ -566,45 +566,47 @@ export class Admin {
         },
       ])
       .then((answers) => {
+        // no Funciona el getElement de la lista de retos por
+        // lo que no se puede modificar ya que devuelve undefined
         const reto = this.retos.getElement(answers.retos);
         if (reto === undefined) {
           console.log("El reto no existe");
           this.modificarReto();
         } else {
-        inquirer
-          .prompt([
-            {
-              type: "list",
-              name: "modificar",
-              message: "¿Que quieres modificar?",
-              choices: [
-                "Nombre",
-                "Tipo de reto",
-                "Km totales",
-                "Usuarios realizando el reto",
-                "Rutas del reto",
-              ],
-            },
-          ])
-          .then((answers) => {
-            switch (answers.modificar) {
-              case "Nombre":
-                this.modificarNombreReto(reto);
-                break;
-              case "Tipo de reto":
-                this.modificarTipoReto(reto);
-                break;
-              case "Km totales":
-                this.modificarKmTotalesReto(reto);
-                break;
-              case "Usuarios realizando el reto":
-                this.modificarUsuariosRealizandoReto(reto);
-                break;
-              case "Rutas del reto":
-                this.modificarRutasReto(reto);
-                break;
-            }
-          });
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "modificar",
+                message: "¿Que quieres modificar?",
+                choices: [
+                  "Nombre",
+                  "Tipo de reto",
+                  "Km totales",
+                  "Usuarios realizando el reto",
+                  "Rutas del reto",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.modificar) {
+                case "Nombre":
+                  this.modificarNombreReto(reto);
+                  break;
+                case "Tipo de reto":
+                  this.modificarTipoReto(reto);
+                  break;
+                case "Km totales":
+                  this.modificarKmTotalesReto(reto);
+                  break;
+                case "Usuarios realizando el reto":
+                  this.modificarUsuariosRealizandoReto(reto);
+                  break;
+                case "Rutas del reto":
+                  this.modificarRutasReto(reto);
+                  break;
+              }
+            });
         }
       });
   }

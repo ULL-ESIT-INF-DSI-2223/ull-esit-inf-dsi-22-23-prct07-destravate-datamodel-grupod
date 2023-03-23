@@ -21,6 +21,7 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }
+
   findElement(nombre: string): T | undefined {
     return [...this.collection.values()].find(
       (element) => element.nombre === nombre

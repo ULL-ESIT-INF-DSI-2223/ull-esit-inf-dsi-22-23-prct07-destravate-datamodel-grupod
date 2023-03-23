@@ -5,24 +5,22 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [master]
   pull_request:
-    branches: [ main ]
+    branches: [master]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cloning repo
-      uses: actions/checkout@v3
-    - name: Use Node.js 19.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 19.x
-    - name: Installing dependencies
-      run: npm i
-    - name: Running tests
-      run: npm run test
-
+      - name: Cloning repo
+        uses: actions/checkout@v3
+      - name: Use Node.js 19.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.x
+      - name: Installing dependencies
+        run: npm i
+      - name: Running tests
+        run: npm run test

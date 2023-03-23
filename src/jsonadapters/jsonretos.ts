@@ -4,12 +4,14 @@ import { Reto } from "../datatypes/retos";
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 
+type Actividad = "correr" | "bicicleta" | undefined;
+
 type schemaType = {
   retos: {
     id: number;
     nombre: string;
     ruta: number[];
-    tipo_reto: string;
+    tipo_reto: Actividad;
     km_totales: number;
     usuarios_realizando_reto: number[];
   }[];

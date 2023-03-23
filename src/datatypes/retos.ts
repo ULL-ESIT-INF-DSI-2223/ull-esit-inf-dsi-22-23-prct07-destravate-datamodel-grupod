@@ -1,5 +1,6 @@
 import { Datatype } from "./datatype";
 
+type Actividad = "correr" | "bicicleta" | undefined;
 export class Reto implements Datatype {
   private static retoCount = 0;
   public id: number;
@@ -7,8 +8,8 @@ export class Reto implements Datatype {
 
   constructor(
     public nombre: string,
-    private ruta: number[],
-    private tipo_reto: string,
+    private rutas: number[],
+    private tipo_reto: Actividad,
     private km_totales: number,
     private usuarios_realizando_reto: number[]
   ) {
@@ -16,7 +17,7 @@ export class Reto implements Datatype {
   }
 
   public getRutas(): number[] {
-    return this.ruta;
+    return this.rutas;
   }
 
   public getKmTotales(): number {
@@ -27,7 +28,11 @@ export class Reto implements Datatype {
     return this.usuarios_realizando_reto;
   }
 
-  public setTipoReto(tipo_reto: string): void {
+  public getTipoReto(): Actividad {
+    return this.tipo_reto;
+  }
+
+  public setTipoReto(tipo_reto: Actividad): void {
     this.tipo_reto = tipo_reto;
   }
 
@@ -40,14 +45,14 @@ export class Reto implements Datatype {
   }
 
   public setRuta(ruta: number[]): void {
-    this.ruta = ruta;
+    this.rutas = ruta;
   }
 
   public añadirRuta(ruta: number): void {
-    this.ruta.push(ruta);
+    this.rutas.push(ruta);
   }
 
   public eliminarRuta(ruta: number): void {
-    this.ruta = this.ruta.filter((element) => element !== ruta);
+    this.rutas = this.rutas.filter((element) => element !== ruta);
   }
 }

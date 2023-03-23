@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.15% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.36% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,8 +101,7 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,35 +109,34 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">37x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">55x</span>
-<span class="cline-any cline-yes">55x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">72x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Usuario } from "../datatypes/usuarios";
@@ -158,26 +156,25 @@ export abstract class BaseCollection&lt;T extends Usuario | Grupo | Reto | Ruta&
   removeElement(id: number): void {
     this.collection.delete(id);
   }
-<span class="fstat-no" title="function not covered" >  updateElement(</span>element: T): void {
-<span class="cstat-no" title="statement not covered" >    this.collection.set(element.id, element);</span>
+  updateElement(element: T): void {
+    this.collection.set(element.id, element);
   }
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }
-<span class="fstat-no" title="function not covered" >  findElement(</span>nombre: string): T | undefined {
-<span class="cstat-no" title="statement not covered" >    return [...this.collection.values()].find(</span>
-<span class="fstat-no" title="function not covered" >      (e</span>lement) =&gt; <span class="cstat-no" title="statement not covered" >element.nombre === nombre</span>
+  findElement(nombre: string): T | undefined {
+    return [...this.collection.values()].find(
+      (element) =&gt; element.nombre === nombre
     );
   }
-<span class="fstat-no" title="function not covered" >  length(</span>): number {
-<span class="cstat-no" title="statement not covered" >    return this.collection.size;</span>
+  length(): number {
+    return this.collection.size;
   }
-<span class="fstat-no" title="function not covered" >  forEach(</span>callback: (element: T) =&gt; void): void {
-<span class="cstat-no" title="statement not covered" >    this.collection.forEach(callback);</span>
+  forEach(callback: (element: T) =&gt; void): void {
+    this.collection.forEach(callback);
   }
-&nbsp;
-<span class="fstat-no" title="function not covered" >  getNombres(</span>): string[] {
-<span class="cstat-no" title="statement not covered" >    return [...this.collection.values()].map(<span class="fstat-no" title="function not covered" >(e</span>lement) =&gt; <span class="cstat-no" title="statement not covered" >element.nombre)</span>;</span>
+  getNombres(): string[] {
+    return [...this.collection.values()].map((element) =&gt; element.nombre);
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -187,7 +184,7 @@ export abstract class BaseCollection&lt;T extends Usuario | Grupo | Reto | Ruta&
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-23T12:02:32.156Z
+                at 2023-03-23T12:48:36.312Z
             </div>
         <script src="../prettify.js"></script>
         <script>

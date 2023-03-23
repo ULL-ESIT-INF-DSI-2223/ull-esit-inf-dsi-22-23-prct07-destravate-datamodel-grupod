@@ -30,10 +30,6 @@ export class Ruta implements Datatype {
       this.calificacion.reduce((a, b) => a + b, 0) / this.calificacion.length;
   }
 
-  public getNombre(): string {
-    return this.nombre;
-  }
-
   public getUsuarios(): number[] {
     return this.usuarios_ya_realizados;
   }

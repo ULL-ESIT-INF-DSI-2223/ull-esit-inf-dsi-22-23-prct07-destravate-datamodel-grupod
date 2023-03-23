@@ -566,7 +566,7 @@ export class Admin {
         },
       ])
       .then((answers) => {
-        const reto: Reto = this.retos.getReto(answers.retos);
+        const reto = this.retos.getReto(answers.retos);
         inquirer
           .prompt([
             {
@@ -587,16 +587,16 @@ export class Admin {
               case "Nombre":
                 this.modificarNombreReto(reto);
                 break;
-              case "Fecha de inicio":
+              case "Tipo de reto":
                 this.modificarTipoReto(reto);
                 break;
-              case "Fecha de fin":
+              case "Km totales":
                 this.modificarKmTotalesReto(reto);
                 break;
-              case "Km totales":
+              case "Usuarios realizando el reto":
                 this.modificarUsuariosRealizandoReto(reto);
                 break;
-              case "Km diarios":
+              case "Rutas del reto":
                 this.modificarRutasReto(reto);
                 break;
             }

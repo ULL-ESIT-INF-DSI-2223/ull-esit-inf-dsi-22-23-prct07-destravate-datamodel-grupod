@@ -2115,7 +2115,8 @@ export class App {
           console.log("No eres el propietario del grupo");
           this.mainMenu();
         } else {
-          console.log("No eres el propietario del grupo");
+          this.grupos.removeElement(answers.grupos);
+          console.log("Grupo eliminado correctamente");
           this.mainMenu();
         }
         this.grupos.removeElement(answers.grupos);

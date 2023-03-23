@@ -4,9 +4,13 @@ import { Stats } from "../datatypes/stats";
 
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
-
+/**
+ * Tipo de actividad
+ */
 type Actividad = "correr" | "bicicleta" | undefined;
-
+/**
+ * Esquema de la base de datos
+ */
 type schemaType = {
   usuarios: {
     id: number;
@@ -22,7 +26,9 @@ type schemaType = {
     }[];
   }[];
 };
-
+/**
+ * Clase adaptadora de la base de datos de usuarios
+ */
 export class JsonUsuarios extends UsuarioCollection {
   private db: lowdb.LowdbSync<schemaType>;
   constructor() {
@@ -47,18 +53,34 @@ export class JsonUsuarios extends UsuarioCollection {
       this.db.set("usuarios", []).write();
     }
   }
+  /**
+   * Añadir un elemento a la colección
+   * @param element Elemento a añadir
+   * @returns ID del elemento añadido
+   */
   addElement(element: Usuario): number {
     const usuario = super.addElement(element);
     this.storeUsuario();
     return usuario;
   }
+  /**
+   * Eliminar un elemento de la colección
+   * @param id ID del elemento a eliminar
+   */
   removeElement(id: number): void {
     super.removeElement(id);
     this.storeUsuario();
   }
+  /**
+   * Almacenar los usuarios en la base de datos
+   */
   storeUsuario(): void {
     this.db.set("usuarios", [...this.collection.values()]).write();
   }
+  /**
+   * Actualizar un elemento de la colección
+   * @param element Elemento a actualizar
+   */
   updateElement(element: Usuario): void {
     super.updateElement(element);
     this.storeUsuario();

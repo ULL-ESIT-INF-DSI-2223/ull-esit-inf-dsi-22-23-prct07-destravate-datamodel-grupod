@@ -4,7 +4,9 @@ import { Stats } from "../datatypes/stats";
 
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
-
+/**
+ * Esquema de la base de datos
+ */
 type schemaType = {
   grupos: {
     id: number;
@@ -20,7 +22,9 @@ type schemaType = {
     owner: number;
   }[];
 };
-
+/**
+ * Clase adaptadora de la base de datos de grupos
+ */
 export class JsonGrupos extends GrupoCollection {
   private db: lowdb.LowdbSync<schemaType>;
   constructor() {
@@ -45,18 +49,34 @@ export class JsonGrupos extends GrupoCollection {
       this.db.set("grupos", []).write();
     }
   }
+  /**
+   * Añadir un elemento a la colección
+   * @param element Elemento a añadir
+   * @returns ID del elemento añadido
+   */
   addElement(element: Grupo): number {
     const grupos = super.addElement(element);
     this.storeGrupos();
     return grupos;
   }
+  /**
+   * Eliminar un elemento de la colección
+   * @param id ID del elemento a eliminar
+   */
   removeElement(id: number): void {
     super.removeElement(id);
     this.storeGrupos();
   }
+  /**
+   * Almacenar los grupos en la base de datos
+   */
   storeGrupos(): void {
     this.db.set("grupos", [...this.collection.values()]).write();
   }
+  /**
+   * Actualizar un elemento de la colección
+   * @param element Elemento a actualizar
+   */
   updateElement(element: Grupo): void {
     super.updateElement(element);
     this.storeGrupos();

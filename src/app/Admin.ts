@@ -1052,28 +1052,424 @@ export class Admin {
       });
   }
 
-  añadirAmigo(): void {
+  public mostrarRutas(): void {
     console.clear();
     inquirer
       .prompt([
         {
           type: "list",
-          name: "nombre",
-          message: "Elige el usuario que quieres añadir",
-          choices: this.usuarios.getNombres(),
+          name: "rutas",
+          message: "¿Como quieres ver la lista de rutas?",
+          choices: [
+            "Mostrar todas las rutas por orden alfabético",
+            "Mostrar todas las rutas por cantidad de usuarios",
+            "Mostrar todas las rutas por distancia",
+            "Mostrar todas las rutas por calificacion media",
+            "Mostrar todas las rutas de correr",
+            "Mostrar todas las rutas de bicicleta",
+          ],
         },
       ])
       .then((answers) => {
-        const usuario = this.usuarios.findElement(answers.nombre);
-        if (usuario == undefined) {
-          console.log("El usuario no existe");
-          this.añadirAmigo();
-        } else {
-          this.current_user.addAmigo(usuario.id);
-          this.usuarios.updateElement(this.current_user);
-          console.log("Amigo añadido correctamente");
-          this.mainMenu();
+        switch (answers.rutas) {
+          case "Mostrar todas las rutas por orden alfabético":
+            this.mostrarRutasAlfabeticamente();
+            break;
+
+          case "Mostrar todas las rutas por cantidad de usuarios":
+            this.mostrarRutasPorCantidadDeUsuarios();
+            break;
+
+          case "Mostrar todas las rutas por distancia":
+            this.mostrarRutasPorDistancia();
+            break;
+
+          case "Mostrar todas las rutas por calificacion media":
+            this.mostrarRutasPorCalificacionMedia();
+            break;
+
+          case "Mostrar todas las rutas de correr":
+            this.mostrarRutasDeCorrer();
+            break;
+
+          case "Mostrar todas las rutas de bicicleta":
+            this.mostrarRutasDeBicicleta();
+            break;
+
+          default:
+            console.log("¡Hasta pronto!");
+            break;
         }
       });
+  }
+
+  public mostrarRutasAlfabeticamente(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Como quieres ver la lista de rutas?",
+          choices: [
+            "Mostrar todas las rutas por orden alfabético ascendente",
+            "Mostrar todas las rutas por orden alfabético descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.rutas) {
+          case "Mostrar todas las rutas por orden alfabético ascendente":
+            this.mostrarRutasAlfabeticamenteAscendente();
+            break;
+          case "Mostrar todas las rutas por orden alfabético descendente":
+            this.mostrarRutasAlfabeticamenteDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRutasAlfabeticamenteAscendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por orden alfabético ascendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.nombre.toLowerCase() < rutasOrdenadas[i].nombre.toLowerCase()
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
+  }
+
+  public mostrarRutasAlfabeticamenteDescendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por orden alfabético descendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.nombre.toLowerCase() > rutasOrdenadas[i].nombre.toLowerCase()
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasPorCantidadDeUsuarios(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Como quieres ver la lista de rutas?",
+          choices: [
+            "Mostrar todas las rutas por cantidad de usuarios ascendente",
+            "Mostrar todas las rutas por cantidad de usuarios descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.rutas) {
+          case "Mostrar todas las rutas por cantidad de usuarios ascendente":
+            this.mostrarRutasPorCantidadDeUsuariosAscendente();
+            break;
+          case "Mostrar todas las rutas por cantidad de usuarios descendente":
+            this.mostrarRutasPorCantidadDeUsuariosDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRutasPorCantidadDeUsuariosAscendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por cantidad de usuarios ascendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.getUsuarios().length < rutasOrdenadas[i].getUsuarios().length
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasPorCantidadDeUsuariosDescendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por cantidad de usuarios descendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.getUsuarios().length > rutasOrdenadas[i].getUsuarios().length
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasPorDistancia(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Como quieres ver la lista de rutas?",
+          choices: [
+            "Mostrar todas las rutas por distancia ascendente",
+            "Mostrar todas las rutas por distancia descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.rutas) {
+          case "Mostrar todas las rutas por distancia ascendente":
+            this.mostrarRutasPorDistanciaAscendente();
+            break;
+          case "Mostrar todas las rutas por distancia descendente":
+            this.mostrarRutasPorDistanciaDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRutasPorDistanciaAscendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por distancia ascendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getDistancia() < rutasOrdenadas[i].getDistancia()) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+    console.log("Pulsa enter para volver al menu principal");
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.on("line", () => {
+      this.mainMenu();
+    });
+  }
+
+  public mostrarRutasPorDistanciaDescendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por distancia descendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (ruta.getDistancia() > rutasOrdenadas[i].getDistancia()) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasPorCalificacionMedia(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Como quieres ver la lista de rutas?",
+          choices: [
+            "Mostrar todas las rutas por calificacion media ascendente",
+            "Mostrar todas las rutas por calificacion media descendente",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.rutas) {
+          case "Mostrar todas las rutas por calificacion media ascendente":
+            this.mostrarRutasPorCalificacionMediaAscendente();
+            break;
+          case "Mostrar todas las rutas por calificacion media descendente":
+            this.mostrarRutasPorCalificacionMediaDescendente();
+            break;
+        }
+      });
+  }
+
+  public mostrarRutasPorCalificacionMediaAscendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por calificacion media ascendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.getCalificacionMedia() <
+              rutasOrdenadas[i].getCalificacionMedia()
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasPorCalificacionMediaDescendente(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas por calificacion media descendente");
+    const rutasOrdenadas: Ruta[] = [];
+    if (this.rutas.length() > 0) {
+      this.rutas.forEach((ruta) => {
+        if (rutasOrdenadas.length == 0) {
+          rutasOrdenadas.push(ruta);
+        } else {
+          for (let i = 0; i < rutasOrdenadas.length; i++) {
+            if (
+              ruta.getCalificacionMedia() >
+              rutasOrdenadas[i].getCalificacionMedia()
+            ) {
+              rutasOrdenadas.splice(i, 0, ruta);
+              break;
+            } else if (i == rutasOrdenadas.length - 1) {
+              rutasOrdenadas.push(ruta);
+              break;
+            }
+          }
+        }
+      });
+    }
+    for (let i = 0; i < rutasOrdenadas.length; i++) {
+      console.log(rutasOrdenadas[i].nombre);
+    }
+  }
+
+  public mostrarRutasDeCorrer(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas de correr");
+    const rutasDeCorrer: Ruta[] = [];
+    this.rutas.forEach((ruta) => {
+      if (ruta.getTipoRuta() == "correr") {
+        rutasDeCorrer.push(ruta);
+      }
+    });
+    for (let i = 0; i < rutasDeCorrer.length; i++) {
+      console.log(rutasDeCorrer[i].nombre);
+    }
+  }
+
+  public mostrarRutasDeBicicleta(): void {
+    console.clear();
+    console.log("Mostrar todas las rutas de bicicleta");
+    const rutasDeBicicleta: Ruta[] = [];
+    this.rutas.forEach((ruta) => {
+      if (ruta.getTipoRuta() == "bicicleta") {
+        rutasDeBicicleta.push(ruta);
+      }
+    });
+    for (let i = 0; i < rutasDeBicicleta.length; i++) {
+      console.log(rutasDeBicicleta[i].nombre);
+    }
   }
 }

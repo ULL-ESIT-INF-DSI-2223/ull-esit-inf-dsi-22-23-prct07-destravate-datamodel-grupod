@@ -47,4 +47,7 @@ export class Grupo implements Datatype {
   addRutaFavorita(ruta: number) {
     this.rutas_favoritas.push(ruta);
   }
+  getRutasFavoritas(): number[] {
+    return this.rutas_favoritas;
+  }
 }

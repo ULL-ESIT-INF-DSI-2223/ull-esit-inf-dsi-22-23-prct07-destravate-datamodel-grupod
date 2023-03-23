@@ -1,9 +1,11 @@
 import { UsuarioCollection } from "../collections/usuario_collection";
-import { Usuario, Actividad } from "../datatypes/usuarios";
+import { Usuario } from "../datatypes/usuarios";
 import { Stats } from "../datatypes/stats";
 
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
+
+type Actividad = "correr" | "bicicleta" | undefined;
 
 type schemaType = {
   usuarios: {

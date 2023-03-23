@@ -2,7 +2,7 @@ import { Stats } from "./stats";
 import { Datatype } from "./datatype";
 import { Ruta } from "./rutas";
 
-export type Actividad = "correr" | "bicicleta" | undefined;
+type Actividad = "correr" | "bicicleta" | undefined;
 
 export class Usuario implements Datatype {
   private static usercount = 0;

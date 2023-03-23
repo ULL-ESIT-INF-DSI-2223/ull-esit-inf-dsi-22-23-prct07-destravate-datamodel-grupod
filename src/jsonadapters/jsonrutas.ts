@@ -4,6 +4,8 @@ import { Ruta, Coordenadas } from "../datatypes/rutas";
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 
+type Actividad = "correr" | "bicicleta" | undefined;
+
 type schemaType = {
   rutas: {
     id: number;
@@ -13,7 +15,7 @@ type schemaType = {
     longitud: number;
     desnivel: number;
     usuarios_ya_realizados: number[];
-    tipo_ruta: string;
+    tipo_ruta: Actividad;
     calificacion: number[];
   }[];
 };

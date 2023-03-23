@@ -1,5 +1,6 @@
 import { Datatype } from "./datatype";
 
+type Actividad = "correr" | "bicicleta" | undefined;
 export type Coordenadas = [number, number];
 
 export class Ruta implements Datatype {
@@ -15,7 +16,7 @@ export class Ruta implements Datatype {
     private distancia: number,
     private desnivel: number,
     private usuarios_ya_realizados: number[],
-    private tipo_ruta: string,
+    private tipo_ruta: Actividad,
     private calificacion: number[]
   ) {
     this.id = Ruta.rutacount++;
@@ -40,7 +41,7 @@ export class Ruta implements Datatype {
   public getDesnivel(): number {
     return this.desnivel;
   }
-  public getTipoRuta(): string {
+  public getTipoRuta(): Actividad {
     return this.tipo_ruta;
   }
 
@@ -56,7 +57,7 @@ export class Ruta implements Datatype {
   public cambiarDesnivel(desnivel: number): void {
     this.desnivel = desnivel;
   }
-  public cambiarTipoRuta(tipo_ruta: string): void {
+  public cambiarTipoRuta(tipo_ruta: Actividad): void {
     this.tipo_ruta = tipo_ruta;
   }
 }

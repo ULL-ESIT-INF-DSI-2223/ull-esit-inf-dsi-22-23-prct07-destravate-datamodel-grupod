@@ -55,4 +55,62 @@ describe("UsuarioCollection", () => {
     usuarios.addElement(usuario);
     expect(usuarios.getElement(usuario.id)).to.be.equal(usuario);
   });
+  it("Se debe poder actualizar un usuario de la colección", () => {
+    const usuarios = new UsuarioCollection();
+    const usuario = new Usuario(
+      "usuario1",
+      "correr",
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+    usuarios.addElement(usuario);
+    usuario.nombre = "usuario2";
+    usuarios.updateElement(usuario);
+    expect(usuarios.getElement(usuario.id)).to.be.equal(usuario);
+  });
+  it("Se debe poder buscar un usuario de la colección", () => {
+    const usuarios = new UsuarioCollection();
+    const usuario = new Usuario(
+      "usuario1",
+      "correr",
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+    usuarios.addElement(usuario);
+    expect(usuarios.findElement(usuario.nombre)).to.be.equal(usuario);
+  });
+  it("Se debe poder obtener el número de usuarios de la colección", () => {
+    const usuarios = new UsuarioCollection();
+    const usuario = new Usuario(
+      "usuario1",
+      "correr",
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+    usuarios.addElement(usuario);
+    expect(usuarios.length()).to.be.equal(1);
+  });
+  it("Se debe poder obtener los nombres de los usuarios de la colección", () => {
+    const usuarios = new UsuarioCollection();
+    const usuario = new Usuario(
+      "usuario1",
+      "correr",
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+    usuarios.addElement(usuario);
+    expect(usuarios.getNombres()).to.be.eql(["usuario1"]);
+  });
 });

@@ -566,7 +566,7 @@ export class Admin {
         },
       ])
       .then((answers) => {
-        const reto = this.retos.getReto(answers.retos);
+        const reto = this.retos.getElement(answers.retos);
         inquirer
           .prompt([
             {

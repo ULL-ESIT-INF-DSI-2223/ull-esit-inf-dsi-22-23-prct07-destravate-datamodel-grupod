@@ -567,6 +567,10 @@ export class Admin {
       ])
       .then((answers) => {
         const reto = this.retos.getElement(answers.retos);
+        if (reto === undefined) {
+          console.log("El reto no existe");
+          this.modificarReto();
+        } else {
         inquirer
           .prompt([
             {
@@ -601,6 +605,7 @@ export class Admin {
                 break;
             }
           });
+        }
       });
   }
 

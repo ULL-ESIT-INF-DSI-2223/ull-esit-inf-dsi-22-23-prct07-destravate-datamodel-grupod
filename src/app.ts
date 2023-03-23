@@ -1742,6 +1742,7 @@ export class App {
                   "Añadir ruta favorita",
                   "Añadir reto",
                   "Añadir rutas",
+                  "Salir",
                 ],
               },
             ])
@@ -1765,6 +1766,8 @@ export class App {
                 case "Añadir rutas":
                   this.anadirRutas(usuario);
                   break;
+                case "Salir":
+                  this.mainMenu();
               }
             });
         }
@@ -1810,6 +1813,7 @@ export class App {
       ])
       .then((answers) => {
         usuario.cambiarActividad(answers.actividad);
+        this.usuarios.updateElement(usuario);
         this.mainMenu();
       });
   }
@@ -2236,5 +2240,7 @@ export class App {
       });
   }
 
-  modificarRuta() {}
+  modificarRuta() {
+    console.clear();
+  }
 }

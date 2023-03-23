@@ -1,9 +1,10 @@
 {
   "usuarios": [
     {
-      "nombre": "Febe",
-      "actividad": "bicicleta",
+      "nombre": "febe",
+      "actividad": "correr",
       "amigos": [
+        1,
         1
       ],
       "stats": {
@@ -36,17 +37,10 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 1
-<<<<<<< HEAD
-<<<<<<< HEAD
-    },
-    {
-      "nombre": "marco",
-=======
     },
     {
       "nombre": "mineinpink",
       "actividad": "correr",
->>>>>>> 777b1af00fbffdbe57378de76b2b3b539cb4b6f6
       "amigos": [],
       "stats": {
         "week_distance": 0,
@@ -60,7 +54,6 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 2
-<<<<<<< HEAD
     },
     {
       "nombre": "jose",
@@ -141,10 +134,6 @@
       "retos_activos": [],
       "historico_rutas": [],
       "id": 7
-=======
->>>>>>> 87753130c2f70ee5e7d11c87449956f0c956a31b
-=======
->>>>>>> 777b1af00fbffdbe57378de76b2b3b539cb4b6f6
     }
   ]
 }

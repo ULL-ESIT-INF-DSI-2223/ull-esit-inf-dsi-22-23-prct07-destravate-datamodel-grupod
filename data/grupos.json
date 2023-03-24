@@ -2,9 +2,169 @@
   "grupos": [
     {
       "nombre": "Corredores",
-      "miembros": [
-        0
+      "miembros": [0, 1, 2, 3],
+      "group_stats": {
+        "week_distance": 25.5,
+        "week_slope": 2.1,
+        "month_distance": 80.2,
+        "month_slope": 5.6,
+        "year_distance": 500.7,
+        "year_slope": 37.4
+      },
+      "clasificacion": [
+        {
+          "nombre": "Ana",
+          "puntos": 23
+        },
+        {
+          "nombre": "Pedro",
+          "puntos": 18
+        },
+        {
+          "nombre": "María",
+          "puntos": 15
+        }
       ],
+      "rutas_favoritas": [
+        {
+          "nombre": "Parque de la Ciudad",
+          "distancia": 8.5,
+          "dificultad": 2
+        },
+        {
+          "nombre": "Paseo Marítimo",
+          "distancia": 12.1,
+          "dificultad": 3
+        }
+      ],
+      "historico_rutas": [
+        {
+          "nombre": "Cerro de la Cruz",
+          "distancia": 6.3,
+          "dificultad": 4,
+          "fecha": "2022-01-03"
+        },
+        {
+          "nombre": "Sendero del Río",
+          "distancia": 10.2,
+          "dificultad": 2,
+          "fecha": "2022-02-15"
+        }
+      ],
+      "owner": 0,
+      "id": 0
+    },
+    {
+      "nombre": "Ciclistas",
+      "miembros": [4, 5, 6],
+      "group_stats": {
+        "week_distance": 95.3,
+        "week_slope": 5.3,
+        "month_distance": 310.6,
+        "month_slope": 18.2,
+        "year_distance": 2200.4,
+        "year_slope": 135.7
+      },
+      "clasificacion": [
+        {
+          "nombre": "Juan",
+          "puntos": 28
+        },
+        {
+          "nombre": "Luisa",
+          "puntos": 25
+        },
+        {
+          "nombre": "David",
+          "puntos": 20
+        }
+      ],
+      "rutas_favoritas": [
+        {
+          "nombre": "Coll de Rates",
+          "distancia": 34.2,
+          "dificultad": 5
+        },
+        {
+          "nombre": "Vía Verde",
+          "distancia": 22.5,
+          "dificultad": 2
+        }
+      ],
+      "historico_rutas": [
+        {
+          "nombre": "Puerto de Tudons",
+          "distancia": 45.7,
+          "dificultad": 4,
+          "fecha": "2022-03-10"
+        },
+        {
+          "nombre": "Ruta de los Faros",
+          "distancia": 70.1,
+          "dificultad": 3,
+          "fecha": "2022-01-28"
+        }
+      ],
+      "owner": 4,
+      "id": 1
+    },
+    {
+      "nombre": "Senderistas",
+      "miembros": [7, 8],
+      "group_stats": {
+        "week_distance": 12.8,
+        "week_slope": 1.6,
+        "month_distance": 46.7,
+        "month_slope": 4.2,
+        "year_distance": 320.5,
+        "year_slope": 29.8
+      },
+      "clasificacion": [
+        {
+          "nombre": "Elena",
+          "puntos": 19
+        },
+        {
+          "nombre": "Roberto",
+          "puntos": 16
+        },
+        {
+          "nombre": "Sandra",
+          "puntos": 13
+        }
+      ],
+      "rutas_favoritas": [
+        {
+          "nombre": "Barranco del Infierno",
+          "distancia": 9.3,
+          "dificultad": 3
+        },
+        {
+          "nombre": "Senda del Oso",
+          "distancia": 12.7,
+          "dificultad": 2
+        }
+      ],
+      "historico_rutas": [
+        {
+          "nombre": "Cascada de Ézaro",
+          "distancia": 7.6,
+          "dificultad": 2,
+          "fecha": "2022-02-05"
+        },
+        {
+          "nombre": "Camino de Santiago",
+          "distancia": 23.4,
+          "dificultad": 1,
+          "fecha": "2022-04-02"
+        }
+      ],
+      "owner": 7,
+      "id": 2
+    },
+    {
+      "nombre": "Escaladores",
+      "miembros": [9, 10, 11],
       "group_stats": {
         "week_distance": 0,
         "week_slope": 0,
@@ -13,11 +173,102 @@
         "year_distance": 0,
         "year_slope": 0
       },
-      "clasificacion": [],
-      "rutas_favoritas": [],
-      "historico_rutas": [],
-      "owner": 0,
-      "id": 0
+      "clasificacion": [
+        {
+          "nombre": "Pablo",
+          "puntos": 12
+        },
+        {
+          "nombre": "Carla",
+          "puntos": 9
+        },
+        {
+          "nombre": "Marta",
+          "puntos": 8
+        }
+      ],
+      "rutas_favoritas": [
+        {
+          "nombre": "Montaña del Teide",
+          "distancia": 8.4,
+          "dificultad": 5
+        },
+        {
+          "nombre": "Peña Ubiña",
+          "distancia": 11.2,
+          "dificultad": 4
+        }
+      ],
+      "historico_rutas": [
+        {
+          "nombre": "Pico Aneto",
+          "distancia": 14.5,
+          "dificultad": 5,
+          "fecha": "2022-06-15"
+        },
+        {
+          "nombre": "Vía Ferrata de la Hermida",
+          "distancia": 5.7,
+          "dificultad": 3,
+          "fecha": "2022-07-20"
+        }
+      ],
+      "owner": 9,
+      "id": 3
+    },
+    {
+      "nombre": "Amantes de la Naturaleza",
+      "miembros": [12, 13, 14, 15],
+      "group_stats": {
+        "week_distance": 32.1,
+        "week_slope": 4.7,
+        "month_distance": 102.4,
+        "month_slope": 13.5,
+        "year_distance": 572.8,
+        "year_slope": 72.3
+      },
+      "clasificacion": [
+        {
+          "nombre": "Héctor",
+          "puntos": 22
+        },
+        {
+          "nombre": "Lucía",
+          "puntos": 19
+        },
+        {
+          "nombre": "Mario",
+          "puntos": 16
+        }
+      ],
+      "rutas_favoritas": [
+        {
+          "nombre": "Parque Nacional de Ordesa y Monte Perdido",
+          "distancia": 15.2,
+          "dificultad": 3
+        },
+        {
+          "nombre": "Monte Gorbea",
+          "distancia": 11.7,
+          "dificultad": 4
+        }
+      ],
+      "historico_rutas": [
+        {
+          "nombre": "Barranco de la Hoz",
+          "distancia": 8.1,
+          "dificultad": 2,
+          "fecha": "2022-03-12"
+        },
+        {
+          "nombre": "Sierra de Gredos",
+          "distancia": 24.5,
+          "dificultad": 4,
+          "fecha": "2022-05-01"
+        }
+      ],
+      "owner": 12,
+      "id": 4
     }
   ]
 }

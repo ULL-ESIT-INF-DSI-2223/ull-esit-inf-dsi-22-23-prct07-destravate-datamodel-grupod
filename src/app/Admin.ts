@@ -15,11 +15,13 @@ import { JsonRetos } from "../jsonadapters/jsonretos";
 import { Gestor } from "./Gestor";
 import readline from "readline";
 
+type MyFunctionType = () => void;
+
 enum Commandos {
   MostrarUsuarios = "Mostrar usuarios",
   MostrarRutas = "Mostrar rutas",
-  // MostrarRetos = "Mostrar retos",
-  // MostrarGrupos = "Mostrar grupos",
+  MostrarRetos = "Mostrar retos",
+  MostrarGrupos = "Mostrar grupos",
   CrearUsuario = "Crear un usuario",
   CrearRuta = "Crear una ruta",
   CrearReto = "Crear un reto",
@@ -72,23 +74,45 @@ export class Admin {
     );
   }
 
-  public setUsuarios(usuarios: UsuarioCollection): void {
+  volver(fn: MyFunctionType): void {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "command",
+          message: "¿Que quieres hacer?",
+          choices: ["Volver al menu anterior", "Volver al menu principal"],
+        },
+      ])
+      .then((answers) => {
+        switch (answers["command"]) {
+          case "Volver al menu anterior":
+            fn();
+            break;
+          case "Volver al menu principal":
+            this.mainMenu();
+            break;
+        }
+      });
+  }
+
+  setUsuarios(usuarios: UsuarioCollection): void {
     this.usuarios = usuarios;
   }
 
-  public setRutas(rutas: RutaCollection): void {
+  setRutas(rutas: RutaCollection): void {
     this.rutas = rutas;
   }
 
-  public setRetos(retos: RetoCollection): void {
+  setRetos(retos: RetoCollection): void {
     this.retos = retos;
   }
 
-  public setGrupos(grupos: GrupoCollection): void {
+  setGrupos(grupos: GrupoCollection): void {
     this.grupos = grupos;
   }
 
-  public mainMenu(): void {
+  mainMenu(): void {
     console.clear();
     const rl = readline.createInterface({
       input: process.stdin,
@@ -109,15 +133,15 @@ export class Admin {
           case Commandos.MostrarUsuarios:
             this.mostrarUsuarios();
             break;
-          // case Commandos.MostrarGrupos:
-          //   this.mostrarGrupos();
-          //   break;
+          case Commandos.MostrarGrupos:
+            this.mostrarGrupos();
+            break;
           case Commandos.MostrarRutas:
             this.mostrarRutas();
             break;
-          // case Commandos.MostrarRetos:
-          //   this.mostrarRetos();
-          //   break;
+          case Commandos.MostrarRetos:
+            this.mostrarRetos();
+            break;
           case Commandos.CrearUsuario:
             this.crearUsuario();
             break;
@@ -389,7 +413,9 @@ export class Admin {
           type: "list",
           name: "usuario",
           message: "¿Que usuario desea modificar?",
-          choices: this.usuarios.getNombres(),
+          choices: this.usuarios
+            .getAllElements()
+            .map((usuario) => usuario.nombre),
         },
       ])
       .then((answers) => {
@@ -580,7 +606,7 @@ export class Admin {
           type: "list",
           name: "retos",
           message: "¿Que reto quieres modificar?",
-          choices: this.retos.getNombres(),
+          choices: this.retos.getAllElements().map((reto) => reto.nombre),
         },
       ])
       .then((answers) => {
@@ -725,7 +751,7 @@ export class Admin {
           type: "list",
           name: "grupo",
           message: "¿Que grupo quieres modificar?",
-          choices: this.grupos.getNombres(),
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
         },
       ])
       .then((answers) => {
@@ -849,7 +875,7 @@ export class Admin {
           type: "list",
           name: "ruta",
           message: "¿Que ruta quieres modificar?",
-          choices: this.rutas.getNombres(),
+          choices: this.rutas.getAllElements().map((ruta) => ruta.nombre),
         },
       ])
       .then((answers) => {
@@ -995,7 +1021,9 @@ export class Admin {
           type: "list",
           name: "usuarios",
           message: "¿Que usuario quieres eliminar?",
-          choices: this.usuarios.getNombres(),
+          choices: this.usuarios
+            .getAllElements()
+            .map((usuario) => usuario.nombre),
         },
       ])
       .then((answers) => {
@@ -1013,7 +1041,7 @@ export class Admin {
           type: "list",
           name: "retos",
           message: "¿Que reto quieres eliminar?",
-          choices: this.retos.getNombres(),
+          choices: this.retos.getAllElements().map((reto) => reto.nombre),
         },
       ])
       .then((answers) => {
@@ -1031,7 +1059,7 @@ export class Admin {
           type: "list",
           name: "rutas",
           message: "¿Que ruta quieres eliminar?",
-          choices: this.rutas.getNombres(),
+          choices: this.rutas.getAllElements().map((ruta) => ruta.nombre),
         },
       ])
       .then((answers) => {
@@ -1049,7 +1077,7 @@ export class Admin {
           type: "list",
           name: "grupos",
           message: "¿Que grupo quieres eliminar?",
-          choices: this.grupos.getNombres(),
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
         },
       ])
       .then((answers) => {
@@ -1097,15 +1125,6 @@ export class Admin {
         switch (answers.rutas) {
           case "Mostrar todas las rutas por orden alfabético ascedente":
             this.mostrarRutasAlfabeticamenteAscendente();
-            // PARA PENSAR
-            // console.log("Pulsa enter para volver al menu principal");
-            // const rl = readline.createInterface({
-            //   input: process.stdin,
-            //   output: process.stdout,
-            // });
-            // rl.on("line", () => {
-            //   this.mainMenu();
-            // });
             break;
           case "Mostrar todas las rutas por orden alfabético descendente":
             this.mostrarRutasAlfabeticamenteDescendente();
@@ -1143,127 +1162,114 @@ export class Admin {
 
   mostrarRutasAlfabeticamenteAscendente(): void {
     console.clear();
-    const rutas = this.rutas.getNombres();
-    rutas.sort();
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) =>
+      a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
+    );
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasAlfabeticamenteDescendente(): void {
     console.clear();
-    const rutas = this.rutas.getNombres();
-    rutas.sort();
-    rutas.reverse();
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) =>
+      b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
+    );
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i]);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasCantidadUsuariosAscendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getUsuarios().length > b.getUsuarios().length) {
-        return 1;
-      }
-      if (a.getUsuarios().length < b.getUsuarios().length) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => a.getUsuarios().length - b.getUsuarios().length);
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i].nombre + " " + rutas[i].getUsuarios().length);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasCantidadUsuariosDescendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getUsuarios().length > b.getUsuarios().length) {
-        return -1;
-      }
-      if (a.getUsuarios().length < b.getUsuarios().length) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => b.getUsuarios().length - a.getUsuarios().length);
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i].nombre + " " + rutas[i].getUsuarios().length);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasDistanciaAscendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getDistancia() > b.getDistancia()) {
-        return 1;
-      }
-      if (a.getDistancia() < b.getDistancia()) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => a.getDistancia() - b.getDistancia());
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i].nombre + " " + rutas[i].getDistancia());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasDistanciaDescendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getDistancia() > b.getDistancia()) {
-        return -1;
-      }
-      if (a.getDistancia() < b.getDistancia()) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(rutas);
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => b.getDistancia() - a.getDistancia());
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(rutas[i].nombre + " " + rutas[i].getDistancia());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasCalificacionAscendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getCalificacionMedia() > b.getCalificacionMedia()) {
-        return 1;
-      }
-      if (a.getCalificacionMedia() < b.getCalificacionMedia()) {
-        return -1;
-      }
-      return 0;
-    });
-    for (const ruta of rutas) {
-      console.log(ruta.nombre + " " + ruta.getCalificacionMedia());
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => a.getCalificacionMedia() - b.getCalificacionMedia());
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(
+        rutas[i].nombre + " " + rutas[i].getCalificacionMedia().toFixed(2)
+      );
     }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasCalificacionDescendente(): void {
     console.clear();
-    const rutas = this.rutas;
-    rutas.sort((a, b) => {
-      if (a.getCalificacionMedia() > b.getCalificacionMedia()) {
-        return -1;
-      }
-      if (a.getCalificacionMedia() < b.getCalificacionMedia()) {
-        return 1;
-      }
-      return 0;
-    });
-    for (const ruta of rutas) {
-      console.log(ruta.nombre + " " + ruta.getCalificacionMedia());
+    const rutas = this.rutas.getAllElements();
+    rutas.sort((a, b) => b.getCalificacionMedia() - a.getCalificacionMedia());
+    for (let i = 0; i < rutas.length; i++) {
+      console.log(
+        rutas[i].nombre + " " + rutas[i].getCalificacionMedia().toFixed(2)
+      );
     }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasCorrer(): void {
     console.clear();
-    const rutas = this.rutas;
+    const rutas = this.rutas.getAllElements();
     const rutasCorrer = rutas.filter((ruta) => ruta.getTipoRuta() === "correr");
-    console.log(rutasCorrer);
+    for (let i = 0; i < rutasCorrer.length; i++) {
+      console.log(rutasCorrer[i].nombre + " " + rutasCorrer[i].getTipoRuta());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarRutasBicicleta(): void {
     console.clear();
-    const rutas = this.rutas;
+    const rutas = this.rutas.getAllElements();
     const rutasBicicleta = rutas.filter(
       (ruta) => ruta.getTipoRuta() === "bicicleta"
     );
-    console.log(rutasBicicleta);
+    for (let i = 0; i < rutasBicicleta.length; i++) {
+      console.log(
+        rutasBicicleta[i].nombre + " " + rutasBicicleta[i].getTipoRuta()
+      );
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuarios(): void {
@@ -1322,106 +1328,390 @@ export class Admin {
 
   mostrarUsuariosAlfabeticamenteAscendente(): void {
     console.clear();
-    const usuarios = this.usuarios.getNombres();
-    usuarios.sort();
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) =>
+      a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
+    );
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosAlfabeticamenteDescendente(): void {
     console.clear();
-    const usuarios = this.usuarios.getNombres();
-    usuarios.sort();
-    usuarios.reverse();
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) =>
+      b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
+    );
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmSemanaAscendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosSemana() > b.getKmRecorridosSemana()) {
-        return 1;
-      }
-      if (a.getKmRecorridosSemana() < b.getKmRecorridosSemana()) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort(
+      (a, b) => a.getKmRecorridosSemana() - b.getKmRecorridosSemana()
+    );
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(
+        usuarios[i].nombre + " " + usuarios[i].getKmRecorridosSemana()
+      );
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmSemanaDescendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosSemana() > b.getKmRecorridosSemana()) {
-        return -1;
-      }
-      if (a.getKmRecorridosSemana() < b.getKmRecorridosSemana()) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort(
+      (a, b) => b.getKmRecorridosSemana() - a.getKmRecorridosSemana()
+    );
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(
+        usuarios[i].nombre + " " + usuarios[i].getKmRecorridosSemana()
+      );
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmMesAscendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosMes() > b.getKmRecorridosMes()) {
-        return 1;
-      }
-      if (a.getKmRecorridosMes() < b.getKmRecorridosMes()) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) => a.getKmRecorridosMes() - b.getKmRecorridosMes());
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmMesDescendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosMes() > b.getKmRecorridosMes()) {
-        return -1;
-      }
-      if (a.getKmRecorridosMes() < b.getKmRecorridosMes()) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) => b.getKmRecorridosMes() - a.getKmRecorridosMes());
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmAñoAscendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosAnio() > b.getKmRecorridosAnio()) {
-        return 1;
-      }
-      if (a.getKmRecorridosAnio() < b.getKmRecorridosAnio()) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) => a.getKmRecorridosAnio() - b.getKmRecorridosAnio());
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 
   mostrarUsuariosKmAñoDescendente(): void {
     console.clear();
-    const usuarios = this.usuarios;
-    usuarios.sort((a, b) => {
-      if (a.getKmRecorridosAnio() > b.getKmRecorridosAnio()) {
-        return -1;
-      }
-      if (a.getKmRecorridosAnio() < b.getKmRecorridosAnio()) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(usuarios);
+    const usuarios = this.usuarios.getAllElements();
+    usuarios.sort((a, b) => b.getKmRecorridosAnio() - a.getKmRecorridosAnio());
+    for (let i = 0; i < usuarios.length; i++) {
+      console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarRetos(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Qué quieres hacer?",
+          choices: [
+            "Mostrar todos los retos por orden alfabético ascedente",
+            "Mostrar todos los retos por orden alfabético descendente",
+            "Mostrar todos los retos por cantidad de Km a realizar ascendente",
+            "Mostrar todos los retos por cantidad de Km a realizar descendente",
+            "Mostrar todos los retos por cantidad de usarios participantes ascendente",
+            "Mostrar todos los retos por cantidad de usarios participantes descendente",
+            "Volver al menu principal",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.retos) {
+          case "Mostrar todos los retos por orden alfabético ascedente":
+            this.mostrarRetosAlfabeticamenteAscendente();
+            break;
+          case "Mostrar todos los retos por orden alfabético descendente":
+            this.mostrarRetosAlfabeticamenteDescendente();
+            break;
+          case "Mostrar todos los retos por cantidad de Km a realizar ascendente":
+            this.mostrarRetosKmAscendente();
+            break;
+          case "Mostrar todos los retos por cantidad de Km a realizar descendente":
+            this.mostrarRetosKmDescendente();
+            break;
+          case "Mostrar todos los retos por cantidad de usarios participantes ascendente":
+            this.mostrarRetosUsuariosAscendente();
+            break;
+          case "Mostrar todos los retos por cantidad de usarios participantes descendente":
+            this.mostrarRetosUsuariosDescendente();
+            break;
+          case "Volver al menu principal":
+            this.mainMenu();
+            break;
+        }
+      });
+  }
+
+  mostrarRetosAlfabeticamenteAscendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort((a, b) =>
+      a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
+    );
+    for (let i = 0; i < retos.length; i++) {
+      console.log(retos[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarRetosAlfabeticamenteDescendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort((a, b) =>
+      b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
+    );
+    for (let i = 0; i < retos.length; i++) {
+      console.log(retos[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarRetosKmAscendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort((a, b) => a.getKmTotales() - b.getKmTotales());
+    for (let i = 0; i < retos.length; i++) {
+      console.log(retos[i].nombre + " " + retos[i].getKmTotales());
+    }
+  }
+
+  mostrarRetosKmDescendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort((a, b) => b.getKmTotales() - a.getKmTotales());
+    for (let i = 0; i < retos.length; i++) {
+      console.log(retos[i].nombre + " " + retos[i].getKmTotales());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarRetosUsuariosAscendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort(
+      (a, b) =>
+        a.getUsuariosRealizandoReto().length -
+        b.getUsuariosRealizandoReto().length
+    );
+    for (let i = 0; i < retos.length; i++) {
+      console.log(
+        retos[i].nombre +
+          " " +
+          retos[i].getUsuariosRealizandoReto().length +
+          " usuarios"
+      );
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarRetosUsuariosDescendente(): void {
+    console.clear();
+    const retos = this.retos.getAllElements();
+    retos.sort(
+      (a, b) =>
+        b.getUsuariosRealizandoReto().length -
+        a.getUsuariosRealizandoReto().length
+    );
+    for (let i = 0; i < retos.length; i++) {
+      console.log(
+        retos[i].nombre +
+          " " +
+          retos[i].getUsuariosRealizandoReto().length +
+          " usuarios"
+      );
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGrupos(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupos",
+          message: "¿Qué quieres hacer?",
+          choices: [
+            "Mostrar todos los grupos por orden alfabético ascedente",
+            "Mostrar todos los grupos por orden alfabético descendente",
+            "Mostrar todos los grupos por cantidad de km semana realizados conjuntamente ascendente",
+            "Mostrar todos los grupos por cantidad de km semana realizados conjuntamente descendente",
+            "Mostrar todos los grupos por cantidad de km mes realizados conjuntamente ascendente",
+            "Mostrar todos los grupos por cantidad de km mes realizados conjuntamente descendente",
+            "Mostrar todos los grupos por cantidad de km año realizados conjuntamente ascendente",
+            "Mostrar todos los grupos por cantidad de km año realizados conjuntamente descendente",
+            "Mostrar todos los grupos por cantidad de miembros ascendente",
+            "Mostrar todos los grupos por cantidad de miembros descendente",
+            "Volver al menu principal",
+          ],
+        },
+      ])
+      .then((answers) => {
+        switch (answers.grupos) {
+          case "Mostrar todos los grupos por orden alfabético ascedente":
+            this.mostrarGruposAlfabeticamenteAscendente();
+            break;
+          case "Mostrar todos los grupos por orden alfabético descendente":
+            this.mostrarGruposAlfabeticamenteDescendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km realizados conjuntamente ascendente":
+            this.mostrarGruposKmSemanaAscendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km realizados conjuntamente descendente":
+            this.mostrarGruposKmSemanaDescendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km mes realizados conjuntamente ascendente":
+            this.mostrarGruposKmMesAscendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km mes realizados conjuntamente descendente":
+            this.mostrarGruposKmMesDescendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km año realizados conjuntamente ascendente":
+            this.mostrarGruposKmAnioAscendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de km año realizados conjuntamente descendente":
+            this.mostrarGruposKmAnioDescendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de miembros ascendente":
+            this.mostrarGruposMiembrosAscendente();
+            break;
+          case "Mostrar todos los grupos por cantidad de miembros descendente":
+            this.mostrarGruposMiembrosDescendente();
+            break;
+          case "Volver al menu principal":
+            this.mainMenu();
+            break;
+        }
+      });
+  }
+
+  mostrarGruposAlfabeticamenteAscendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) =>
+      a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
+    );
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposAlfabeticamenteDescendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) =>
+      b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
+    );
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre);
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmSemanaAscendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort(
+      (a, b) => a.getKmRecorridosSemana() - b.getKmRecorridosSemana()
+    );
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmSemanaDescendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort(
+      (a, b) => b.getKmRecorridosSemana() - a.getKmRecorridosSemana()
+    );
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmMesAscendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => a.getKmRecorridosMes() - b.getKmRecorridosMes());
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmMesDescendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => b.getKmRecorridosMes() - a.getKmRecorridosMes());
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmAnioAscendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => a.getKmRecorridosAnio() - b.getKmRecorridosAnio());
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposKmAnioDescendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => b.getKmRecorridosAnio() - a.getKmRecorridosAnio());
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposMiembrosAscendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => a.getMiembros().length - b.getMiembros().length);
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
+    }
+    this.volver(this.mostrarRutas.bind(this));
+  }
+
+  mostrarGruposMiembrosDescendente(): void {
+    console.clear();
+    const grupos = this.grupos.getAllElements();
+    grupos.sort((a, b) => b.getMiembros().length - a.getMiembros().length);
+    for (let i = 0; i < grupos.length; i++) {
+      console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
+    }
+    this.volver(this.mostrarRutas.bind(this));
   }
 }

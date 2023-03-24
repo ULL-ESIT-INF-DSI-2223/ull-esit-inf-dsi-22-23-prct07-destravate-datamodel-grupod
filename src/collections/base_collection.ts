@@ -41,6 +41,15 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   getElement(id: number): T | undefined {
     return this.collection.get(id);
   }
+
+  /**
+   * función que devuelve todos los elementos de la colección
+   * @returns Devuelve todos los elementos de la colección
+   */
+  getAllElements(): T[] {
+    return [...this.collection.values()];
+  }
+
   /**
    * Buscar un elemento en la colección por su nombre
    * @param nombre Nombre del elemento a buscar
@@ -65,41 +74,5 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   forEach(callback: (element: T) => void): void {
     this.collection.forEach(callback);
   }
-  /**
-   * Conseguir los nombres de los elementos de la colección
-   * @returns Array con los nombres de los elementos de la colección
-   */
-  getNombres(): string[] {
-    return [...this.collection.values()].map((element) => element.nombre);
-  }
-  /**
-   * Ordenar la colección
-   * @param funcion Función a ejecutar para ordenar la colección
-   * @returns Colección ordenada
-   */
-  sort(funcion: (a: T, b: T) => number): T[] {
-    return [...this.collection.values()].sort(funcion);
-  }
-  /**
-   * Filtrar la colección
-   * @param funcion Función a ejecutar por cada elemento de la colección
-   * @returns Colección filtrada
-   */
-  filter(funcion: (element: T) => boolean): T[] {
-    return [...this.collection.values()].filter(funcion);
-  }
-  /**
-   * Iterador de la colección
-   * @returns Iterador de la colección
-   */
-  SymbolIterator(): IterableIterator<T> {
-    return this.collection.values();
-  }
-  /**
-   * Iterador de la colección
-   * @returns Iterador de la colección
-   */
-  [Symbol.iterator](): IterableIterator<T> {
-    return this.SymbolIterator();
-  }
+
 }

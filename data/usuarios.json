@@ -12,14 +12,25 @@
         "month_distance": 0,
         "month_slope": 0,
         "year_distance": 0,
-        "year_slope": 0
+        "year_slope": 0,
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": null,
+        "desnivel_mes": null,
+        "desnivel_anio": null
       },
       "rutas_favoritas": [
         0
       ],
       "retos_activos": [],
-      "historico_rutas": [],
-      "id": 0
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 8
     },
     {
       "nombre": "Sofía",
@@ -41,7 +52,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 1
+      "id": 9
     },
     {
       "nombre": "Pedro",
@@ -63,7 +74,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 2
+      "id": 10
     },
     {
       "nombre": "Juan",
@@ -84,7 +95,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 3
+      "id": 11
     },
     {
       "nombre": "María",
@@ -106,7 +117,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 4
+      "id": 12
     },
     {
       "nombre": "Laura",
@@ -128,7 +139,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 5
+      "id": 13
     },
     {
       "nombre": "Pablo",
@@ -150,7 +161,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 6
+      "id": 14
     }
   ]
 }

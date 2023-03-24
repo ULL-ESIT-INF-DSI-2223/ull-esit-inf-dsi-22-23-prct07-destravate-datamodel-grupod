@@ -54,6 +54,7 @@ describe("RutaCollection", () => {
     const rutas = new RutaCollection();
     const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "correr", [1]);
     rutas.addElement(ruta);
-    expect(rutas.getNombres()).to.be.eql(["ruta1"]);
+    let nombres = rutas.getAllElements().map((ruta) => ruta.nombre);
+    expect(nombres).to.be.eql(["ruta1"]);
   });
 });

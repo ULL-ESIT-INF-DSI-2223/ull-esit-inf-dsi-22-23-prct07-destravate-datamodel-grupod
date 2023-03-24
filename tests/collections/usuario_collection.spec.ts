@@ -18,7 +18,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -32,7 +39,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -47,7 +61,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -61,7 +82,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -77,7 +105,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -91,7 +126,14 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -105,12 +147,20 @@ describe("UsuarioCollection", () => {
       "usuario1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
     );
     usuarios.addElement(usuario);
-    expect(usuarios.getNombres()).to.be.eql(["usuario1"]);
+    let nombres = usuarios.getAllElements().map((usuario) => usuario.nombre);
+    expect(nombres).to.be.eql(["usuario1"]);
   });
 });

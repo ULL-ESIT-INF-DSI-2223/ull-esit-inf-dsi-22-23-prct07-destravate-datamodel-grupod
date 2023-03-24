@@ -1,5 +1,7 @@
-import { Stats } from "./stats";
 import { Datatype } from "./datatype";
+import { Stats } from "./stats";
+
+  
 /**
  * Clase que define el tipo de dato Grupo
  */
@@ -30,21 +32,35 @@ export class Grupo implements Datatype {
    * @returns Kilómetros recorridos por el grupo en el año
    */
   public getKmRecorridosAnio(): number {
-    return this.group_stats.getYearDistance();
+    return this.group_stats.km_anio;
+  }
+
+  /**
+   * funcion que actualiza las estadisticas del grupo
+   * @param km km recorridos
+   * @param desnivel desnivel recorrido
+   */
+  updateStats(km: number, desnivel: number) {
+    this.group_stats.km_semana += km;
+    this.group_stats.km_mes += km;
+    this.group_stats.km_anio += km;
+    this.group_stats.desnivel_semana += desnivel;
+    this.group_stats.desnivel_mes += desnivel;
+    this.group_stats.desnivel_anio += desnivel;
   }
   /**
    * Obtener distancia recorrida por el grupo en el mes
    * @returns Kilómetros recorridos por el grupo en el mes
    */
   public getKmRecorridosMes(): number {
-    return this.group_stats.getMonthDistance();
+    return this.group_stats.km_mes;
   }
   /**
    * Obtener distancia recorrida por el grupo en la semana
    * @returns Kilómetros recorridos por el grupo en la semana
    */
   public getKmRecorridosSemana(): number {
-    return this.group_stats.getWeekDistance();
+    return this.group_stats.km_semana;
   }
   /**
    * Obtener ID del propietario del grupo

@@ -13,7 +13,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -25,7 +32,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -37,7 +51,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [5, 6, 7],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -45,16 +66,30 @@ describe("Clase Usuario", () => {
     expect(usuario.getAmigos()).to.be.deep.equal([5, 6, 7]);
   });
   it("Se debe poder acceder a las estadísticas del usuario", () => {
-    const stats = new Stats();
+    const stats = {
+      km_anio: 0,
+      km_mes: 0,
+      km_semana: 0,
+      desnivel_anio: 0,
+      desnivel_mes: 0,
+      desnivel_semana: 0,
+    };
     const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
-    expect(usuario.getStats()).to.be.equal(stats);
+    expect(usuario.getStats()).to.be.deep.equal(stats);
   });
   it("Se debe poder acceder a las rutas favoritas del usuario", () => {
     const usuario = new Usuario(
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [1, 2, 3],
       [],
       []
@@ -66,7 +101,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [10, 20, 30],
       []
@@ -79,7 +121,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       [{ fecha: today, rutaid: 1 }]
@@ -88,20 +137,48 @@ describe("Clase Usuario", () => {
       { fecha: today, rutaid: 1 },
     ]);
   });
-  it("Se puden obtener los kilometros totales del usuario", () => {
-    const stats = new Stats();
-    stats.updateStats(100, 100);
+  it("Se pueden obtener los kilometros totales del usuario", () => {
+    const stats: Stats = {
+      km_anio: 100,
+      km_mes: 100,
+      km_semana: 100,
+      desnivel_anio: 100,
+      desnivel_mes: 100,
+      desnivel_semana: 100,
+    };
     const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
     expect(usuario.getKmRecorridosAnio()).to.be.equal(100);
     expect(usuario.getKmRecorridosMes()).to.be.equal(100);
     expect(usuario.getKmRecorridosSemana()).to.be.equal(100);
+  });
+  it("Se debe poder modificar los kilometros y desnivel de un usuario", () => {
+    const stats = {
+      km_anio: 100,
+      km_mes: 100,
+      km_semana: 100,
+      desnivel_anio: 100,
+      desnivel_mes: 100,
+      desnivel_semana: 100,
+    };
+    const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
+    usuario.updateStats(100, 100);
+    expect(usuario.getKmRecorridosAnio()).to.be.deep.eq(200);
+    expect(usuario.getKmRecorridosMes()).to.be.deep.eq(200);
+    expect(usuario.getKmRecorridosSemana()).to.be.deep.eq(200);
   });
   it("Se puede cambiar el nombre del usuario", () => {
     const usuario = new Usuario(
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -114,7 +191,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -127,7 +211,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -140,7 +231,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -153,7 +251,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -167,7 +272,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []
@@ -180,7 +292,14 @@ describe("Clase Usuario", () => {
       "Usuario 1",
       "correr",
       [5, 6, 7],
-      new Stats(),
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
       [],
       [],
       []

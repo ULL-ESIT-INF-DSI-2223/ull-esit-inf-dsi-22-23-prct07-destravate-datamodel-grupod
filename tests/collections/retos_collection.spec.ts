@@ -54,6 +54,7 @@ describe("RetoCollection", () => {
     const retos = new RetoCollection();
     const reto = new Reto("Reto1", [1], "correr", 1, [1]);
     retos.addElement(reto);
-    expect(retos.getNombres()).to.be.eql(["Reto1"]);
+    let nombres = retos.getAllElements().map((reto) => reto.nombre);
+    expect(nombres).to.be.eql(["Reto1"]);
   });
 });

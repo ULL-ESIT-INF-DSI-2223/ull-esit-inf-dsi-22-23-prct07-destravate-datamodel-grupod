@@ -1,7 +1,6 @@
 import { Usuario } from "../datatypes/usuarios";
 import { Ruta } from "../datatypes/rutas";
 import { Reto } from "../datatypes/retos";
-import { Stats } from "../datatypes/stats";
 import { Grupo } from "../datatypes/grupos";
 import { UsuarioCollection } from "../collections/usuario_collection";
 import { RutaCollection } from "../collections/rutas_collection";
@@ -64,10 +63,17 @@ export class Admin {
     this.retos = new JsonRetos();
     this.grupos = new JsonGrupos();
     this.current_user = new Usuario(
-      "none",
+      "admin",
       undefined,
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -219,7 +225,14 @@ export class Admin {
                 answers.nombre,
                 answers.actividad,
                 [],
-                new Stats(),
+                {
+                  km_anio: 0,
+                  km_mes: 0,
+                  km_semana: 0,
+                  desnivel_anio: 0,
+                  desnivel_mes: 0,
+                  desnivel_semana: 0,
+                },
                 [],
                 [],
                 []
@@ -267,7 +280,14 @@ export class Admin {
               new Grupo(
                 answers.nombre,
                 miembros,
-                new Stats(),
+                {
+                  km_anio: 0,
+                  km_mes: 0,
+                  km_semana: 0,
+                  desnivel_anio: 0,
+                  desnivel_mes: 0,
+                  desnivel_semana: 0,
+                },
                 [],
                 [],
                 [],

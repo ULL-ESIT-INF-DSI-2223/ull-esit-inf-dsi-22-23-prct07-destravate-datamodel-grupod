@@ -2,7 +2,12 @@
   "grupos": [
     {
       "nombre": "Corredores",
-      "miembros": [0, 1, 2, 3],
+      "miembros": [
+        0,
+        1,
+        2,
+        3
+      ],
       "group_stats": {
         "week_distance": 25.5,
         "week_slope": 2.1,
@@ -56,7 +61,11 @@
     },
     {
       "nombre": "Ciclistas",
-      "miembros": [4, 5, 6],
+      "miembros": [
+        4,
+        5,
+        6
+      ],
       "group_stats": {
         "week_distance": 95.3,
         "week_slope": 5.3,
@@ -110,7 +119,10 @@
     },
     {
       "nombre": "Senderistas",
-      "miembros": [7, 8],
+      "miembros": [
+        7,
+        8
+      ],
       "group_stats": {
         "week_distance": 12.8,
         "week_slope": 1.6,
@@ -164,7 +176,11 @@
     },
     {
       "nombre": "Escaladores",
-      "miembros": [9, 10, 11],
+      "miembros": [
+        9,
+        10,
+        11
+      ],
       "group_stats": {
         "week_distance": 0,
         "week_slope": 0,
@@ -218,7 +234,12 @@
     },
     {
       "nombre": "Amantes de la Naturaleza",
-      "miembros": [12, 13, 14, 15],
+      "miembros": [
+        12,
+        13,
+        14,
+        15
+      ],
       "group_stats": {
         "week_distance": 32.1,
         "week_slope": 4.7,

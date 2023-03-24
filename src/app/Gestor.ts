@@ -1,6 +1,5 @@
 import { Usuario } from "../datatypes/usuarios";
 import { Grupo } from "../datatypes/grupos";
-import { Stats } from "../datatypes/stats";
 import inquirer from "inquirer";
 import { UsuarioCollection } from "../collections/usuario_collection";
 import { RutaCollection } from "../collections/rutas_collection";
@@ -47,7 +46,14 @@ export class Gestor {
       "none",
       undefined,
       [],
-      new Stats(),
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
       [],
       [],
       []
@@ -152,7 +158,14 @@ export class Gestor {
             username,
             undefined,
             [],
-            new Stats(),
+            {
+              km_anio: 0,
+              km_mes: 0,
+              km_semana: 0,
+              desnivel_anio: 0,
+              desnivel_mes: 0,
+              desnivel_semana: 0,
+            },
             [],
             [],
             []
@@ -373,7 +386,7 @@ export class Gestor {
     console.clear();
     console.log("Rutas");
     console.log();
-    const options = this.rutas.getNombres();
+    const options = this.rutas.getAllElements().map((ruta) => ruta.nombre);
     options.push("Volver al menú principal");
     inquirer
       .prompt([
@@ -442,7 +455,7 @@ export class Gestor {
           type: "list",
           name: "nombre",
           message: "Elija un grupo para unirse",
-          choices: this.grupos.getNombres(),
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
         },
       ])
       .then((answers) => {
@@ -529,7 +542,14 @@ export class Gestor {
         const grupo = new Grupo(
           nombre,
           [this.current_user.id],
-          new Stats(),
+          {
+            km_anio: 0,
+            km_mes: 0,
+            km_semana: 0,
+            desnivel_anio: 0,
+            desnivel_mes: 0,
+            desnivel_semana: 0,
+          },
           [this.current_user.id],
           [],
           [],
@@ -546,7 +566,7 @@ export class Gestor {
     console.log("Eliminar grupo");
     console.log();
     console.log(this.grupos.toString());
-    const options = this.grupos.getNombres();
+    const options = this.grupos.getAllElements().map((grupo) => grupo.nombre);
     options.push("Volver al menú principal");
     inquirer
       .prompt([
@@ -554,7 +574,7 @@ export class Gestor {
           type: "list",
           name: "nombre",
           message: "Elija un grupo para eliminar",
-          choices: this.grupos.getNombres(),
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
         },
       ])
       .then((answers) => {

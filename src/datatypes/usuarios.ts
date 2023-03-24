@@ -1,6 +1,6 @@
-import { Stats } from "./stats";
 import { Datatype } from "./datatype";
 import { Ruta } from "./rutas";
+import { Stats } from "./stats";
 /**
  * Tipo de dato Actividad
  */
@@ -41,7 +41,14 @@ export class Usuario implements Datatype {
    * Obtener las estadísticas del usuario
    * @returns Devuelve las estadísticas del usuario
    */
-  public getStats(): Stats {
+  public getStats(): {
+    km_semana: number;
+    km_mes: number;
+    km_anio: number;
+    desnivel_semana: number;
+    desnivel_mes: number;
+    desnivel_anio: number;
+  } {
     return this.stats;
   }
   /**
@@ -73,22 +80,37 @@ export class Usuario implements Datatype {
    * @returns Devuelve los kilómetros recorridos en la semana
    */
   public getKmRecorridosSemana(): number {
-    return this.stats.getWeekDistance();
+    return this.stats.km_semana;
   }
   /**
    * Obtener los kilómetros recorridos en el mes
    * @returns Devuelve los kilómetros recorridos en el mes
    */
   public getKmRecorridosMes(): number {
-    return this.stats.getMonthDistance();
+    return this.stats.km_mes;
   }
   /**
    * Obtener los kilómetros recorridos en el año
    * @returns Devuelve los kilómetros recorridos en el año
    */
   public getKmRecorridosAnio(): number {
-    return this.stats.getYearDistance();
+    return this.stats.km_anio;
   }
+
+  /**
+   * funcion para actualizar las estadisticas del usuario
+   * @param km km recorridos
+   * @param desnivel desnivel recorrido
+   */
+  updateStats(km: number, desnivel: number) {
+    this.stats.km_semana += km;
+    this.stats.km_mes += km;
+    this.stats.km_anio += km;
+    this.stats.desnivel_semana += desnivel;
+    this.stats.desnivel_mes += desnivel;
+    this.stats.desnivel_anio += desnivel;
+  }
+
   /**
    * Cambiar el nombre del usuario
    * @param nombre Nuevo nombre del usuario
@@ -141,6 +163,6 @@ export class Usuario implements Datatype {
       rutaid: ruta.id,
     };
     this.historico_rutas.push(entrada);
-    this.stats.updateStats(ruta.getDistancia(), ruta.getDesnivel());
+    this.updateStats(ruta.getDistancia(), ruta.getDesnivel());
   }
 }

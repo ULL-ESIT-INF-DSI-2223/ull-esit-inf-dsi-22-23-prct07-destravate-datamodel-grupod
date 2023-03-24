@@ -400,6 +400,46 @@ La aplicación deberá permitir añadir, borrar y modificar rutas, usuarios, gru
    - Por cantidad de KM que se deben realizar, ascendente y descendente.
    - Por la cantidad de usuarios que lo están realizando, ascendente y descendente.
 
+Todos estos métodos los almacenaremos en una clase `Admin`, que será la encargada de gestionar los datos de la aplicación.
+
+```typescript
+export class Admin {
+  private usuarios: UsuarioCollection;
+  private rutas: RutaCollection;
+  private retos: RetoCollection;
+  private grupos: GrupoCollection;
+  private current_user: Usuario;
+  /**
+   * Obtiene la instancia de la clase Admin
+   * @returns instancia de la clase Admin
+   */
+  public static getInstance(): Admin {
+    if (!Admin.instance) {
+      Admin.instance = new Admin();
+    }
+    return Admin.instance;
+  }
+  private static instance: Admin;
+
+  private constructor() {
+    this.usuarios = new JsonUsuarios();
+    this.rutas = new JsonRutas();
+    this.retos = new JsonRetos();
+    this.grupos = new JsonGrupos();
+    this.current_user = new Usuario(
+      "none",
+      undefined,
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+  }
+```
+
+Se hace uso del patrón Singleton para que solo exista una instancia de la clase `Admin` en la aplicación. La clase almacenará las colecciones de usuarios, rutas, retos y grupos.
+
 ### Añadir datos
 
 ```typescript
@@ -634,4 +674,447 @@ Los métodos anteriores son los que se encargan de crear los distintos elementos
 
 ### Eliminar datos
 
+```typescript
+eliminarUsuario(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "usuarios",
+          message: "¿Que usuario quieres eliminar?",
+          choices: this.usuarios
+            .getAllElements()
+            .map((usuario) => usuario.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.usuarios.removeElement(answers.usuarios);
+        console.log("Usuario eliminado correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarReto(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres eliminar?",
+          choices: this.retos.getAllElements().map((reto) => reto.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.retos.removeElement(answers.retos);
+        console.log("Reto eliminado correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarRuta(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Que ruta quieres eliminar?",
+          choices: this.rutas.getAllElements().map((ruta) => ruta.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.rutas.removeElement(answers.rutas);
+        console.log("Ruta eliminada correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarGrupo(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupos",
+          message: "¿Que grupo quieres eliminar?",
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
+        },
+      ])
+      .then((answers) => {
+        const grupo = this.grupos.findElement(answers.grupos);
+        if (grupo == undefined) {
+          console.log("No existe el grupo");
+          this.mainMenu();
+        } else if (grupo.getOwner() !== this.current_user.id) {
+          console.log("No eres el propietario del grupo");
+          this.mainMenu();
+        } else {
+          this.grupos.removeElement(answers.grupos);
+          console.log("Grupo eliminado correctamente");
+          this.mainMenu();
+        }
+      });
+  }
+```
+
+Estos métodos son los que se encargan de eliminar los distintos elementos del programa, para ello se utiliza la librería inquirer para poder pedir al usuario que seleccione el elemento que quiere eliminar. Si el usuario no es el propietario del grupo, no podrá eliminarlo.
+
 ### Modificar datos
+
+```typescript
+modificarReto(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres modificar?",
+          choices: this.retos.getAllElements().map((reto) => reto.nombre),
+        },
+      ])
+      .then((answers) => {
+        const reto = this.retos.findElement(answers.retos);
+        if (reto != undefined) {
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "modificar",
+                message: "¿Que quieres modificar?",
+                choices: [
+                  "Nombre",
+                  "Tipo de reto",
+                  "Km totales",
+                  "Usuarios realizando el reto",
+                  "Rutas del reto",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.modificar) {
+                case "Nombre":
+                  this.modificarNombreReto(reto);
+                  break;
+                case "Tipo de reto":
+                  this.modificarTipoReto(reto);
+                  break;
+                case "Km totales":
+                  this.modificarKmTotalesReto(reto);
+                  break;
+                case "Usuarios realizando el reto":
+                  this.modificarUsuariosRealizandoReto(reto);
+                  break;
+                case "Rutas del reto":
+                  this.modificarRutasReto(reto);
+                  break;
+              }
+            });
+        } else {
+          console.log("El reto no existe");
+          this.modificarReto();
+        }
+      });
+  }
+```
+
+```typescript
+modificarGrupo() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupo",
+          message: "¿Que grupo quieres modificar?",
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
+        },
+      ])
+      .then((answers) => {
+        const grupo = this.grupos.findElement(answers.grupo);
+        if (grupo != undefined) {
+          if (grupo.getOwner() !== this.current_user.id) {
+            console.log("No eres el propietario del grupo");
+            this.mainMenu();
+          } else {
+            inquirer
+              .prompt([
+                {
+                  type: "list",
+                  name: "actividad",
+                  message: "¿Que desea hacer?",
+                  choices: [
+                    "Cambiar nombre",
+                    "Añadir miembro",
+                    "Añadir ruta favorita",
+                    "Salir",
+                  ],
+                },
+              ])
+              .then((answers) => {
+                switch (answers.actividad) {
+                  case "Cambiar nombre":
+                    this.cambiarNombreGrupo(grupo);
+                    break;
+                  case "Añadir miembro":
+                    this.addMiembro(grupo);
+                    break;
+                  case "Añadir ruta favorita":
+                    this.addRutaFavoritaGrupo(grupo);
+                    break;
+                  case "Salir":
+                    this.mainMenu();
+                    break;
+                }
+              });
+          }
+        }
+      });
+  }
+```
+
+```typescript
+modificarRuta() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "ruta",
+          message: "¿Que ruta quieres modificar?",
+          choices: this.rutas.getAllElements().map((ruta) => ruta.nombre),
+        },
+      ])
+      .then((answers) => {
+        const ruta = this.rutas.findElement(answers.ruta);
+        if (ruta != undefined) {
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "actividad",
+                message: "¿Que desea hacer?",
+                choices: [
+                  "Cambiar nombre",
+                  "Cambiar distancia",
+                  "Cambiar desnivel",
+                  "Cambiar tipo",
+                  "Salir",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.actividad) {
+                case "Cambiar nombre":
+                  this.cambiarNombreRuta(ruta);
+                  break;
+                case "Cambiar distancia":
+                  this.cambiarDistanciaRuta(ruta);
+                  break;
+                case "Cambiar desnivel":
+                  this.cambiarDesnivelRuta(ruta);
+                  break;
+                case "Cambiar tipo":
+                  this.cambiarTipoRuta(ruta);
+                  break;
+                case "Salir":
+                  this.mainMenu();
+                  break;
+              }
+            });
+        }
+      });
+  }
+```
+
+```typescript
+modificarUsuario() {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "usuario",
+          message: "¿Que usuario desea modificar?",
+          choices: this.usuarios
+            .getAllElements()
+            .map((usuario) => usuario.nombre),
+        },
+      ])
+      .then((answers) => {
+        const usuario = this.usuarios.findElement(answers.usuario);
+        if (usuario != undefined) {
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "actividad",
+                message: "¿Que desea hacer?",
+                choices: [
+                  "Cambiar nombre",
+                  "Cambiar actividad",
+                  "Añadir amigo",
+                  "Añadir ruta favorita",
+                  "Añadir reto",
+                  "Añadir rutas",
+                  "Salir",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.actividad) {
+                case "Cambiar nombre":
+                  this.cambiarNombre(usuario);
+                  break;
+                case "Cambiar actividad":
+                  this.cambiarActividad(usuario);
+                  break;
+                case "Añadir amigo":
+                  this.anadirAmigo(usuario);
+                  break;
+                case "Añadir ruta favorita":
+                  this.anadirRutaFavorita(usuario);
+                  break;
+                case "Añadir reto":
+                  this.anadirReto(usuario);
+                  break;
+                case "Añadir rutas":
+                  this.anadirRutas(usuario);
+                  break;
+                case "Salir":
+                  this.mainMenu();
+              }
+            });
+        }
+      });
+  }
+```
+
+Estos son los métodos que se encargan de modificar los distintos elementos de la aplicación. En todos ellos se utiliza la librería inquirer para pedir los datos al usuario y modificar el elemento en cuestión. En el caso de los grupos, se comprueba que el usuario que está modificando el grupo es el propietario del mismo. En cada opción, se llama a un método que se encarga de modificar el elemento en cuestión.
+
+## Gestor
+
+Para gestionar el tratamiento del sistema, vamos a implementar una clase `Gestor`. La clase hara uso de inquirer para que un usuario pueda realizar las siguientes acciones:
+
+- Registrarse en el sistema
+- Visualizar todas las rutas del sistema
+- Unirse a un grupo existente
+- Visualizar, crear y borrar grupos
+
+```typescript
+export class Gestor {
+  private usuarios: UsuarioCollection;
+  private rutas: RutaCollection;
+  private retos: RetoCollection;
+  private grupos: GrupoCollection;
+  private current_user: Usuario;
+
+  public static instance: Gestor;
+  /**
+   * Obtiene la instancia de la clase Gestor
+   * @returns La instancia de la clase Gestor
+   */
+  public static getInstance(): Gestor {
+    if (!Gestor.instance) {
+      Gestor.instance = new Gestor();
+    }
+    return Gestor.instance;
+  }
+
+  private constructor() {
+    this.usuarios = new JsonUsuarios();
+    this.rutas = new JsonRutas();
+    this.retos = new JsonRetos();
+    this.grupos = new JsonGrupos();
+    this.current_user = new Usuario(
+      "none",
+      undefined,
+      [],
+      new Stats(),
+      [],
+      [],
+      []
+    );
+  }
+}
+```
+
+Al igual que la clase admin, la clase gestor es un singleton. En el constructor se inicializan las colecciones de usuarios, rutas, retos y grupos. Además, se crea un usuario vacío que se utilizará para almacenar el usuario que se ha logueado en el sistema.
+
+### Inicio de sesión
+
+```typescript
+public login(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "username",
+          message: "Introduce tu nombre de usuario",
+        },
+      ])
+      .then((answers) => {
+        const username = answers["username"];
+        const user = this.usuarios.findElement(username);
+        if (user !== undefined) {
+          this.current_user = user;
+          this.mainMenu();
+          return;
+        } else {
+          this.errorLogin();
+          return;
+        }
+      });
+  }
+```
+
+El método `login()` se encarga de pedir el nombre de usuario al usuario y comprobar si existe en la colección de usuarios. Si existe, se guarda el usuario en la variable `current_user` y se llama al método `mainMenu()`. Si no existe, se llama al método `errorLogin()`, el cual se encargará de preguntar si el usuario quiere intentarlo de nuevo o registrarse.
+
+### Registro
+
+```typescript
+public register(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "username",
+          message: "Introduce tu nombre de usuario",
+        },
+      ])
+      .then((answers) => {
+        const username = answers["username"];
+        const user = this.usuarios.findElement(username);
+        if (user !== undefined) {
+          this.errorRegistrarse();
+          return;
+        } else {
+          const user = new Usuario(
+            username,
+            undefined,
+            [],
+            new Stats(),
+            [],
+            [],
+            []
+          );
+          this.usuarios.addElement(user);
+          this.current_user = user;
+          this.mainMenu();
+          return;
+        }
+      });
+  }
+```
+
+El método `register()` se encarga de pedir el nombre de usuario al usuario y comprobar si existe en la colección de usuarios. Si existe, se llama al método `errorRegistrarse()`, el cual se encargará de preguntar si el usuario quiere intentarlo de nuevo o iniciar sesión con esa cuenta. Si no existe, se crea un nuevo usuario con el nombre de usuario introducido y se añade a la colección de usuarios. Después, se guarda el usuario en la variable `current_user` y se llama al método `mainMenu()`.

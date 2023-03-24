@@ -2,7 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import { UsuarioCollection } from "../../src/collections/usuario_collection";
 import { Usuario } from "../../src/datatypes/usuarios";
-import { Stats } from "../../src/datatypes/stats";
 
 describe("UsuarioCollection", () => {
   it("Debe existir la clase UsuarioCollection", () => {
@@ -160,7 +159,7 @@ describe("UsuarioCollection", () => {
       []
     );
     usuarios.addElement(usuario);
-    let nombres = usuarios.getAllElements().map((usuario) => usuario.nombre);
+    const nombres = usuarios.getAllElements().map((usuario) => usuario.nombre);
     expect(nombres).to.be.eql(["usuario1"]);
   });
 });

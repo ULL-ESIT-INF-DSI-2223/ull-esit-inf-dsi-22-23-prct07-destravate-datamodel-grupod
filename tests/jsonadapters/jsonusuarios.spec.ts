@@ -2,8 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import { JsonUsuarios } from "../../src/jsonadapters/jsonusuarios";
 import { Usuario } from "../../src/datatypes/usuarios";
-import { Stats } from "../../src/datatypes/stats";
-import fs from "fs";
 
 describe("JsonUsuario", () => {
   it("Debe existir la clase JsonUsuario", () => {

@@ -2,7 +2,6 @@ import "mocha";
 import { expect } from "chai";
 import { GrupoCollection } from "../../src/collections/grupos_collection";
 import { Grupo } from "../../src/datatypes/grupos";
-import { Stats } from "../../src/datatypes/stats";
 
 describe("GrupoCollection", () => {
   it("Debe existir la clase GrupoCollection", () => {
@@ -183,7 +182,7 @@ describe("GrupoCollection", () => {
       -1
     );
     grupos.addElement(grupo);
-    let nombres = grupos.getAllElements().map((element) => {
+    const nombres = grupos.getAllElements().map((element) => {
       return element.nombre;
     });
     expect(nombres).to.be.eql(["Grupo1"]);

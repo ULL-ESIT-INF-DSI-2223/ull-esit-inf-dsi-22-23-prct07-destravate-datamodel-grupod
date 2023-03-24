@@ -16,7 +16,9 @@ import { Gestor } from "./Gestor";
 import readline from "readline";
 
 type MyFunctionType = () => void;
-
+/**
+ * Enumerado de los comandos
+ */
 enum Commandos {
   MostrarUsuarios = "Mostrar usuarios",
   MostrarRutas = "Mostrar rutas",

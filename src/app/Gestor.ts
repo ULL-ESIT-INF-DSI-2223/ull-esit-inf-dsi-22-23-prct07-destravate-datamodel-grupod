@@ -11,7 +11,9 @@ import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
 import { JsonGrupos } from "../jsonadapters/jsongrupos";
 import { Admin } from "./Admin";
-
+/**
+ * Enumerado de los comandos que puede ejecutar el gestor
+ */
 enum ComandosGestor {
   VerUsuarios = "Ver usuarios",
   VerRutas = "Ver rutas",
@@ -21,7 +23,9 @@ enum ComandosGestor {
   GestionarGrupos = "Gestionar grupos",
   CerrarSesión = "Cerrar sesión",
 }
-
+/**
+ * Clase que representa el gestor de la aplicación
+ */
 export class Gestor {
   private usuarios: UsuarioCollection;
   private rutas: RutaCollection;
@@ -30,7 +34,10 @@ export class Gestor {
   private current_user: Usuario;
 
   public static instance: Gestor;
-
+  /**
+   * Obtiene la instancia de la clase Gestor
+   * @returns La instancia de la clase Gestor
+   */
   public static getInstance(): Gestor {
     if (!Gestor.instance) {
       Gestor.instance = new Gestor();
@@ -53,7 +60,9 @@ export class Gestor {
       []
     );
   }
-
+  /**
+   * Inicia la aplicación
+   */
   public start(): void {
     console.clear();
     console.log("Bienvenido a DeStravaTe");
@@ -84,7 +93,9 @@ export class Gestor {
         }
       });
   }
-
+  /**
+   * Inicia sesión
+   */
   public login(): void {
     console.clear();
     inquirer
@@ -108,6 +119,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Error al iniciar sesión
+   */
   public errorLogin() {
     console.log("Usuario no encontrado");
     console.log();
@@ -130,7 +144,9 @@ export class Gestor {
         }
       });
   }
-
+  /**
+   * Registra un usuario
+   */
   public register(): void {
     console.clear();
     inquirer
@@ -164,7 +180,9 @@ export class Gestor {
         }
       });
   }
-
+  /**
+   * Error al registrar un usuario
+   */
   public errorRegistrarse() {
     console.log("Usuario ya existente");
     console.log();
@@ -185,7 +203,9 @@ export class Gestor {
         }
       });
   }
-
+  /**
+   * Muestra el menú principal
+   */
   public mainMenu(): void {
     console.clear();
     console.log("Bienvenido " + this.current_user.nombre);
@@ -224,6 +244,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para ver los usuarios
+   */
   public verUsuarios() {
     console.clear();
     console.log("Usuarios");
@@ -249,6 +272,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para gestionar los amigos
+   */
   public gestionarAmigos() {
     console.clear();
     console.log("Gestionar amigos");
@@ -279,6 +305,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para añadir un amigo
+   */
   public addFriend() {
     console.clear();
     console.log("Añadir amigo");
@@ -315,6 +344,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para eliminar un amigo
+   */
   public removeFriend() {
     console.clear();
     console.log("Eliminar amigo");
@@ -341,6 +373,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para ver los amigos
+   */
   public verAmigos() {
     console.clear();
     console.log("Amigos");
@@ -369,6 +404,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para ver las rutas
+   */
   public verRutas() {
     console.clear();
     console.log("Rutas");
@@ -392,6 +430,10 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Ver los detalles de una ruta
+   * @param nombre Nombre de la ruta
+   */
   public verRuta(nombre: string) {
     console.clear();
     console.log("Ruta");
@@ -431,6 +473,9 @@ export class Gestor {
         });
     }
   }
+  /**
+   * Menú para unirse a un grupo
+   */
   public unirseGrupo() {
     console.clear();
     console.log("Unirse a grupo");
@@ -459,6 +504,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para ver los grupos
+   */
   public verGrupos() {
     console.clear();
     console.log("Grupos");
@@ -484,6 +532,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para gestionar los grupos
+   */
   public gestionarGrupos() {
     console.clear();
     console.log("Gestionar grupos");
@@ -512,6 +563,9 @@ export class Gestor {
         }
       });
   }
+  /**
+   * Menú para crear un grupo
+   */
   public crearGrupo() {
     console.clear();
     console.log("Crear grupo");
@@ -541,6 +595,9 @@ export class Gestor {
         this.mainMenu();
       });
   }
+  /**
+   * Menú para eliminar un grupo
+   */
   public eliminarGrupo() {
     console.clear();
     console.log("Eliminar grupo");

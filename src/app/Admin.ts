@@ -856,41 +856,36 @@ export class Admin {
       .then((answers) => {
         const grupo = this.grupos.findElement(answers.grupo);
         if (grupo != undefined) {
-          if (grupo.getOwner() !== this.current_user.id) {
-            console.log("No eres el propietario del grupo");
-            this.mainMenu();
-          } else {
-            inquirer
-              .prompt([
-                {
-                  type: "list",
-                  name: "actividad",
-                  message: "¿Que desea hacer?",
-                  choices: [
-                    "Cambiar nombre",
-                    "Añadir miembro",
-                    "Añadir ruta favorita",
-                    "Salir",
-                  ],
-                },
-              ])
-              .then((answers) => {
-                switch (answers.actividad) {
-                  case "Cambiar nombre":
-                    this.cambiarNombreGrupo(grupo);
-                    break;
-                  case "Añadir miembro":
-                    this.addMiembro(grupo);
-                    break;
-                  case "Añadir ruta favorita":
-                    this.addRutaFavoritaGrupo(grupo);
-                    break;
-                  case "Salir":
-                    this.mainMenu();
-                    break;
-                }
-              });
-          }
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "actividad",
+                message: "¿Que desea hacer?",
+                choices: [
+                  "Cambiar nombre",
+                  "Añadir miembro",
+                  "Añadir ruta favorita",
+                  "Salir",
+                ],
+              },
+            ])
+            .then((answers) => {
+              switch (answers.actividad) {
+                case "Cambiar nombre":
+                  this.cambiarNombreGrupo(grupo);
+                  break;
+                case "Añadir miembro":
+                  this.addMiembro(grupo);
+                  break;
+                case "Añadir ruta favorita":
+                  this.addRutaFavoritaGrupo(grupo);
+                  break;
+                case "Salir":
+                  this.mainMenu();
+                  break;
+              }
+            });
         }
       });
   }
@@ -1404,7 +1399,7 @@ export class Admin {
     const rutas = this.rutas.getAllElements();
     const rutasCorrer = rutas.filter((ruta) => ruta.getTipoRuta() === "correr");
     for (let i = 0; i < rutasCorrer.length; i++) {
-      console.log(rutasCorrer[i].nombre + " " + rutasCorrer[i].getTipoRuta());
+      console.log(rutasCorrer[i].nombre + ": " + rutasCorrer[i].getTipoRuta());
     }
     this.volver(this.mostrarRutas.bind(this));
   }
@@ -1419,7 +1414,7 @@ export class Admin {
     );
     for (let i = 0; i < rutasBicicleta.length; i++) {
       console.log(
-        rutasBicicleta[i].nombre + " " + rutasBicicleta[i].getTipoRuta()
+        rutasBicicleta[i].nombre + ": " + rutasBicicleta[i].getTipoRuta()
       );
     }
     this.volver(this.mostrarRutas.bind(this));

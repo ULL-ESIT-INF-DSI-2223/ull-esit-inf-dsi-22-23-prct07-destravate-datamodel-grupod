@@ -3,61 +3,21 @@
     {
       "nombre": "Corredores",
       "miembros": [
-        0,
-        1,
-        2,
-        3
+        9
       ],
       "group_stats": {
-        "week_distance": 25.5,
-        "week_slope": 2.1,
-        "month_distance": 80.2,
-        "month_slope": 5.6,
-        "year_distance": 500.7,
-        "year_slope": 37.4
+        "week_distance": 0,
+        "week_slope": 0,
+        "month_distance": 0,
+        "month_slope": 0,
+        "year_distance": 0,
+        "year_slope": 0
       },
-      "clasificacion": [
-        {
-          "nombre": "Ana",
-          "puntos": 23
-        },
-        {
-          "nombre": "Pedro",
-          "puntos": 18
-        },
-        {
-          "nombre": "María",
-          "puntos": 15
-        }
-      ],
-      "rutas_favoritas": [
-        {
-          "nombre": "Parque de la Ciudad",
-          "distancia": 8.5,
-          "dificultad": 2
-        },
-        {
-          "nombre": "Paseo Marítimo",
-          "distancia": 12.1,
-          "dificultad": 3
-        }
-      ],
-      "historico_rutas": [
-        {
-          "nombre": "Cerro de la Cruz",
-          "distancia": 6.3,
-          "dificultad": 4,
-          "fecha": "2022-01-03"
-        },
-        {
-          "nombre": "Sendero del Río",
-          "distancia": 10.2,
-          "dificultad": 2,
-          "fecha": "2022-02-15"
-        }
-      ],
+      "clasificacion": [],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
       "owner": 0,
-      "id": 0
+      "id": 5
     },
     {
       "nombre": "Ciclistas",
@@ -115,7 +75,7 @@
         }
       ],
       "owner": 4,
-      "id": 1
+      "id": 6
     },
     {
       "nombre": "Senderistas",
@@ -172,7 +132,7 @@
         }
       ],
       "owner": 7,
-      "id": 2
+      "id": 7
     },
     {
       "nombre": "Escaladores",
@@ -230,7 +190,7 @@
         }
       ],
       "owner": 9,
-      "id": 3
+      "id": 8
     },
     {
       "nombre": "Amantes de la Naturaleza",
@@ -289,7 +249,7 @@
         }
       ],
       "owner": 12,
-      "id": 4
+      "id": 9
     }
   ]
 }

@@ -1,18 +1,43 @@
 {
   "usuarios": [
     {
+      "nombre": "Dani",
+      "actividad": "correr",
+      "amigos": [
+        1,
+        2
+      ],
+      "stats": {
+        "km_semana": 1,
+        "km_mes": 1,
+        "km_anio": 1,
+        "desnivel_semana": 12,
+        "desnivel_mes": 12,
+        "desnivel_anio": 12
+      },
+      "rutas_favoritas": [
+        0
+      ],
+      "retos_activos": [],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-24T20:36:51.586Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 9
+    },
+    {
       "nombre": "Febe",
       "actividad": "correr",
       "amigos": [
         2
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0,
         "km_semana": null,
         "km_mes": null,
         "km_anio": null,
@@ -30,7 +55,7 @@
           "rutaid": 10
         }
       ],
-      "id": 8
+      "id": 10
     },
     {
       "nombre": "Sofía",
@@ -52,7 +77,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 9
+      "id": 11
     },
     {
       "nombre": "Pedro",
@@ -74,7 +99,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 10
+      "id": 12
     },
     {
       "nombre": "Juan",
@@ -95,7 +120,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 11
+      "id": 13
     },
     {
       "nombre": "María",
@@ -117,7 +142,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 12
+      "id": 14
     },
     {
       "nombre": "Laura",
@@ -139,7 +164,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 13
+      "id": 15
     },
     {
       "nombre": "Pablo",
@@ -161,7 +186,7 @@
       ],
       "retos_activos": [],
       "historico_rutas": [],
-      "id": 14
+      "id": 16
     }
   ]
 }

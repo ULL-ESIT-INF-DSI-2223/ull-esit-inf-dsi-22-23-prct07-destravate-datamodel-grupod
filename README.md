@@ -634,4 +634,97 @@ Los métodos anteriores son los que se encargan de crear los distintos elementos
 
 ### Eliminar datos
 
+```typescript
+eliminarUsuario(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "usuarios",
+          message: "¿Que usuario quieres eliminar?",
+          choices: this.usuarios
+            .getAllElements()
+            .map((usuario) => usuario.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.usuarios.removeElement(answers.usuarios);
+        console.log("Usuario eliminado correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarReto(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "retos",
+          message: "¿Que reto quieres eliminar?",
+          choices: this.retos.getAllElements().map((reto) => reto.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.retos.removeElement(answers.retos);
+        console.log("Reto eliminado correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarRuta(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "rutas",
+          message: "¿Que ruta quieres eliminar?",
+          choices: this.rutas.getAllElements().map((ruta) => ruta.nombre),
+        },
+      ])
+      .then((answers) => {
+        this.rutas.removeElement(answers.rutas);
+        console.log("Ruta eliminada correctamente");
+        this.mainMenu();
+      });
+  }
+```
+
+```typescript
+  eliminarGrupo(): void {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "grupos",
+          message: "¿Que grupo quieres eliminar?",
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
+        },
+      ])
+      .then((answers) => {
+        const grupo = this.grupos.findElement(answers.grupos);
+        if (grupo == undefined) {
+          console.log("No existe el grupo");
+          this.mainMenu();
+        } else if (grupo.getOwner() !== this.current_user.id) {
+          console.log("No eres el propietario del grupo");
+          this.mainMenu();
+        } else {
+          this.grupos.removeElement(answers.grupos);
+          console.log("Grupo eliminado correctamente");
+          this.mainMenu();
+        }
+      });
+  }
+```
+
+Estos métodos son los que se encargan de eliminar los distintos elementos del programa, para ello se utiliza la librería inquirer para poder pedir al usuario que seleccione el elemento que quiere eliminar. Si el usuario no es el propietario del grupo, no podrá eliminarlo.
+
 ### Modificar datos

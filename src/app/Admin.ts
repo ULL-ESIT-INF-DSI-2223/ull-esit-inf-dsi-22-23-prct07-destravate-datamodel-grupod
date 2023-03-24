@@ -1206,8 +1206,6 @@ export class Admin {
           console.log("Grupo eliminado correctamente");
           this.mainMenu();
         }
-        this.grupos.removeElement(answers.grupos);
-        console.log("Grupo eliminado correctamente");
       });
   }
   /**

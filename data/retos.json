@@ -2,9 +2,6 @@
   "retos": [
     {
       "nombre": "RetoX",
-      "rutas": [
-        123
-      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
       "usuarios_realizando_reto": [
@@ -14,13 +11,10 @@
         4,
         6
       ],
-      "id": 3
+      "id": 28
     },
     {
       "nombre": "Reto2",
-      "rutas": [
-        123
-      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
       "usuarios_realizando_reto": [
@@ -30,13 +24,10 @@
         4,
         6
       ],
-      "id": 4
+      "id": 29
     },
     {
       "nombre": "Reto3",
-      "rutas": [
-        123
-      ],
       "tipo_reto": "bicicleta",
       "km_totales": 200,
       "usuarios_realizando_reto": [
@@ -46,7 +37,7 @@
         4,
         6
       ],
-      "id": 5
+      "id": 30
     }
   ]
 }

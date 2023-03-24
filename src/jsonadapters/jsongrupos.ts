@@ -62,10 +62,12 @@ export class JsonGrupos extends GrupoCollection {
   /**
    * Eliminar un elemento de la colección
    * @param id ID del elemento a eliminar
+   * @returns Verdadero si se ha eliminado el elemento
    */
-  removeElement(id: number): void {
-    super.removeElement(id);
+  removeElement(id: number): boolean {
+    const result = super.removeElement(id);
     this.storeGrupos();
+    return result;
   }
   /**
    * Almacenar los grupos en la base de datos

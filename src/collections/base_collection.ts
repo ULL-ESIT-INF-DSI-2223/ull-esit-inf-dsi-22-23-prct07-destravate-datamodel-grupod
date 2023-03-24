@@ -22,9 +22,10 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   /**
    * Eliminar un elemento de la colección
    * @param id ID del elemento a eliminar
+   * @returns true si se ha eliminado el elemento, false en caso contrario
    */
-  removeElement(id: number): void {
-    this.collection.delete(id);
+  removeElement(id: number): boolean {
+    return this.collection.delete(id);
   }
   /**
    * Actualizar un elemento de la colección
@@ -74,5 +75,4 @@ export abstract class BaseCollection<T extends Usuario | Grupo | Reto | Ruta> {
   forEach(callback: (element: T) => void): void {
     this.collection.forEach(callback);
   }
-
 }

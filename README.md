@@ -409,10 +409,7 @@ export class Admin {
   private retos: RetoCollection;
   private grupos: GrupoCollection;
   private current_user: Usuario;
-  /**
-   * Obtiene la instancia de la clase Admin
-   * @returns instancia de la clase Admin
-   */
+
   public static getInstance(): Admin {
     if (!Admin.instance) {
       Admin.instance = new Admin();
@@ -1018,10 +1015,7 @@ export class Gestor {
   private current_user: Usuario;
 
   public static instance: Gestor;
-  /**
-   * Obtiene la instancia de la clase Gestor
-   * @returns La instancia de la clase Gestor
-   */
+
   public static getInstance(): Gestor {
     if (!Gestor.instance) {
       Gestor.instance = new Gestor();
@@ -1118,3 +1112,323 @@ public register(): void {
 ```
 
 El método `register()` se encarga de pedir el nombre de usuario al usuario y comprobar si existe en la colección de usuarios. Si existe, se llama al método `errorRegistrarse()`, el cual se encargará de preguntar si el usuario quiere intentarlo de nuevo o iniciar sesión con esa cuenta. Si no existe, se crea un nuevo usuario con el nombre de usuario introducido y se añade a la colección de usuarios. Después, se guarda el usuario en la variable `current_user` y se llama al método `mainMenu()`.
+
+### Añadir amigos
+
+```typescript
+ public addFriend() {
+  console.clear();
+  console.log("Añadir amigo");
+  console.log();
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "username",
+        message: "Introduce el nombre de usuario del amigo",
+      },
+    ])
+    .then((answers) => {
+      const username = answers["username"];
+      const user = this.usuarios.findElement(username);
+      if (user !== undefined) {
+        if (this.current_user.getAmigos().includes(user.id)) {
+          console.log("Ya es tu amigo");
+          this.gestionarAmigos();
+          return;
+        }
+        if (user.id === this.current_user.id) {
+          console.log("No puedes añadirte a ti mismo");
+          this.gestionarAmigos();
+          return;
+        }
+        this.current_user.addAmigo(user.id);
+        console.log("Amigo añadido");
+        this.usuarios.updateElement(this.current_user);
+        this.gestionarAmigos();
+      } else {
+        console.log("Usuario no encontrado");
+        this.addFriend();
+      }
+    });
+}
+```
+
+El método `addFriend()` se encarga de pedir el nombre de usuario y comprobar si existe en la colección. Si existe, se comprueba si ya es amigo del usuario actual. Si no es amigo, se añade el usuario a la lista de amigos del usuario actual y se actualiza en la colección. Si no existe, se muestra un mensaje de error y se vuelve a llamar al método.
+
+### Eliminar amigos
+
+```typescript
+public removeFriend() {
+    console.clear();
+    console.log("Eliminar amigo");
+    console.log();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "username",
+          message: "Introduce el nombre de usuario del amigo",
+        },
+      ])
+      .then((answers) => {
+        const username = answers["username"];
+        const user = this.usuarios.findElement(username);
+        if (user !== undefined) {
+          this.current_user.removeAmigo(user.id);
+          console.log("Amigo eliminado");
+          this.usuarios.updateElement(this.current_user);
+          this.gestionarAmigos();
+        } else {
+          console.log("Usuario no encontrado");
+          this.removeFriend();
+        }
+      });
+  }
+```
+
+El método `removeFriend()` se encarga de pedir el nombre de usuario y comprobar si existe en la colección. Si existe, se elimina el usuario de la lista de amigos del usuario actual y se actualiza en la colección. Si no existe, se muestra un mensaje de error y se vuelve a llamar al método.
+
+### Visualizar rutas
+
+```typescript
+public verRutas() {
+    console.clear();
+    console.log("Rutas");
+    console.log();
+    const options = this.rutas.getAllElements().map((ruta) => ruta.nombre);
+    options.push("Volver al menú principal");
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "command",
+          message: "Elija una ruta para ver sus detalles",
+          choices: options,
+        },
+      ])
+      .then((answers) => {
+        if (answers["command"] === "Volver al menú principal") {
+          this.mainMenu();
+        } else {
+          this.verRuta(answers["command"]);
+        }
+      });
+  }
+```
+
+En este menú, se muestran todas las rutas del sistema. El usuario puede seleccionar una ruta para ver sus detalle
+
+```typescript
+ public verRuta(nombre: string) {
+    console.clear();
+    console.log("Ruta");
+    console.log();
+    const ruta = this.rutas.findElement(nombre);
+    if (ruta !== undefined) {
+      console.log("Nombre: " + ruta.nombre);
+      console.log("Geolocalización de inicio: " + ruta.getCoordenadasInicio());
+      console.log("Geolocalización de fin: " + ruta.getCoordenadasFin());
+      console.log("Longitud de la ruta: " + ruta.getDistancia() + " km");
+      console.log("Desnivel medio de la ruta: " + ruta.getDesnivel() + " m");
+      console.log("Usuarios que han realizado la ruta: ");
+      ruta.getUsuarios().forEach((id) => {
+        const user = this.usuarios.getElement(id);
+        if (user !== undefined) {
+          console.log(user.nombre);
+        }
+      });
+      console.log("Tipo de actividad: " + ruta.getTipoRuta());
+      console.log("Calificación media: " + ruta.getCalificacionMedia());
+      console.log();
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "command",
+            message: "¿Que quieres hacer?",
+            choices: ["Volver a ver rutas", "Volver al menú principal"],
+          },
+        ])
+        .then((answers) => {
+          if (answers["command"] === "Volver a ver rutas") {
+            this.verRutas();
+          } else {
+            this.mainMenu();
+          }
+        });
+    }
+  }
+```
+
+El método `verRuta()` se encarga de mostrar los detalles de una ruta. Estos detalles incluyen el nombre, las coordenadas de inicio y fin, la longitud, el desnivel medio, los usuarios que han realizado la ruta, el tipo de actividad y la calificación media.
+
+### Unirse a un grupo
+
+```typescript
+public unirseGrupo() {
+    console.clear();
+    console.log("Unirse a grupo");
+    console.log();
+    console.log(this.grupos.toString());
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "nombre",
+          message: "Elija un grupo para unirse",
+          choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
+        },
+      ])
+      .then((answers) => {
+        const nombre = answers["nombre"];
+        const grupo = this.grupos.findElement(nombre);
+        if (grupo !== undefined) {
+          if (grupo.getMiembros().includes(this.current_user.id)) {
+            console.log("Ya eres miembro de este grupo");
+            this.mainMenu();
+            return;
+          }
+          grupo.addMiembro(this.current_user.id);
+          this.grupos.updateElement(grupo);
+          console.log("Te has unido al grupo");
+          this.mainMenu();
+        } else {
+          console.log("Grupo no encontrado");
+          this.unirseGrupo();
+        }
+      });
+  }
+```
+
+El método `unirseGrupo()` se encarga de mostrar todos los grupos del sistema y permitir al usuario unirse a uno de ellos. Si el usuario ya es miembro del grupo, se le notifica y se le devuelve al menú principal. Si el usuario no es miembro del grupo, se le añade a la lista de miembros del grupo y se le notifica.
+
+### Visualizar grupos
+
+```typescript
+public verGrupos() {
+    console.clear();
+    console.log("Grupos");
+    console.log();
+    this.grupos.forEach((grupo) => {
+      console.log(grupo.nombre);
+    });
+    console.log();
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "command",
+          message: "¿Que quieres hacer?",
+          choices: ["Volver al menú principal", "Gestionar grupos"],
+        },
+      ])
+      .then((answers) => {
+        if (answers["command"] === "Volver al menú principal") {
+          this.mainMenu();
+        } else {
+          this.gestionarGrupos();
+        }
+      });
+  }
+```
+
+El método `verGrupos()` se encarga de mostrar todos los grupos del sistema. El usuario puede elegir entre volver al menú principal o gestionar los grupos.
+
+### Crear grupo
+
+```typescript
+public crearGrupo() {
+    console.clear();
+    console.log("Crear grupo");
+    console.log();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del grupo",
+        },
+      ])
+      .then((answers) => {
+        const nombre = answers["nombre"];
+        const grupo = new Grupo(
+          nombre,
+          [this.current_user.id],
+          {
+            km_anio: 0,
+            km_mes: 0,
+            km_semana: 0,
+            desnivel_anio: 0,
+            desnivel_mes: 0,
+            desnivel_semana: 0,
+          },
+          [this.current_user.id],
+          [],
+          [],
+          this.current_user.id
+        );
+        grupo.addMiembro(this.current_user.id);
+        this.grupos.addElement(grupo);
+        console.log("Grupo creado");
+        this.mainMenu();
+      });
+  }
+```
+
+El método `crearGrupo()` se encarga de crear un grupo. El usuario introduce el nombre del grupo y se crea un grupo con ese nombre. El usuario que crea el grupo se añade a la lista de miembros del grupo.
+
+### Eliminar grupo
+
+```typescript
+public eliminarGrupo() {
+  console.clear();
+  console.log("Eliminar grupo");
+  console.log();
+  const options = this.grupos.getAllElements().map((grupo) => grupo.nombre);
+  options.push("Volver al menú principal");
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "nombre",
+        message: "Elija un grupo para eliminar",
+        choices: this.grupos.getAllElements().map((grupo) => grupo.nombre),
+      },
+    ])
+    .then((answers) => {
+      if (answers["nombre"] === "Volver al menú principal") {
+        this.gestionarGrupos();
+      }
+      const nombre = answers["nombre"];
+      const grupo = this.grupos.findElement(nombre);
+      if (grupo === undefined) {
+        console.log("Grupo no encontrado");
+        this.eliminarGrupo();
+      } else if (grupo.getOwner() !== this.current_user.id) {
+        this.grupos.removeElement(grupo.id);
+        console.log("Grupo eliminado");
+        this.gestionarGrupos();
+      } else {
+        console.log("No puedes eliminar un grupo que no te pertenece");
+        this.gestionarGrupos();
+      }
+    });
+}
+```
+
+El método `eliminarGrupo()` se encarga de eliminar un grupo. El usuario elige el grupo y se elimina. Si el usuario que intenta eliminar el grupo no es el propietario del grupo, se le notifica y se le devuelve al menú de gestión de grupos.
+
+## Conclusiones
+
+Hemos conseguido implementar de forma simplificada el funcionamiento de una aplicación deportiva. Los módulos inquirer.js y lowdb han resultado útiles para la implementación de la interfaz de usuario y la persistencia de datos. Por otra parte, la implementación de los patrones de diseño Singleton y Adapter han resultado útiles para la implementación de la aplicación. De la misma forma, las herramientas de integración continua, el cubrimiento de código y verificación de la calidad del código han resultado útiles para la implementación de la aplicación. En general, el proyecto ha resultado satisfactorio y ha cumplido con los objetivos propuestos.
+
+## Bibliografía
+
+[1] [Página de npm de Inquirer](https://www.npmjs.com/package/inquirer)
+
+[2] [Página de npm de LowDB](https://www.npmjs.com/package/lowdb)
+
+[3] [Apuntes de la asignatura](https://ull-esit-inf-dsi-2223.github.io/typescript-theory/)
+
+[4] [Adam Freeman - Essential Typescript 4: From Beginner to Pro](https://www.oreilly.com/library/view/essential-typescript-4/9781484270110/html/Part_1.xhtml)

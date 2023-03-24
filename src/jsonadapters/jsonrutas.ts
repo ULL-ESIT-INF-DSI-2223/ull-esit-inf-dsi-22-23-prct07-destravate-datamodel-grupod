@@ -64,10 +64,12 @@ export class JsonRutas extends RutaCollection {
   /**
    * Eliminar un elemento de la colección
    * @param id ID del elemento a eliminar
+   * @returns Verdadero si se ha eliminado el elemento
    */
-  removeElement(id: number): void {
-    super.removeElement(id);
+  removeElement(id: number): boolean {
+    const result = super.removeElement(id);
     this.storeRutas();
+    return result;
   }
   /**
    * Almacenar las rutas en la base de datos

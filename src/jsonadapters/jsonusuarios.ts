@@ -66,10 +66,12 @@ export class JsonUsuarios extends UsuarioCollection {
   /**
    * Eliminar un elemento de la colección
    * @param id ID del elemento a eliminar
+   * @returns Verdadero si se ha eliminado correctamente
    */
-  removeElement(id: number): void {
-    super.removeElement(id);
+  removeElement(id: number): boolean {
+    const result = super.removeElement(id);
     this.storeUsuario();
+    return result;
   }
   /**
    * Almacenar los usuarios en la base de datos

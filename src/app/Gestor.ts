@@ -507,6 +507,11 @@ export class Gestor {
         const nombre = answers["nombre"];
         const grupo = this.grupos.findElement(nombre);
         if (grupo !== undefined) {
+          if (grupo.getMiembros().includes(this.current_user.id)) {
+            console.log("Ya eres miembro de este grupo");
+            this.mainMenu();
+            return;
+          }
           grupo.addMiembro(this.current_user.id);
           this.grupos.updateElement(grupo);
           console.log("Te has unido al grupo");
@@ -552,7 +557,6 @@ export class Gestor {
     console.clear();
     console.log("Gestionar grupos");
     console.log();
-    console.log(this.current_user.toString());
     inquirer
       .prompt([
         {

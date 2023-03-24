@@ -58,10 +58,12 @@ export class JsonRetos extends RetoCollection {
   /**
    * Eliminar un elemento de la colección
    * @param id ID del elemento a eliminar
+   * @returns Verdadero si se ha eliminado el elemento
    */
-  removeElement(id: number): void {
-    super.removeElement(id);
+  removeElement(id: number): boolean {
+    const result = super.removeElement(id);
     this.storeRetos();
+    return result;
   }
   /**
    * Almacenar los retos en la base de datos

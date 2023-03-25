@@ -1,7 +1,7 @@
 import { Datatype } from "./datatype";
 import { Stats } from "./stats";
+import { Usuario } from "./usuarios";
 
-  
 /**
  * Clase que define el tipo de dato Grupo
  */
@@ -13,7 +13,7 @@ export class Grupo implements Datatype {
     public nombre: string,
     private miembros: number[],
     private group_stats: Stats,
-    private clasificacion: number[],
+    private clasificacion: Usuario[],
     private rutas_favoritas: number[],
     private historico_rutas: { fecha: Date; rutaid: number }[],
     private owner: number
@@ -33,6 +33,14 @@ export class Grupo implements Datatype {
    */
   public getKmRecorridosAnio(): number {
     return this.group_stats.km_anio;
+  }
+
+  /**
+   * funcion que devuelve la clasificacion del grupo
+   * @returns Devuelve la clasificación del grupo
+   */
+  getClassification(): Usuario[] {
+    return this.clasificacion;
   }
 
   /**
@@ -87,8 +95,40 @@ export class Grupo implements Datatype {
    * Añadir un miembro al grupo
    * @param miembro ID del miembro a añadir
    */
-  addMiembro(miembro: number) {
-    this.miembros.push(miembro);
+  addMiembro(miembro: Usuario) {
+    this.miembros.push(miembro.id);
+    this.clasificacion.push(miembro);
+    if (this.clasificacion.length > 1) {
+      this.clasificacion.sort((a, b) => {
+        if (a.getStats().km_anio > b.getStats().km_anio) {
+          return -1;
+        } else if (a.getStats().km_anio < b.getStats().km_anio) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+
+    this.updateStats(
+      miembro.getStats().km_anio,
+      miembro.getStats().desnivel_anio
+    );
+  }
+
+  /**
+   * funcion que elimina un miembro del grupo
+   * @param miembro miembro a eliminar
+   */
+  eliminarMiembro(miembro: Usuario) {
+    this.miembros = this.miembros.filter((id) => id != miembro.id);
+    this.clasificacion = this.clasificacion.filter(
+      (usuario) => usuario.id != miembro.id
+    );
+    this.updateStats(
+      -miembro.getStats().km_anio,
+      -miembro.getStats().desnivel_anio
+    );
   }
   /**
    * Añadir una ruta favorita al grupo

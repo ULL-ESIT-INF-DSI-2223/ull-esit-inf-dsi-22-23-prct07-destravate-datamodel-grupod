@@ -512,7 +512,7 @@ export class Gestor {
             this.mainMenu();
             return;
           }
-          grupo.addMiembro(this.current_user.id);
+          grupo.addMiembro(this.current_user);
           this.grupos.updateElement(grupo);
           console.log("Te has unido al grupo");
           this.mainMenu();
@@ -608,12 +608,12 @@ export class Gestor {
             desnivel_mes: 0,
             desnivel_semana: 0,
           },
-          [this.current_user.id],
+          [this.current_user],
           [],
           [],
           this.current_user.id
         );
-        grupo.addMiembro(this.current_user.id);
+        grupo.addMiembro(this.current_user);
         this.grupos.addElement(grupo);
         console.log("Grupo creado");
         this.mainMenu();

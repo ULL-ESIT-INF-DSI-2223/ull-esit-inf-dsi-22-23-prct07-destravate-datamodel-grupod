@@ -878,6 +878,9 @@ export class Admin {
                 case "Añadir miembro":
                   this.addMiembro(grupo);
                   break;
+                case "Eliminar miembro":
+                  this.eliminarMiembro(grupo);
+                  break;
                 case "Añadir ruta favorita":
                   this.addRutaFavoritaGrupo(grupo);
                   break;
@@ -937,7 +940,7 @@ export class Admin {
       .then((answers) => {
         const usuario = this.usuarios.findElement(answers.nombre);
         if (usuario != undefined) {
-          grupo.addMiembro(usuario.id);
+          grupo.addMiembro(usuario);
           this.grupos.updateElement(grupo);
           this.mainMenu();
         } else {
@@ -946,6 +949,34 @@ export class Admin {
         }
       });
   }
+
+  /**
+   * función para eliminar miembro de grupo
+   * @param grupo Grupo a modificar
+   */
+  eliminarMiembro(grupo: Grupo) {
+    console.clear();
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "nombre",
+          message: "Introduce el nombre del miembro",
+        },
+      ])
+      .then((answers) => {
+        const usuario = this.usuarios.findElement(answers.nombre);
+        if (usuario != undefined) {
+          grupo.eliminarMiembro(usuario);
+          this.grupos.updateElement(grupo);
+          this.mainMenu();
+        } else {
+          console.log("El usuario no existe");
+          this.eliminarMiembro(grupo);
+        }
+      });
+  }
+
   /**
    * Menú de añadir ruta favorita a grupo
    * @param grupo Grupo a modificar

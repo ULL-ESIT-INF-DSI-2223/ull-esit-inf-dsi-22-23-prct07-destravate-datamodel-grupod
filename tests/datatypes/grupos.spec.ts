@@ -1,6 +1,7 @@
 import "mocha";
 import { expect } from "chai";
 import { Grupo } from "../../src/datatypes/grupos";
+import { Usuario } from "../../src/datatypes/usuarios";
 import { Stats } from "../../src/datatypes/stats";
 
 describe("Clase Grupos", () => {
@@ -134,6 +135,15 @@ describe("Clase Grupos", () => {
     expect(grupos.nombre).to.be.deep.eq("Grupo 2");
   });
   it("Se debe poder añadir un miembro a un grupo", () => {
+    const stats: Stats = {
+      km_anio: 100,
+      km_mes: 100,
+      km_semana: 100,
+      desnivel_anio: 100,
+      desnivel_mes: 100,
+      desnivel_semana: 100,
+    };
+    const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
     const grupos = new Grupo(
       "Grupo 1",
       [1, 2, 3],
@@ -150,8 +160,106 @@ describe("Clase Grupos", () => {
       [],
       1
     );
-    grupos.addMiembro(4);
-    expect(grupos.getMiembros()).to.be.deep.eq([1, 2, 3, 4]);
+    grupos.addMiembro(usuario);
+    expect(grupos.getMiembros()).to.be.deep.eq([1, 2, 3, 7]);
+  });
+  it("Se debe poder eliminar un miembro de un grupo", () => {
+    const stats: Stats = {
+      km_anio: 100,
+      km_mes: 100,
+      km_semana: 100,
+      desnivel_anio: 100,
+      desnivel_mes: 100,
+      desnivel_semana: 100,
+    };
+    const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
+    const grupos = new Grupo(
+      "Grupo 1",
+      [1, 2, 3],
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
+      [],
+      [],
+      [],
+
+      1
+    );
+    grupos.addMiembro(usuario);
+    grupos.eliminarMiembro(usuario);
+    expect(grupos.getMiembros()).to.be.deep.eq([1, 2, 3]);
+  });
+  it("Se espera que cuando se añada un miembro a un grupo, se actualice la clasificación del grupo", () => {
+    const stats: Stats = {
+      km_anio: 100,
+      km_mes: 100,
+      km_semana: 100,
+      desnivel_anio: 100,
+      desnivel_mes: 100,
+      desnivel_semana: 100,
+    };
+    const usuario = new Usuario("Usuario 1", "correr", [], stats, [], [], []);
+    const grupos = new Grupo(
+      "Grupo 1",
+      [1, 2, 3],
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
+      [],
+      [],
+      [],
+      1
+    );
+    grupos.addMiembro(usuario);
+
+    expect(grupos.getClassification()).to.be.deep.eq([
+      {
+        actividad: "correr",
+        amigos: [],
+        historico_rutas: [],
+        id: 9,
+        nombre: "Usuario 1",
+        retos_activos: [],
+        rutas_favoritas: [],
+        stats: {
+          desnivel_anio: 100,
+          desnivel_mes: 100,
+          desnivel_semana: 100,
+          km_anio: 100,
+          km_mes: 100,
+          km_semana: 100,
+        },
+      },
+    ]);
+  });
+  it("Se debe poder obtener la clasificación de un grupo", () => {
+    const grupos = new Grupo(
+      "Grupo 1",
+      [1, 2, 3],
+      {
+        km_anio: 0,
+        km_mes: 0,
+        km_semana: 0,
+        desnivel_anio: 0,
+        desnivel_mes: 0,
+        desnivel_semana: 0,
+      },
+      [],
+      [],
+      [],
+      1
+    );
+    expect(grupos.getClassification()).to.be.deep.eq([]);
   });
   it("Se debe poder añadir una ruta favorita a un grupo", () => {
     const grupos = new Grupo(

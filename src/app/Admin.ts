@@ -13,7 +13,9 @@ import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
 import { Gestor } from "./Gestor";
 import readline from "readline";
-
+/**
+ * Tipo de funcion
+ */
 type MyFunctionType = () => void;
 /**
  * Enumerado de los comandos

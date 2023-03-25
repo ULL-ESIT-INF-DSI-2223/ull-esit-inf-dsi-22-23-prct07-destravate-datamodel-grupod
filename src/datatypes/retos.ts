@@ -1,6 +1,7 @@
 import { Datatype } from "./datatype";
 /**
  * Tipo de dato Actividad
+ * @typedef {string} Actividad
  */
 type Actividad = "correr" | "bicicleta" | undefined;
 /**

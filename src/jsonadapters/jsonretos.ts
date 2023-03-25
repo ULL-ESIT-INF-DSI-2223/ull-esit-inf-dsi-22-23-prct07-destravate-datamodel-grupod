@@ -5,10 +5,12 @@ import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 /**
  * Tipo de actividad
+ * @typedef {string} Actividad
  */
 type Actividad = "correr" | "bicicleta" | undefined;
 /**
  * Esquema de la base de datos
+ * @typedef schemaType Esquema de la base de datos
  */
 type schemaType = {
   retos: {

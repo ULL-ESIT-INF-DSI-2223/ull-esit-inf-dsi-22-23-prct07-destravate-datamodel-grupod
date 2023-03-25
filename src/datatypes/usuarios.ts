@@ -3,6 +3,7 @@ import { Ruta } from "./rutas";
 import { Stats } from "./stats";
 /**
  * Tipo de dato Actividad
+ * @typedef {string} Actividad
  */
 type Actividad = "correr" | "bicicleta" | undefined;
 /**

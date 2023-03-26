@@ -91,7 +91,7 @@ export class Admin {
    * Vuelve a la funcion que se le pasa
    * @param fn Funcion a la que se vuelve
    */
-  volver(fn: MyFunctionType): void {
+  volver(fn: MyFunctionType): boolean {
     inquirer
       .prompt([
         {
@@ -111,6 +111,7 @@ export class Admin {
             break;
         }
       });
+    return true;
   }
   /**
    * Cambia a los usuarios que se le pasan
@@ -143,7 +144,7 @@ export class Admin {
   /**
    * Menú principal
    */
-  mainMenu(): void {
+  mainMenu(): boolean {
     console.clear();
     const rl = readline.createInterface({
       input: process.stdin,
@@ -217,6 +218,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de crear usuario

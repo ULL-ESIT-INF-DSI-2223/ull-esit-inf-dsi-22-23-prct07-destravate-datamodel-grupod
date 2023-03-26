@@ -13,7 +13,7 @@ export class Grupo implements Datatype {
     public nombre: string,
     private miembros: number[],
     private group_stats: Stats,
-    private clasificacion: Usuario[],
+    private clasificacion: { nombre: string; id: number; valor: number }[],
     private rutas_favoritas: number[],
     private historico_rutas: { fecha: Date; rutaid: number }[],
     private owner: number
@@ -39,7 +39,7 @@ export class Grupo implements Datatype {
    * funcion que devuelve la clasificacion del grupo
    * @returns Devuelve la clasificación del grupo
    */
-  getClassification(): Usuario[] {
+  getClassification(): { nombre: string; id: number; valor: number }[] {
     return this.clasificacion;
   }
 
@@ -97,19 +97,17 @@ export class Grupo implements Datatype {
    */
   addMiembro(miembro: Usuario) {
     this.miembros.push(miembro.id);
-    this.clasificacion.push(miembro);
-    if (this.clasificacion.length > 1) {
-      this.clasificacion.sort((a, b) => {
-        if (a.getStats().km_anio > b.getStats().km_anio) {
-          return -1;
-        } else if (a.getStats().km_anio < b.getStats().km_anio) {
-          return 1;
-        } else {
-          return 0;
+    this.clasificacion.push({ nombre: miembro.nombre, id: miembro.id, valor: miembro.getStats().km_anio });
+    for (let i = 0; i < this.clasificacion.length; i++) {
+      for (let j = i + 1; j < this.clasificacion.length; j++) {
+        if (this.clasificacion[i].valor < this.clasificacion[j].valor) {
+          let aux = this.clasificacion[i];
+          this.clasificacion[i] = this.clasificacion[j];
+          this.clasificacion[j] = aux;
         }
-      });
+      }
     }
-
+    
     this.updateStats(
       miembro.getStats().km_anio,
       miembro.getStats().desnivel_anio

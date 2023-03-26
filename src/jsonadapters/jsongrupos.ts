@@ -14,7 +14,7 @@ type schemaType = {
     nombre: string;
     miembros: number[];
     group_stats: Stats;
-    clasificacion: Usuario[];
+    clasificacion: { nombre: string; id: number; valor: number }[];
     rutas_favoritas: number[];
     historico_rutas: {
       fecha: Date;

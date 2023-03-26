@@ -86,12 +86,12 @@
         6
       ],
       "group_stats": {
-        "week_distance": 95.3,
-        "week_slope": 5.3,
-        "month_distance": 310.6,
-        "month_slope": 18.2,
-        "year_distance": 2200.4,
-        "year_slope": 135.7
+        "km_semana": 95.3,
+        "km_mes": 5.3,
+        "km_anio": 310.6,
+        "desnivel_semana": 18.2,
+        "desnivel_mes": 2200.4,
+        "desnivel_anio": 135.7
       },
       "clasificacion": [
         {
@@ -143,12 +143,12 @@
         8
       ],
       "group_stats": {
-        "week_distance": 12.8,
-        "week_slope": 1.6,
-        "month_distance": 46.7,
-        "month_slope": 4.2,
-        "year_distance": 320.5,
-        "year_slope": 29.8
+        "km_semana": 12.8,
+        "km_mes": 1.6,
+        "km_anio": 46.7,
+        "desnivel_semana": 4.2,
+        "desnivel_mes": 320.5,
+        "desnivel_anio": 29.8
       },
       "clasificacion": [
         {
@@ -201,12 +201,12 @@
         11
       ],
       "group_stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 0,
+        "km_mes": 0,
+        "km_anio": 0,
+        "desnivel_semana": 0,
+        "desnivel_mes": 0,
+        "desnivel_anio": 0
       },
       "clasificacion": [
         {
@@ -260,12 +260,12 @@
         15
       ],
       "group_stats": {
-        "week_distance": 32.1,
-        "week_slope": 4.7,
-        "month_distance": 102.4,
-        "month_slope": 13.5,
-        "year_distance": 572.8,
-        "year_slope": 72.3
+        "km_semana": 32.1,
+        "km_mes": 4.7,
+        "km_anio": 102.4,
+        "desnivel_semana": 13.5,
+        "desnivel_mes": 572.8,
+        "desnivel_anio": 72.3
       },
       "clasificacion": [
         {

@@ -224,21 +224,9 @@ describe("Clase Grupos", () => {
 
     expect(grupos.getClassification()).to.be.deep.eq([
       {
-        actividad: "correr",
-        amigos: [],
-        historico_rutas: [],
         id: 9,
         nombre: "Usuario 1",
-        retos_activos: [],
-        rutas_favoritas: [],
-        stats: {
-          desnivel_anio: 100,
-          desnivel_mes: 100,
-          desnivel_semana: 100,
-          km_anio: 100,
-          km_mes: 100,
-          km_semana: 100,
-        },
+        valor: 100,
       },
     ]);
   });

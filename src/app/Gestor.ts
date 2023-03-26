@@ -81,7 +81,7 @@ export class Gestor {
           choices: [
             "Iniciar sesión",
             "Registrarse",
-            "Modo Admin (Solo para desarrolladores)",
+            "Acceder a funcionalidades de administrador",
           ],
         },
       ])
@@ -608,7 +608,7 @@ export class Gestor {
             desnivel_mes: 0,
             desnivel_semana: 0,
           },
-          [this.current_user],
+          [{nombre: this.current_user.nombre, id:this.current_user.id, valor:this.current_user.getStats().km_anio}],
           [],
           [],
           this.current_user.id

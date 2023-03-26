@@ -161,7 +161,7 @@ describe("Clase Grupos", () => {
       1
     );
     grupos.addMiembro(usuario);
-    expect(grupos.getMiembros()).to.be.deep.eq([1, 2, 3, 7]);
+    expect(grupos.getMiembros()).to.be.deep.eq([1, 2, 3, usuario.id]);
   });
   it("Se debe poder eliminar un miembro de un grupo", () => {
     const stats: Stats = {
@@ -224,8 +224,8 @@ describe("Clase Grupos", () => {
 
     expect(grupos.getClassification()).to.be.deep.eq([
       {
-        id: 9,
-        nombre: "Usuario 1",
+        id: usuario.id,
+        nombre: usuario.nombre,
         valor: 100,
       },
     ]);

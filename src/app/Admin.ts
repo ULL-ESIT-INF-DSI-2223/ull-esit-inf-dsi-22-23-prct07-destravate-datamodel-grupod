@@ -16,7 +16,7 @@ import readline from "readline";
 /**
  * Tipo de funcion
  */
-type MyFunctionType = () => void;
+export type MyFunctionType = () => void;
 /**
  * Enumerado de los comandos
  */

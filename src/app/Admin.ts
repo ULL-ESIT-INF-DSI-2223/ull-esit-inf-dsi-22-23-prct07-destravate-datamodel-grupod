@@ -869,6 +869,7 @@ export class Admin {
                 choices: [
                   "Cambiar nombre",
                   "Añadir miembro",
+                  "Eliminar miembro",
                   "Añadir ruta favorita",
                   "Salir",
                 ],

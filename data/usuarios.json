@@ -18,7 +18,9 @@
       "rutas_favoritas": [
         0
       ],
-      "retos_activos": [],
+      "retos_activos": [
+        0
+      ],
       "historico_rutas": [
         {
           "fecha": "2023-03-24T20:05:57.102Z",
@@ -29,7 +31,7 @@
           "rutaid": 10
         }
       ],
-      "id": 52
+      "id": 91
     },
     {
       "nombre": "Febe",
@@ -48,14 +50,16 @@
       "rutas_favoritas": [
         0
       ],
-      "retos_activos": [],
+      "retos_activos": [
+        0
+      ],
       "historico_rutas": [
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
         }
       ],
-      "id": 53
+      "id": 92
     },
     {
       "nombre": "Sofía",
@@ -65,19 +69,26 @@
         3
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 200,
+        "km_mes": 200,
+        "km_anio": 200,
+        "desnivel_semana": 200,
+        "desnivel_mes": 200,
+        "desnivel_anio": 200
       },
       "rutas_favoritas": [
         1
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 54
+      "retos_activos": [
+        0
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 93
     },
     {
       "nombre": "Pedro",
@@ -87,19 +98,26 @@
         5
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 100,
+        "km_mes": 100,
+        "km_anio": 100,
+        "desnivel_semana": 100,
+        "desnivel_mes": 100,
+        "desnivel_anio": 100
       },
       "rutas_favoritas": [
         2
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 55
+      "retos_activos": [
+        0
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 94
     },
     {
       "nombre": "Juan",
@@ -108,19 +126,26 @@
         2
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 50,
+        "km_mes": 50,
+        "km_anio": 50,
+        "desnivel_semana": 50,
+        "desnivel_mes": 50,
+        "desnivel_anio": 50
       },
       "rutas_favoritas": [
         3
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 56
+      "retos_activos": [
+        0
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 95
     },
     {
       "nombre": "María",
@@ -130,19 +155,26 @@
         7
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 25,
+        "km_mes": 25,
+        "km_anio": 25,
+        "desnivel_semana": 25,
+        "desnivel_mes": 25,
+        "desnivel_anio": 25
       },
       "rutas_favoritas": [
         4
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 57
+      "retos_activos": [
+        0
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 96
     },
     {
       "nombre": "Laura",
@@ -152,19 +184,26 @@
         5
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 60,
+        "km_mes": 60,
+        "km_anio": 60,
+        "desnivel_semana": 60,
+        "desnivel_mes": 60,
+        "desnivel_anio": 60
       },
       "rutas_favoritas": [
         5
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 58
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 97
     },
     {
       "nombre": "Pablo",
@@ -174,19 +213,401 @@
         9
       ],
       "stats": {
-        "week_distance": 0,
-        "week_slope": 0,
-        "month_distance": 0,
-        "month_slope": 0,
-        "year_distance": 0,
-        "year_slope": 0
+        "km_semana": 3000,
+        "km_mes": 3000,
+        "km_anio": 3000,
+        "desnivel_semana": 3000,
+        "desnivel_mes": 3000,
+        "desnivel_anio": 3000
       },
       "rutas_favoritas": [
         6
       ],
-      "retos_activos": [],
-      "historico_rutas": [],
-      "id": 59
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 98
+    },
+    {
+      "nombre": "Antonio",
+      "actividad": "ciclismo",
+      "amigos": [
+        10,
+        11
+      ],
+      "stats": {
+        "km_semana": 1000,
+        "km_mes": 1000,
+        "km_anio": 1000,
+        "desnivel_semana": 1000,
+        "desnivel_mes": 1000,
+        "desnivel_anio": 1000
+      },
+      "rutas_favoritas": [
+        7
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 99
+    },
+    {
+      "nombre": "Marta",
+      "actividad": "ciclismo",
+      "amigos": [
+        12,
+        13
+      ],
+      "stats": {
+        "km_semana": 12,
+        "km_mes": 12,
+        "km_anio": 12,
+        "desnivel_semana": 12,
+        "desnivel_mes": 12,
+        "desnivel_anio": 12
+      },
+      "rutas_favoritas": [
+        8
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 100
+    },
+    {
+      "nombre": "Javier",
+      "actividad": "ciclismo",
+      "amigos": [
+        14,
+        15
+      ],
+      "stats": {
+        "km_semana": 13,
+        "km_mes": 13,
+        "km_anio": 13,
+        "desnivel_semana": 13,
+        "desnivel_mes": 13,
+        "desnivel_anio": 13
+      },
+      "rutas_favoritas": [
+        9
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 101
+    },
+    {
+      "nombre": "Sara",
+      "actividad": "ciclismo",
+      "amigos": [
+        16,
+        17
+      ],
+      "stats": {
+        "km_semana": 16,
+        "km_mes": 16,
+        "km_anio": 16,
+        "desnivel_semana": 16,
+        "desnivel_mes": 16
+      },
+      "rutas_favoritas": [
+        10
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 102
+    },
+    {
+      "nombre": "Sergio",
+      "actividad": "ciclismo",
+      "amigos": [
+        18,
+        19
+      ],
+      "stats": {
+        "km_semana": 17,
+        "km_mes": 17,
+        "km_anio": 17,
+        "desnivel_semana": 17,
+        "desnivel_mes": 17,
+        "desnivel_anio": 17
+      },
+      "rutas_favoritas": [
+        11
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 103
+    },
+    {
+      "nombre": "Miguel",
+      "actividad": "ciclismo",
+      "amigos": [
+        20,
+        21
+      ],
+      "stats": {
+        "km_semana": 18,
+        "km_mes": 18,
+        "km_anio": 18,
+        "desnivel_semana": 18,
+        "desnivel_mes": 18,
+        "desnivel_anio": 18
+      },
+      "rutas_favoritas": [
+        12
+      ],
+      "retos_activos": [
+        1
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 104
+    },
+    {
+      "nombre": "Luis",
+      "actividad": "ciclismo",
+      "amigos": [
+        22,
+        23
+      ],
+      "stats": {
+        "km_semana": 19,
+        "km_mes": 19,
+        "km_anio": 19,
+        "desnivel_semana": 19,
+        "desnivel_mes": 19,
+        "desnivel_anio": 19
+      },
+      "rutas_favoritas": [
+        13
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 105
+    },
+    {
+      "nombre": "Mauricio",
+      "actividad": "ciclismo",
+      "amigos": [
+        24,
+        25
+      ],
+      "stats": {
+        "km_semana": 20,
+        "km_mes": 20,
+        "km_anio": 20,
+        "desnivel_semana": 20,
+        "desnivel_mes": 20
+      },
+      "rutas_favoritas": [
+        14
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 106
+    },
+    {
+      "nombre": "Chicho",
+      "actividad": "ciclismo",
+      "amigos": [
+        26,
+        27
+      ],
+      "stats": {
+        "km_semana": 21,
+        "km_mes": 21,
+        "km_anio": 21,
+        "desnivel_semana": 21,
+        "desnivel_mes": 21,
+        "desnivel_anio": 21
+      },
+      "rutas_favoritas": [
+        15
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 107
+    },
+    {
+      "nombre": "Brayan",
+      "actividad": "ciclismo",
+      "amigos": [
+        28,
+        29
+      ],
+      "stats": {
+        "km_semana": 22,
+        "km_mes": 22,
+        "km_anio": 22,
+        "desnivel_semana": 22,
+        "desnivel_mes": 22,
+        "desnivel_anio": 22
+      },
+      "rutas_favoritas": [
+        16
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 108
+    },
+    {
+      "nombre": "Eduardo",
+      "actividad": "ciclismo",
+      "amigos": [
+        30,
+        31
+      ],
+      "stats": {
+        "km_semana": 23,
+        "km_mes": 23,
+        "km_anio": 23,
+        "desnivel_semana": 23,
+        "desnivel_mes": 23,
+        "desnivel_anio": 23
+      },
+      "rutas_favoritas": [
+        17
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 109
+    },
+    {
+      "nombre": "Aday",
+      "actividad": "ciclismo",
+      "amigos": [
+        32,
+        33
+      ],
+      "stats": {
+        "km_semana": 24,
+        "km_mes": 24,
+        "km_anio": 24,
+        "desnivel_semana": 24,
+        "desnivel_mes": 24,
+        "desnivel_anio": 24
+      },
+      "rutas_favoritas": [
+        18
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 110
+    },
+    {
+      "nombre": "Mario",
+      "actividad": "ciclismo",
+      "amigos": [
+        34,
+        35
+      ],
+      "stats": {
+        "km_semana": 25,
+        "km_mes": 25,
+        "km_anio": 25,
+        "desnivel_semana": 25,
+        "desnivel_mes": 25,
+        "desnivel_anio": 25
+      },
+      "rutas_favoritas": [
+        19
+      ],
+      "retos_activos": [
+        2
+      ],
+      "historico_rutas": [
+        {
+          "fecha": "2023-03-24T20:05:57.102Z",
+          "rutaid": 10
+        }
+      ],
+      "id": 111
     }
   ]
 }

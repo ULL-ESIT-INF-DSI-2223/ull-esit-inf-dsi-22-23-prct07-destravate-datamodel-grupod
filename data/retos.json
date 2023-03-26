@@ -1,7 +1,7 @@
 {
   "retos": [
     {
-      "nombre": "RetoX",
+      "nombre": "Reto1",
       "tipo_reto": "bicicleta",
       "km_totales": 200,
       "usuarios_realizando_reto": [

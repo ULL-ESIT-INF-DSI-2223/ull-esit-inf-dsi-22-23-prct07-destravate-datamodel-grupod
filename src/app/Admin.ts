@@ -1344,7 +1344,7 @@ export class Admin {
       b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
     );
     for (let i = 0; i < rutas.length; i++) {
-      console.log(rutas[i]);
+      console.log(rutas[i].nombre);
     }
     this.volver(this.mostrarRutas.bind(this));
   }
@@ -1520,7 +1520,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por orden alfabético descendente
@@ -1534,7 +1534,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados semana actual ascendente
@@ -1550,7 +1550,7 @@ export class Admin {
         usuarios[i].nombre + " " + usuarios[i].getKmRecorridosSemana()
       );
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados semana actual descendente
@@ -1566,7 +1566,7 @@ export class Admin {
         usuarios[i].nombre + " " + usuarios[i].getKmRecorridosSemana()
       );
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados mes actual ascendente
@@ -1578,7 +1578,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados mes actual descendente
@@ -1590,7 +1590,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados año actual ascendente
@@ -1602,7 +1602,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados año actual descendente
@@ -1614,7 +1614,7 @@ export class Admin {
     for (let i = 0; i < usuarios.length; i++) {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarUsuarios.bind(this));
   }
   /**
    * Menú de mostrar retos
@@ -1676,7 +1676,7 @@ export class Admin {
     for (let i = 0; i < retos.length; i++) {
       console.log(retos[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Mostrar retos por cantidad de Km a realizar descendente
@@ -1690,7 +1690,7 @@ export class Admin {
     for (let i = 0; i < retos.length; i++) {
       console.log(retos[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Mostrar retos por cantidad de Km a realizar ascendente
@@ -1702,6 +1702,7 @@ export class Admin {
     for (let i = 0; i < retos.length; i++) {
       console.log(retos[i].nombre + " " + retos[i].getKmTotales());
     }
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Mostrar retos por cantidad de Km a realizar descendente
@@ -1713,7 +1714,7 @@ export class Admin {
     for (let i = 0; i < retos.length; i++) {
       console.log(retos[i].nombre + " " + retos[i].getKmTotales());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Mostrar retos por cantidad de usuarios participantes ascendente
@@ -1734,7 +1735,7 @@ export class Admin {
           " usuarios"
       );
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Mostrar retos por cantidad de usuarios participantes descendente
@@ -1755,7 +1756,7 @@ export class Admin {
           " usuarios"
       );
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarRetos.bind(this));
   }
   /**
    * Menú de mostrar grupos
@@ -1833,7 +1834,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente descendente
@@ -1847,7 +1848,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente ascendente
@@ -1861,7 +1862,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente descendente
@@ -1875,7 +1876,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km mes realizados conjuntamente ascendente
@@ -1887,7 +1888,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km mes realizados conjuntamente descendente
@@ -1899,7 +1900,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km año realizados conjuntamente ascendente
@@ -1911,7 +1912,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de km año realizados conjuntamente descendente
@@ -1923,7 +1924,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de miembros ascendente
@@ -1935,7 +1936,7 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
   /**
    * Mostrar grupos por cantidad de miembros descendente
@@ -1947,6 +1948,6 @@ export class Admin {
     for (let i = 0; i < grupos.length; i++) {
       console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
     }
-    this.volver(this.mostrarRutas.bind(this));
+    this.volver(this.mostrarGrupos.bind(this));
   }
 }

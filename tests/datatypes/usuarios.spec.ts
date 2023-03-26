@@ -307,4 +307,23 @@ describe("Clase Usuario", () => {
     usuario.removeAmigo(6);
     expect(usuario.getAmigos()).to.be.deep.equal([5, 7]);
   });
+  it("Se debe poder obtener el desnivel en la semana", () => {
+    const usuario = new Usuario(
+      "Usuario 1",
+      "correr",
+      [5, 6, 7],
+      {
+        km_anio: 100,
+        km_mes: 100,
+        km_semana: 100,
+        desnivel_anio: 100,
+        desnivel_mes: 100,
+        desnivel_semana: 100,
+      },
+      [],
+      [],
+      []
+    );
+    expect(usuario.getDesnivelSemana()).to.be.equal(100);
+  });
 });

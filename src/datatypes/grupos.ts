@@ -48,13 +48,20 @@ export class Grupo implements Datatype {
    * @param km km recorridos
    * @param desnivel desnivel recorrido
    */
-  updateStats(km: number, desnivel: number) {
-    this.group_stats.km_semana += km;
-    this.group_stats.km_mes += km;
-    this.group_stats.km_anio += km;
-    this.group_stats.desnivel_semana += desnivel;
-    this.group_stats.desnivel_mes += desnivel;
-    this.group_stats.desnivel_anio += desnivel;
+  updateStats(
+    km_semana: number,
+    km_mes: number,
+    km_anio: number,
+    desnivel_semana: number,
+    desnivel_mes: number,
+    desnivel_anio: number
+  ) {
+    this.group_stats.km_semana += km_semana;
+    this.group_stats.km_mes += km_mes;
+    this.group_stats.km_anio += km_anio;
+    this.group_stats.desnivel_semana += desnivel_semana;
+    this.group_stats.desnivel_mes += desnivel_mes;
+    this.group_stats.desnivel_anio += desnivel_anio;
   }
   /**
    * Obtener distancia recorrida por el grupo en el mes
@@ -111,7 +118,11 @@ export class Grupo implements Datatype {
     }
 
     this.updateStats(
+      miembro.getStats().km_semana,
+      miembro.getStats().km_mes,
       miembro.getStats().km_anio,
+      miembro.getStats().desnivel_semana,
+      miembro.getStats().desnivel_mes,
       miembro.getStats().desnivel_anio
     );
   }
@@ -126,7 +137,11 @@ export class Grupo implements Datatype {
       (usuario) => usuario.id != miembro.id
     );
     this.updateStats(
+      -miembro.getStats().km_semana,
+      -miembro.getStats().km_mes,
       -miembro.getStats().km_anio,
+      -miembro.getStats().desnivel_semana,
+      -miembro.getStats().desnivel_mes,
       -miembro.getStats().desnivel_anio
     );
   }

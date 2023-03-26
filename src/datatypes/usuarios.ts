@@ -98,6 +98,10 @@ export class Usuario implements Datatype {
     return this.stats.km_anio;
   }
 
+  public getDesnivelSemana(): number {
+    return this.stats.desnivel_semana;
+  }
+
   /**
    * funcion para actualizar las estadisticas del usuario
    * @param km km recorridos

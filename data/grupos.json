@@ -3,8 +3,8 @@
     {
       "nombre": "Corredores",
       "miembros": [
-        9,
-        10
+        23,
+        22
       ],
       "group_stats": {
         "km_semana": 22,
@@ -32,14 +32,16 @@
           "rutas_favoritas": [
             0
           ],
-          "retos_activos": [],
+          "retos_activos": [
+            0
+          ],
           "historico_rutas": [
             {
               "fecha": "2023-03-24T20:05:57.102Z",
               "rutaid": 10
             }
           ],
-          "id": 10
+          "id": 23
         },
         {
           "nombre": "Dani",
@@ -59,7 +61,9 @@
           "rutas_favoritas": [
             0
           ],
-          "retos_activos": [],
+          "retos_activos": [
+            0
+          ],
           "historico_rutas": [
             {
               "fecha": "2023-03-24T20:05:57.102Z",
@@ -70,186 +74,192 @@
               "rutaid": 10
             }
           ],
-          "id": 9
+          "id": 22
         }
       ],
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 0,
-      "id": 37
+      "id": 5
     },
     {
       "nombre": "Ciclistas",
       "miembros": [
-        4,
-        5,
-        6
+        25,
+        26
       ],
       "group_stats": {
-        "km_semana": 95.3,
-        "desnivel_semana": 5.3,
-        "km_mes": 310.6,
-        "desnivel_mes": 18.2,
-        "km_anio": 2200.4,
-        "desnivel_anio": 135.7
+        "km_semana": 150,
+        "desnivel_semana": 150,
+        "km_mes": 150,
+        "desnivel_mes": 150,
+        "km_anio": 150,
+        "desnivel_anio": 150
       },
       "clasificacion": [
         {
+          "nombre": "Pedro",
+          "actividad": "ciclismo",
+          "amigos": [
+            4,
+            5
+          ],
+          "stats": {
+            "km_semana": 100,
+            "km_mes": 100,
+            "km_anio": 100,
+            "desnivel_semana": 100,
+            "desnivel_mes": 100,
+            "desnivel_anio": 100
+          },
+          "rutas_favoritas": [
+            2
+          ],
+          "retos_activos": [
+            0
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 25
+        },
+        {
           "nombre": "Juan",
-          "puntos": 28
-        },
-        {
-          "nombre": "Luisa",
-          "puntos": 25
-        },
-        {
-          "nombre": "David",
-          "puntos": 20
+          "actividad": "ciclismo",
+          "amigos": [
+            2
+          ],
+          "stats": {
+            "km_semana": 50,
+            "km_mes": 50,
+            "km_anio": 50,
+            "desnivel_semana": 50,
+            "desnivel_mes": 50,
+            "desnivel_anio": 50
+          },
+          "rutas_favoritas": [
+            3
+          ],
+          "retos_activos": [
+            0
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 26
         }
       ],
-      "rutas_favoritas": [
-        {
-          "nombre": "Coll de Rates",
-          "distancia": 34.2,
-          "dificultad": 5
-        },
-        {
-          "nombre": "Vía Verde",
-          "distancia": 22.5,
-          "dificultad": 2
-        }
-      ],
-      "historico_rutas": [
-        {
-          "nombre": "Puerto de Tudons",
-          "distancia": 45.7,
-          "dificultad": 4,
-          "fecha": "2022-03-10"
-        },
-        {
-          "nombre": "Ruta de los Faros",
-          "distancia": 70.1,
-          "dificultad": 3,
-          "fecha": "2022-01-28"
-        }
-      ],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
       "owner": 4,
-      "id": 38
+      "id": 6
     },
     {
       "nombre": "Senderistas",
       "miembros": [
-        7,
-        8
+        27
       ],
       "group_stats": {
-        "km_semana": 12.8,
-        "desnivel_semana": 1.6,
-        "km_mes": 46.7,
-        "desnivel_mes": 4.2,
-        "km_anio": 320.5,
-        "desnivel_anio": 29.8
+        "km_semana": 25,
+        "desnivel_semana": 25,
+        "km_mes": 25,
+        "desnivel_mes": 25,
+        "km_anio": 25,
+        "desnivel_anio": 25
       },
       "clasificacion": [
         {
-          "nombre": "Elena",
-          "puntos": 19
-        },
-        {
-          "nombre": "Roberto",
-          "puntos": 16
-        },
-        {
-          "nombre": "Sandra",
-          "puntos": 13
+          "nombre": "María",
+          "actividad": "correr",
+          "amigos": [
+            6,
+            7
+          ],
+          "stats": {
+            "km_semana": 25,
+            "km_mes": 25,
+            "km_anio": 25,
+            "desnivel_semana": 25,
+            "desnivel_mes": 25,
+            "desnivel_anio": 25
+          },
+          "rutas_favoritas": [
+            4
+          ],
+          "retos_activos": [
+            0
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 27
         }
       ],
-      "rutas_favoritas": [
-        {
-          "nombre": "Barranco del Infierno",
-          "distancia": 9.3,
-          "dificultad": 3
-        },
-        {
-          "nombre": "Senda del Oso",
-          "distancia": 12.7,
-          "dificultad": 2
-        }
-      ],
-      "historico_rutas": [
-        {
-          "nombre": "Cascada de Ézaro",
-          "distancia": 7.6,
-          "dificultad": 2,
-          "fecha": "2022-02-05"
-        },
-        {
-          "nombre": "Camino de Santiago",
-          "distancia": 23.4,
-          "dificultad": 1,
-          "fecha": "2022-04-02"
-        }
-      ],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
       "owner": 7,
-      "id": 39
+      "id": 7
     },
     {
       "nombre": "Escaladores",
       "miembros": [
         9,
         10,
-        11
+        11,
+        35
       ],
       "group_stats": {
-        "km_semana": 0,
-        "desnivel_semana": 0,
-        "km_mes": 0,
-        "desnivel_mes": 0,
-        "km_anio": 0,
-        "desnivel_anio": 0
+        "km_semana": 18,
+        "desnivel_semana": 18,
+        "km_mes": 18,
+        "desnivel_mes": 18,
+        "km_anio": 18,
+        "desnivel_anio": 18
       },
       "clasificacion": [
         {
-          "nombre": "Pablo",
-          "puntos": 12
-        },
-        {
-          "nombre": "Carla",
-          "puntos": 9
-        },
-        {
-          "nombre": "Marta",
-          "puntos": 8
+          "nombre": "Miguel",
+          "actividad": "ciclismo",
+          "amigos": [
+            20,
+            21
+          ],
+          "stats": {
+            "km_semana": 18,
+            "km_mes": 18,
+            "km_anio": 18,
+            "desnivel_semana": 18,
+            "desnivel_mes": 18,
+            "desnivel_anio": 18
+          },
+          "rutas_favoritas": [
+            12
+          ],
+          "retos_activos": [
+            1
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 35
         }
       ],
-      "rutas_favoritas": [
-        {
-          "nombre": "Montaña del Teide",
-          "distancia": 8.4,
-          "dificultad": 5
-        },
-        {
-          "nombre": "Peña Ubiña",
-          "distancia": 11.2,
-          "dificultad": 4
-        }
-      ],
-      "historico_rutas": [
-        {
-          "nombre": "Pico Aneto",
-          "distancia": 14.5,
-          "dificultad": 5,
-          "fecha": "2022-06-15"
-        },
-        {
-          "nombre": "Vía Ferrata de la Hermida",
-          "distancia": 5.7,
-          "dificultad": 3,
-          "fecha": "2022-07-20"
-        }
-      ],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
       "owner": 9,
-      "id": 40
+      "id": 8
     },
     {
       "nombre": "Amantes de la Naturaleza",
@@ -257,58 +267,81 @@
         12,
         13,
         14,
-        15
+        15,
+        36,
+        37
       ],
       "group_stats": {
-        "km_semana": 32.1,
-        "desnivel_semana": 4.7,
-        "km_mes": 102.4,
-        "desnivel_mes": 13.5,
-        "km_anio": 572.8,
-        "desnivel_anio": 72.3
+        "km_semana": 39,
+        "desnivel_semana": 39,
+        "km_mes": 39,
+        "desnivel_mes": 39,
+        "km_anio": 39,
+        "desnivel_anio": null
       },
       "clasificacion": [
         {
-          "nombre": "Héctor",
-          "puntos": 22
+          "nombre": "Mauricio",
+          "actividad": "ciclismo",
+          "amigos": [
+            24,
+            25
+          ],
+          "stats": {
+            "km_semana": 20,
+            "km_mes": 20,
+            "km_anio": 20,
+            "desnivel_semana": 20,
+            "desnivel_mes": 20
+          },
+          "rutas_favoritas": [
+            14
+          ],
+          "retos_activos": [
+            2
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 37
         },
         {
-          "nombre": "Lucía",
-          "puntos": 19
-        },
-        {
-          "nombre": "Mario",
-          "puntos": 16
+          "nombre": "Luis",
+          "actividad": "ciclismo",
+          "amigos": [
+            22,
+            23
+          ],
+          "stats": {
+            "km_semana": 19,
+            "km_mes": 19,
+            "km_anio": 19,
+            "desnivel_semana": 19,
+            "desnivel_mes": 19,
+            "desnivel_anio": 19
+          },
+          "rutas_favoritas": [
+            13
+          ],
+          "retos_activos": [
+            2
+          ],
+          "historico_rutas": [
+            {
+              "fecha": "2023-03-24T20:05:57.102Z",
+              "rutaid": 10
+            }
+          ],
+          "id": 36
         }
       ],
-      "rutas_favoritas": [
-        {
-          "nombre": "Parque Nacional de Ordesa y Monte Perdido",
-          "distancia": 15.2,
-          "dificultad": 3
-        },
-        {
-          "nombre": "Monte Gorbea",
-          "distancia": 11.7,
-          "dificultad": 4
-        }
-      ],
-      "historico_rutas": [
-        {
-          "nombre": "Barranco de la Hoz",
-          "distancia": 8.1,
-          "dificultad": 2,
-          "fecha": "2022-03-12"
-        },
-        {
-          "nombre": "Sierra de Gredos",
-          "distancia": 24.5,
-          "dificultad": 4,
-          "fecha": "2022-05-01"
-        }
-      ],
+      "rutas_favoritas": [],
+      "historico_rutas": [],
       "owner": 12,
-      "id": 41
+      "id": 9
     }
   ]
 }

@@ -115,4 +115,11 @@ export class Ruta implements Datatype {
   public cambiarTipoRuta(tipo_ruta: Actividad): void {
     this.tipo_ruta = tipo_ruta;
   }
+  /**
+   * Añadir un usuario a la lista de usuarios que ya han realizado la ruta
+   * @param id ID del usuario
+   */
+  public addUsuario(id: number): void {
+    this.usuarios_ya_realizados.push(id);
+  }
 }

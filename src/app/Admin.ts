@@ -671,7 +671,9 @@ export class Admin {
         const ruta = this.rutas.findElement(answers.nombre);
         if (ruta != undefined) {
           usuario.addHistoricoRuta(ruta);
+          ruta.addUsuario(usuario.id);
           this.usuarios.updateElement(usuario);
+          this.rutas.updateElement(ruta);
           this.mainMenu();
         } else {
           console.log("La ruta no existe");

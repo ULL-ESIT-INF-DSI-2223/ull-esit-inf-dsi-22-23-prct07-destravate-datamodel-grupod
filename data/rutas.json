@@ -4,21 +4,22 @@
       "nombre": "Ruta1",
       "desnivel": 12,
       "usuarios_ya_realizados": [
-        123
+        22
       ],
       "tipo_ruta": "correr",
       "calificacion": [
         9,
         10
       ],
-      "id": 52,
+      "id": 10,
       "calificacion_media": 9.5
     },
     {
       "nombre": "Ruta2",
       "desnivel": 12,
       "usuarios_ya_realizados": [
-        123
+        23,
+        24
       ],
       "tipo_ruta": "bicicleta",
       "calificacion": [
@@ -26,14 +27,16 @@
         2,
         3
       ],
-      "id": 53,
+      "id": 11,
       "calificacion_media": 2
     },
     {
       "nombre": "Ruta3",
       "desnivel": 12,
       "usuarios_ya_realizados": [
-        123
+        25,
+        22,
+        23
       ],
       "tipo_ruta": "bicicleta",
       "calificacion": [
@@ -48,15 +51,13 @@
         9,
         10
       ],
-      "id": 54,
+      "id": 12,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta4",
       "desnivel": 12,
-      "usuarios_ya_realizados": [
-        123
-      ],
+      "usuarios_ya_realizados": [],
       "tipo_ruta": "bicicleta",
       "calificacion": [
         1,
@@ -70,14 +71,14 @@
         9,
         10
       ],
-      "id": 55,
+      "id": 13,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta5",
       "desnivel": 12,
       "usuarios_ya_realizados": [
-        123
+        29
       ],
       "tipo_ruta": "bicicleta",
       "calificacion": [
@@ -92,14 +93,14 @@
         9,
         10
       ],
-      "id": 56,
+      "id": 14,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta6",
       "desnivel": 12,
       "usuarios_ya_realizados": [
-        123
+        28
       ],
       "tipo_ruta": "bicicleta",
       "calificacion": [
@@ -114,7 +115,7 @@
         9,
         10
       ],
-      "id": 57,
+      "id": 15,
       "calificacion_media": 5.5
     },
     {
@@ -136,15 +137,13 @@
         9,
         10
       ],
-      "id": 58,
+      "id": 16,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta8",
       "desnivel": 12,
-      "usuarios_ya_realizados": [
-        123
-      ],
+      "usuarios_ya_realizados": [],
       "tipo_ruta": "bicicleta",
       "calificacion": [
         1,
@@ -158,15 +157,13 @@
         9,
         10
       ],
-      "id": 59,
+      "id": 17,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta9",
       "desnivel": 12,
-      "usuarios_ya_realizados": [
-        123
-      ],
+      "usuarios_ya_realizados": [],
       "tipo_ruta": "bicicleta",
       "calificacion": [
         1,
@@ -180,15 +177,13 @@
         9,
         10
       ],
-      "id": 60,
+      "id": 18,
       "calificacion_media": 5.5
     },
     {
       "nombre": "Ruta10",
       "desnivel": 12,
-      "usuarios_ya_realizados": [
-        123
-      ],
+      "usuarios_ya_realizados": [],
       "tipo_ruta": "bicicleta",
       "calificacion": [
         1,
@@ -202,7 +197,7 @@
         9,
         10
       ],
-      "id": 61,
+      "id": 19,
       "calificacion_media": 5.5
     }
   ]

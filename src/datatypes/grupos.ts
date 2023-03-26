@@ -140,7 +140,8 @@ export class Grupo implements Datatype {
       -miembro.getStats().km_semana,
       -miembro.getStats().km_mes,
       -miembro.getStats().km_anio,
-      -miembro.getStats().desnivel_semana,
+      
+    -miembro.getStats().desnivel_semana,
       -miembro.getStats().desnivel_mes,
       -miembro.getStats().desnivel_anio
     );

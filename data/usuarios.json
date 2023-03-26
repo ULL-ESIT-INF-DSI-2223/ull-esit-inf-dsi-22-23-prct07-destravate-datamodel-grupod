@@ -8,12 +8,12 @@
         2
       ],
       "stats": {
-        "km_semana": 1,
-        "km_mes": 1,
-        "km_anio": 1,
-        "desnivel_semana": 12,
-        "desnivel_mes": 12,
-        "desnivel_anio": 12
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 36,
+        "desnivel_mes": 36,
+        "desnivel_anio": 36
       },
       "rutas_favoritas": [
         0
@@ -29,9 +29,17 @@
         {
           "fecha": "2023-03-24T20:36:51.586Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:00:40.689Z",
+          "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:27.242Z",
+          "rutaid": 12
         }
       ],
-      "id": 91
+      "id": 22
     },
     {
       "nombre": "Febe",
@@ -40,12 +48,12 @@
         2
       ],
       "stats": {
-        "km_semana": 21,
-        "km_mes": 21,
-        "km_anio": 21,
-        "desnivel_semana": 2,
-        "desnivel_mes": 2,
-        "desnivel_anio": 2
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 26,
+        "desnivel_mes": 26,
+        "desnivel_anio": 26
       },
       "rutas_favoritas": [
         0
@@ -57,9 +65,17 @@
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:00.336Z",
+          "rutaid": 11
+        },
+        {
+          "fecha": "2023-03-26T11:01:41.222Z",
+          "rutaid": 12
         }
       ],
-      "id": 92
+      "id": 23
     },
     {
       "nombre": "Sofía",
@@ -69,12 +85,12 @@
         3
       ],
       "stats": {
-        "km_semana": 200,
-        "km_mes": 200,
-        "km_anio": 200,
-        "desnivel_semana": 200,
-        "desnivel_mes": 200,
-        "desnivel_anio": 200
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 212,
+        "desnivel_mes": 212,
+        "desnivel_anio": 212
       },
       "rutas_favoritas": [
         1
@@ -86,9 +102,13 @@
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:10.367Z",
+          "rutaid": 11
         }
       ],
-      "id": 93
+      "id": 24
     },
     {
       "nombre": "Pedro",
@@ -98,12 +118,12 @@
         5
       ],
       "stats": {
-        "km_semana": 100,
-        "km_mes": 100,
-        "km_anio": 100,
-        "desnivel_semana": 100,
-        "desnivel_mes": 100,
-        "desnivel_anio": 100
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 112,
+        "desnivel_mes": 112,
+        "desnivel_anio": 112
       },
       "rutas_favoritas": [
         2
@@ -115,9 +135,13 @@
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:19.126Z",
+          "rutaid": 12
         }
       ],
-      "id": 94
+      "id": 25
     },
     {
       "nombre": "Juan",
@@ -145,7 +169,7 @@
           "rutaid": 10
         }
       ],
-      "id": 95
+      "id": 26
     },
     {
       "nombre": "María",
@@ -174,7 +198,7 @@
           "rutaid": 10
         }
       ],
-      "id": 96
+      "id": 27
     },
     {
       "nombre": "Laura",
@@ -184,12 +208,12 @@
         5
       ],
       "stats": {
-        "km_semana": 60,
-        "km_mes": 60,
-        "km_anio": 60,
-        "desnivel_semana": 60,
-        "desnivel_mes": 60,
-        "desnivel_anio": 60
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 72,
+        "desnivel_mes": 72,
+        "desnivel_anio": 72
       },
       "rutas_favoritas": [
         5
@@ -201,9 +225,13 @@
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:59.883Z",
+          "rutaid": 15
         }
       ],
-      "id": 97
+      "id": 28
     },
     {
       "nombre": "Pablo",
@@ -213,12 +241,12 @@
         9
       ],
       "stats": {
-        "km_semana": 3000,
-        "km_mes": 3000,
-        "km_anio": 3000,
-        "desnivel_semana": 3000,
-        "desnivel_mes": 3000,
-        "desnivel_anio": 3000
+        "km_semana": null,
+        "km_mes": null,
+        "km_anio": null,
+        "desnivel_semana": 3012,
+        "desnivel_mes": 3012,
+        "desnivel_anio": 3012
       },
       "rutas_favoritas": [
         6
@@ -230,9 +258,13 @@
         {
           "fecha": "2023-03-24T20:05:57.102Z",
           "rutaid": 10
+        },
+        {
+          "fecha": "2023-03-26T11:01:49.829Z",
+          "rutaid": 14
         }
       ],
-      "id": 98
+      "id": 29
     },
     {
       "nombre": "Antonio",
@@ -261,7 +293,7 @@
           "rutaid": 10
         }
       ],
-      "id": 99
+      "id": 30
     },
     {
       "nombre": "Marta",
@@ -290,7 +322,7 @@
           "rutaid": 10
         }
       ],
-      "id": 100
+      "id": 31
     },
     {
       "nombre": "Javier",
@@ -319,7 +351,7 @@
           "rutaid": 10
         }
       ],
-      "id": 101
+      "id": 32
     },
     {
       "nombre": "Sara",
@@ -347,7 +379,7 @@
           "rutaid": 10
         }
       ],
-      "id": 102
+      "id": 33
     },
     {
       "nombre": "Sergio",
@@ -376,7 +408,7 @@
           "rutaid": 10
         }
       ],
-      "id": 103
+      "id": 34
     },
     {
       "nombre": "Miguel",
@@ -405,7 +437,7 @@
           "rutaid": 10
         }
       ],
-      "id": 104
+      "id": 35
     },
     {
       "nombre": "Luis",
@@ -434,7 +466,7 @@
           "rutaid": 10
         }
       ],
-      "id": 105
+      "id": 36
     },
     {
       "nombre": "Mauricio",
@@ -462,7 +494,7 @@
           "rutaid": 10
         }
       ],
-      "id": 106
+      "id": 37
     },
     {
       "nombre": "Chicho",
@@ -491,7 +523,7 @@
           "rutaid": 10
         }
       ],
-      "id": 107
+      "id": 38
     },
     {
       "nombre": "Brayan",
@@ -520,7 +552,7 @@
           "rutaid": 10
         }
       ],
-      "id": 108
+      "id": 39
     },
     {
       "nombre": "Eduardo",
@@ -549,7 +581,7 @@
           "rutaid": 10
         }
       ],
-      "id": 109
+      "id": 40
     },
     {
       "nombre": "Aday",
@@ -578,7 +610,7 @@
           "rutaid": 10
         }
       ],
-      "id": 110
+      "id": 41
     },
     {
       "nombre": "Mario",
@@ -607,7 +639,7 @@
           "rutaid": 10
         }
       ],
-      "id": 111
+      "id": 42
     }
   ]
 }

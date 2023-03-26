@@ -105,15 +105,10 @@ export class Grupo implements Datatype {
   addMiembro(miembro: Usuario) {
     this.miembros.push(miembro.id);
     this.clasificacion.push({ nombre: miembro.nombre, id: miembro.id, valor: miembro.getStats().km_anio });
-    for (let i = 0; i < this.clasificacion.length; i++) {
-      for (let j = i + 1; j < this.clasificacion.length; j++) {
-        if (this.clasificacion[i].valor < this.clasificacion[j].valor) {
-          let aux = this.clasificacion[i];
-          this.clasificacion[i] = this.clasificacion[j];
-          this.clasificacion[j] = aux;
-        }
-      }
-    }
+    
+    this.clasificacion.sort((a, b) => {
+      return b.valor - a.valor;
+    });
     
     this.updateStats(
       miembro.getStats().km_semana,

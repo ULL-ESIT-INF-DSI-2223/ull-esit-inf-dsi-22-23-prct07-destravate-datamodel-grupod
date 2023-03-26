@@ -4,7 +4,6 @@ import { Stats } from "../datatypes/stats";
 
 import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
-import { Usuario } from "../datatypes/usuarios";
 /**
  * Esquema de la base de datos
  * @typedef schemaType Esquema de la base de datos

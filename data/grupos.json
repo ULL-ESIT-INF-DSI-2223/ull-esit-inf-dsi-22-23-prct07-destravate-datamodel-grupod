@@ -80,7 +80,7 @@
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 0,
-      "id": 46
+      "id": 37
     },
     {
       "nombre": "Ciclistas",
@@ -158,7 +158,7 @@
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 4,
-      "id": 47
+      "id": 38
     },
     {
       "nombre": "Senderistas",
@@ -207,7 +207,7 @@
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 7,
-      "id": 48
+      "id": 39
     },
     {
       "nombre": "Escaladores",
@@ -259,7 +259,7 @@
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 9,
-      "id": 49
+      "id": 40
     },
     {
       "nombre": "Amantes de la Naturaleza",
@@ -341,7 +341,7 @@
       "rutas_favoritas": [],
       "historico_rutas": [],
       "owner": 12,
-      "id": 50
+      "id": 41
     }
   ]
 }

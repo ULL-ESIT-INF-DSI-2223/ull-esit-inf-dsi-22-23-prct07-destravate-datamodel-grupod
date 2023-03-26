@@ -3,6 +3,7 @@ import { Ruta } from "./rutas";
 import { Stats } from "./stats";
 /**
  * Tipo de dato Actividad
+ * @typedef {string} Actividad
  */
 type Actividad = "correr" | "bicicleta" | undefined;
 /**
@@ -95,6 +96,10 @@ export class Usuario implements Datatype {
    */
   public getKmRecorridosAnio(): number {
     return this.stats.km_anio;
+  }
+
+  public getDesnivelSemana(): number {
+    return this.stats.desnivel_semana;
   }
 
   /**

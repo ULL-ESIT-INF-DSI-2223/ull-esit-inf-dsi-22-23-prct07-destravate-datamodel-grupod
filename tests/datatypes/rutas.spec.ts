@@ -58,4 +58,9 @@ describe("Clase Rutas", () => {
     const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "correr", [1]);
     expect(ruta.getCoordenadasFin()).to.be.deep.eq([2, 2]);
   });
+  it("Se debe poder añadir un usuario a la lista de usuarios que han realizado la ruta", () => {
+    const ruta = new Ruta("ruta1", [1, 1], [2, 2], 1, 1, [1], "correr", [1]);
+    ruta.addUsuario(2);
+    expect(ruta.getUsuarios()).to.be.deep.eq([1, 2]);
+  });
 });

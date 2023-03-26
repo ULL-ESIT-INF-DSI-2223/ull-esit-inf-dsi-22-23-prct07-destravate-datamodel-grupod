@@ -56,7 +56,7 @@ describe("Clase Grupos", () => {
       desnivel_semana: 100,
     };
     const grupos = new Grupo("Grupo 1", [1, 2, 3], stats, [], [], [], -1);
-    grupos.updateStats(100, 100);
+    grupos.updateStats(100, 100, 100, 100, 100, 100);
     expect(grupos.getKmRecorridosAnio()).to.be.deep.eq(200);
     expect(grupos.getKmRecorridosMes()).to.be.deep.eq(200);
     expect(grupos.getKmRecorridosSemana()).to.be.deep.eq(200);

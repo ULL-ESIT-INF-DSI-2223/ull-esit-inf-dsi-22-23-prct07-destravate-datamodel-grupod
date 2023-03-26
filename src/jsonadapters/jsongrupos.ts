@@ -7,6 +7,7 @@ import FileSync from "lowdb/adapters/FileSync";
 import { Usuario } from "../datatypes/usuarios";
 /**
  * Esquema de la base de datos
+ * @typedef schemaType Esquema de la base de datos
  */
 type schemaType = {
   grupos: {

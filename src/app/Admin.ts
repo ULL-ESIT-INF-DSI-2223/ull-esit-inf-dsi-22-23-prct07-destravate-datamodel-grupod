@@ -13,7 +13,9 @@ import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
 import { Gestor } from "./Gestor";
 import readline from "readline";
-
+/**
+ * Tipo de funcion
+ */
 type MyFunctionType = () => void;
 /**
  * Enumerado de los comandos
@@ -669,7 +671,9 @@ export class Admin {
         const ruta = this.rutas.findElement(answers.nombre);
         if (ruta != undefined) {
           usuario.addHistoricoRuta(ruta);
+          ruta.addUsuario(usuario.id);
           this.usuarios.updateElement(usuario);
+          this.rutas.updateElement(ruta);
           this.mainMenu();
         } else {
           console.log("La ruta no existe");
@@ -1343,7 +1347,7 @@ export class Admin {
       b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
     );
     for (let i = 0; i < rutas.length; i++) {
-      console.log(rutas[i]);
+      console.log(rutas[i].nombre);
     }
     this.volver(this.mostrarRutas.bind(this));
   }

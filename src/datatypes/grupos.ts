@@ -104,12 +104,14 @@ export class Grupo implements Datatype {
    */
   addMiembro(miembro: Usuario) {
     this.miembros.push(miembro.id);
-    this.clasificacion.push({ nombre: miembro.nombre, id: miembro.id, valor: miembro.getStats().km_anio });
-    
-    this.clasificacion.sort((a, b) => {
-      return b.valor - a.valor;
+    this.clasificacion.push({
+      nombre: miembro.nombre,
+      id: miembro.id,
+      valor: miembro.getStats().km_anio,
     });
-    
+
+    this.clasificacion.sort((a, b) => b.valor - a.valor);
+
     this.updateStats(
       miembro.getStats().km_semana,
       miembro.getStats().km_mes,
@@ -133,8 +135,8 @@ export class Grupo implements Datatype {
       -miembro.getStats().km_semana,
       -miembro.getStats().km_mes,
       -miembro.getStats().km_anio,
-      
-    -miembro.getStats().desnivel_semana,
+
+      -miembro.getStats().desnivel_semana,
       -miembro.getStats().desnivel_mes,
       -miembro.getStats().desnivel_anio
     );

@@ -13,10 +13,11 @@ import { JsonRutas } from "../jsonadapters/jsonrutas";
 import { JsonRetos } from "../jsonadapters/jsonretos";
 import { Gestor } from "./Gestor";
 import readline from "readline";
+
 /**
  * Tipo de funcion
  */
-export type MyFunctionType = () => void;
+export type MyFunctionType = () => boolean;
 /**
  * Enumerado de los comandos
  */
@@ -112,6 +113,34 @@ export class Admin {
         }
       });
     return true;
+  }
+  /**
+   * Getter de los usuarios
+   * @returns Devuelve los usuarios
+   */
+  getUsuarios(): UsuarioCollection {
+    return this.usuarios;
+  }
+  /**
+   * Getter de las rutas
+   * @returns Devuelve las rutas
+   */
+  getRutas(): RutaCollection {
+    return this.rutas;
+  }
+  /**
+   * Getter de los retos
+   * @returns Devuelve los retos
+   */
+  getRetos(): RetoCollection {
+    return this.retos;
+  }
+  /**
+   * Getter de los grupos
+   * @returns Devuelve los grupos
+   */
+  getGrupos(): GrupoCollection {
+    return this.grupos;
   }
   /**
    * Cambia a los usuarios que se le pasan
@@ -271,6 +300,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de crear grupo
@@ -330,6 +360,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de crear ruta
@@ -409,6 +440,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de crear reto
@@ -461,6 +493,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de modificar usuario
@@ -524,6 +557,7 @@ export class Admin {
             });
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar nombre de usuario
@@ -555,6 +589,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar actividad de usuario
@@ -602,6 +637,7 @@ export class Admin {
           this.anadirAmigo(usuario);
         }
       });
+    return true;
   }
   /**
    * Menú de añadir ruta favorita a usuario
@@ -628,6 +664,7 @@ export class Admin {
           this.anadirRutaFavorita(usuario);
         }
       });
+    return true;
   }
   /**
    * Menú de añadir reto a usuario
@@ -654,6 +691,7 @@ export class Admin {
           this.anadirReto(usuario);
         }
       });
+    return true;
   }
   /**
    * Menú de añadir rutas a usuario
@@ -682,11 +720,12 @@ export class Admin {
           this.anadirRutas(usuario);
         }
       });
+    return true;
   }
   /**
    * Menú de modificar retos
    */
-  modificarReto(): void {
+  modificarReto(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -739,12 +778,13 @@ export class Admin {
           this.modificarReto();
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar nombre de reto
    * @param reto Reto a modificar
    */
-  modificarNombreReto(reto: Reto): void {
+  modificarNombreReto(reto: Reto): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -759,12 +799,13 @@ export class Admin {
         this.retos.updateElement(reto);
         console.log("Nombre modificado correctamente");
       });
+    return true;
   }
   /**
    * Menú de cambiar tipo de reto
    * @param reto Reto a modificar
    */
-  modificarTipoReto(reto: Reto): void {
+  modificarTipoReto(reto: Reto): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -779,12 +820,13 @@ export class Admin {
         this.retos.updateElement(reto);
         console.log("Tipo de reto modificado correctamente");
       });
+    return true;
   }
   /**
    * Menú de cambiar km totales de reto
    * @param reto Reto a modificar
    */
-  modificarKmTotalesReto(reto: Reto): void {
+  modificarKmTotalesReto(reto: Reto): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -799,12 +841,13 @@ export class Admin {
         this.retos.updateElement(reto);
         console.log("Km totales modificados correctamente");
       });
+    return true;
   }
   /**
    * Menú de cambiar usuarios realizando reto
    * @param reto Reto a modificar
    */
-  modificarUsuariosRealizandoReto(reto: Reto): void {
+  modificarUsuariosRealizandoReto(reto: Reto): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -822,12 +865,13 @@ export class Admin {
         this.retos.updateElement(reto);
         console.log("Usuarios realizando el reto modificados correctamente");
       });
+    return true;
   }
   /**
    * Menú de cambiar rutas de reto
    * @param reto Reto a modificar
    */
-  modificarRutasReto(reto: Reto): void {
+  modificarRutasReto(reto: Reto): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -844,6 +888,7 @@ export class Admin {
         this.retos.updateElement(reto);
         console.log("Rutas modificadas correctamente");
       });
+    return true;
   }
   /**
    * Menú de modificar grupos
@@ -898,6 +943,7 @@ export class Admin {
             });
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar nombre de grupo
@@ -929,6 +975,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de añadir miembro a grupo
@@ -955,6 +1002,7 @@ export class Admin {
           this.addMiembro(grupo);
         }
       });
+    return true;
   }
 
   /**
@@ -982,6 +1030,7 @@ export class Admin {
           this.eliminarMiembro(grupo);
         }
       });
+    return true;
   }
 
   /**
@@ -1009,6 +1058,7 @@ export class Admin {
           this.addRutaFavoritaGrupo(grupo);
         }
       });
+    return true;
   }
   /**
    * Menú de modificar rutas
@@ -1063,6 +1113,7 @@ export class Admin {
             });
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar nombre de ruta
@@ -1094,6 +1145,7 @@ export class Admin {
           }
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar distancia de ruta
@@ -1121,6 +1173,7 @@ export class Admin {
           this.mainMenu();
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar desnivel de ruta
@@ -1148,6 +1201,7 @@ export class Admin {
           this.mainMenu();
         }
       });
+    return true;
   }
   /**
    * Menú de cambiar tipo de ruta
@@ -1169,11 +1223,12 @@ export class Admin {
         this.rutas.updateElement(ruta);
         this.mainMenu();
       });
+    return true;
   }
   /**
    * Menú de eliminar usuarios
    */
-  eliminarUsuario(): void {
+  eliminarUsuario(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1191,11 +1246,12 @@ export class Admin {
         console.log("Usuario eliminado correctamente");
         this.mainMenu();
       });
+    return true;
   }
   /**
    * Menú de eliminar retos
    */
-  eliminarReto(): void {
+  eliminarReto(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1211,11 +1267,12 @@ export class Admin {
         console.log("Reto eliminado correctamente");
         this.mainMenu();
       });
+    return true;
   }
   /**
    * Menú de eliminar rutas
    */
-  eliminarRuta(): void {
+  eliminarRuta(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1231,11 +1288,12 @@ export class Admin {
         console.log("Ruta eliminada correctamente");
         this.mainMenu();
       });
+    return true;
   }
   /**
    * Menú de eliminar grupos
    */
-  eliminarGrupo(): void {
+  eliminarGrupo(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1260,11 +1318,12 @@ export class Admin {
           this.mainMenu();
         }
       });
+    return true;
   }
   /**
    * Menú de mostrar rutas
    */
-  mostrarRutas(): void {
+  mostrarRutas(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1324,11 +1383,12 @@ export class Admin {
             break;
         }
       });
+    return true;
   }
   /**
    * Mostrar rutas alfabeticamente ascendente
    */
-  mostrarRutasAlfabeticamenteAscendente(): void {
+  mostrarRutasAlfabeticamenteAscendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) =>
@@ -1338,11 +1398,12 @@ export class Admin {
       console.log(rutas[i].nombre);
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas alfabeticamente descendente
    */
-  mostrarRutasAlfabeticamenteDescendente(): void {
+  mostrarRutasAlfabeticamenteDescendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) =>
@@ -1352,11 +1413,12 @@ export class Admin {
       console.log(rutas[i].nombre);
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por cantidad de usuarios ascendente
    */
-  mostrarRutasCantidadUsuariosAscendente(): void {
+  mostrarRutasCantidadUsuariosAscendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => a.getUsuarios().length - b.getUsuarios().length);
@@ -1364,11 +1426,12 @@ export class Admin {
       console.log(rutas[i].nombre + " " + rutas[i].getUsuarios().length);
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por cantidad de usuarios descendente
    */
-  mostrarRutasCantidadUsuariosDescendente(): void {
+  mostrarRutasCantidadUsuariosDescendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => b.getUsuarios().length - a.getUsuarios().length);
@@ -1376,11 +1439,12 @@ export class Admin {
       console.log(rutas[i].nombre + " " + rutas[i].getUsuarios().length);
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por distancia ascendente
    */
-  mostrarRutasDistanciaAscendente(): void {
+  mostrarRutasDistanciaAscendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => a.getDistancia() - b.getDistancia());
@@ -1388,11 +1452,12 @@ export class Admin {
       console.log(rutas[i].nombre + " " + rutas[i].getDistancia());
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por distancia descendente
    */
-  mostrarRutasDistanciaDescendente(): void {
+  mostrarRutasDistanciaDescendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => b.getDistancia() - a.getDistancia());
@@ -1400,11 +1465,12 @@ export class Admin {
       console.log(rutas[i].nombre + " " + rutas[i].getDistancia());
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por calificacion media ascendente
    */
-  mostrarRutasCalificacionAscendente(): void {
+  mostrarRutasCalificacionAscendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => a.getCalificacionMedia() - b.getCalificacionMedia());
@@ -1414,11 +1480,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas por calificacion media descendente
    */
-  mostrarRutasCalificacionDescendente(): void {
+  mostrarRutasCalificacionDescendente(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     rutas.sort((a, b) => b.getCalificacionMedia() - a.getCalificacionMedia());
@@ -1428,11 +1495,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas de correr
    */
-  mostrarRutasCorrer(): void {
+  mostrarRutasCorrer(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     const rutasCorrer = rutas.filter((ruta) => ruta.getTipoRuta() === "correr");
@@ -1440,11 +1508,12 @@ export class Admin {
       console.log(rutasCorrer[i].nombre + ": " + rutasCorrer[i].getTipoRuta());
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Mostrar rutas de bicicleta
    */
-  mostrarRutasBicicleta(): void {
+  mostrarRutasBicicleta(): boolean {
     console.clear();
     const rutas = this.rutas.getAllElements();
     const rutasBicicleta = rutas.filter(
@@ -1456,11 +1525,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarRutas.bind(this));
+    return true;
   }
   /**
    * Menú de mostra usuarios
    */
-  mostrarUsuarios(): void {
+  mostrarUsuarios(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1512,11 +1582,12 @@ export class Admin {
             break;
         }
       });
+    return true;
   }
   /**
    * Mostrar usuarios por orden alfabético ascendente
    */
-  mostrarUsuariosAlfabeticamenteAscendente(): void {
+  mostrarUsuariosAlfabeticamenteAscendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) =>
@@ -1526,11 +1597,12 @@ export class Admin {
       console.log(usuarios[i].nombre);
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por orden alfabético descendente
    */
-  mostrarUsuariosAlfabeticamenteDescendente(): void {
+  mostrarUsuariosAlfabeticamenteDescendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) =>
@@ -1540,11 +1612,12 @@ export class Admin {
       console.log(usuarios[i].nombre);
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados semana actual ascendente
    */
-  mostrarUsuariosKmSemanaAscendente(): void {
+  mostrarUsuariosKmSemanaAscendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort(
@@ -1556,11 +1629,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados semana actual descendente
    */
-  mostrarUsuariosKmSemanaDescendente(): void {
+  mostrarUsuariosKmSemanaDescendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort(
@@ -1572,11 +1646,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados mes actual ascendente
    */
-  mostrarUsuariosKmMesAscendente(): void {
+  mostrarUsuariosKmMesAscendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) => a.getKmRecorridosMes() - b.getKmRecorridosMes());
@@ -1584,11 +1659,12 @@ export class Admin {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados mes actual descendente
    */
-  mostrarUsuariosKmMesDescendente(): void {
+  mostrarUsuariosKmMesDescendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) => b.getKmRecorridosMes() - a.getKmRecorridosMes());
@@ -1596,11 +1672,12 @@ export class Admin {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosMes());
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados año actual ascendente
    */
-  mostrarUsuariosKmAñoAscendente(): void {
+  mostrarUsuariosKmAñoAscendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) => a.getKmRecorridosAnio() - b.getKmRecorridosAnio());
@@ -1608,11 +1685,12 @@ export class Admin {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Mostrar usuarios por cantidad de Km realizados año actual descendente
    */
-  mostrarUsuariosKmAñoDescendente(): void {
+  mostrarUsuariosKmAñoDescendente(): boolean {
     console.clear();
     const usuarios = this.usuarios.getAllElements();
     usuarios.sort((a, b) => b.getKmRecorridosAnio() - a.getKmRecorridosAnio());
@@ -1620,11 +1698,12 @@ export class Admin {
       console.log(usuarios[i].nombre + " " + usuarios[i].getKmRecorridosAnio());
     }
     this.volver(this.mostrarUsuarios.bind(this));
+    return true;
   }
   /**
    * Menú de mostrar retos
    */
-  mostrarRetos(): void {
+  mostrarRetos(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1668,11 +1747,12 @@ export class Admin {
             break;
         }
       });
+    return true;
   }
   /**
    * Mostrar retos por cantidad de Km a realizar ascendente
    */
-  mostrarRetosAlfabeticamenteAscendente(): void {
+  mostrarRetosAlfabeticamenteAscendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort((a, b) =>
@@ -1682,11 +1762,12 @@ export class Admin {
       console.log(retos[i].nombre);
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Mostrar retos por cantidad de Km a realizar descendente
    */
-  mostrarRetosAlfabeticamenteDescendente(): void {
+  mostrarRetosAlfabeticamenteDescendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort((a, b) =>
@@ -1696,11 +1777,12 @@ export class Admin {
       console.log(retos[i].nombre);
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Mostrar retos por cantidad de Km a realizar ascendente
    */
-  mostrarRetosKmAscendente(): void {
+  mostrarRetosKmAscendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort((a, b) => a.getKmTotales() - b.getKmTotales());
@@ -1708,11 +1790,12 @@ export class Admin {
       console.log(retos[i].nombre + " " + retos[i].getKmTotales());
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Mostrar retos por cantidad de Km a realizar descendente
    */
-  mostrarRetosKmDescendente(): void {
+  mostrarRetosKmDescendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort((a, b) => b.getKmTotales() - a.getKmTotales());
@@ -1720,11 +1803,12 @@ export class Admin {
       console.log(retos[i].nombre + " " + retos[i].getKmTotales());
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Mostrar retos por cantidad de usuarios participantes ascendente
    */
-  mostrarRetosUsuariosAscendente(): void {
+  mostrarRetosUsuariosAscendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort(
@@ -1741,11 +1825,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Mostrar retos por cantidad de usuarios participantes descendente
    */
-  mostrarRetosUsuariosDescendente(): void {
+  mostrarRetosUsuariosDescendente(): boolean {
     console.clear();
     const retos = this.retos.getAllElements();
     retos.sort(
@@ -1762,11 +1847,12 @@ export class Admin {
       );
     }
     this.volver(this.mostrarRetos.bind(this));
+    return true;
   }
   /**
    * Menú de mostrar grupos
    */
-  mostrarGrupos(): void {
+  mostrarGrupos(): boolean {
     console.clear();
     inquirer
       .prompt([
@@ -1826,11 +1912,12 @@ export class Admin {
             break;
         }
       });
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente ascendente
    */
-  mostrarGruposAlfabeticamenteAscendente(): void {
+  mostrarGruposAlfabeticamenteAscendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) =>
@@ -1840,11 +1927,12 @@ export class Admin {
       console.log(grupos[i].nombre);
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente descendente
    */
-  mostrarGruposAlfabeticamenteDescendente(): void {
+  mostrarGruposAlfabeticamenteDescendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) =>
@@ -1854,11 +1942,12 @@ export class Admin {
       console.log(grupos[i].nombre);
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente ascendente
    */
-  mostrarGruposKmSemanaAscendente(): void {
+  mostrarGruposKmSemanaAscendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort(
@@ -1868,11 +1957,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km semana realizados conjuntamente descendente
    */
-  mostrarGruposKmSemanaDescendente(): void {
+  mostrarGruposKmSemanaDescendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort(
@@ -1882,11 +1972,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosSemana());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km mes realizados conjuntamente ascendente
    */
-  mostrarGruposKmMesAscendente(): void {
+  mostrarGruposKmMesAscendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => a.getKmRecorridosMes() - b.getKmRecorridosMes());
@@ -1894,11 +1985,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km mes realizados conjuntamente descendente
    */
-  mostrarGruposKmMesDescendente(): void {
+  mostrarGruposKmMesDescendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => b.getKmRecorridosMes() - a.getKmRecorridosMes());
@@ -1906,11 +1998,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosMes());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km año realizados conjuntamente ascendente
    */
-  mostrarGruposKmAnioAscendente(): void {
+  mostrarGruposKmAnioAscendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => a.getKmRecorridosAnio() - b.getKmRecorridosAnio());
@@ -1918,11 +2011,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de km año realizados conjuntamente descendente
    */
-  mostrarGruposKmAnioDescendente(): void {
+  mostrarGruposKmAnioDescendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => b.getKmRecorridosAnio() - a.getKmRecorridosAnio());
@@ -1930,11 +2024,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getKmRecorridosAnio());
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de miembros ascendente
    */
-  mostrarGruposMiembrosAscendente(): void {
+  mostrarGruposMiembrosAscendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => a.getMiembros().length - b.getMiembros().length);
@@ -1942,11 +2037,12 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
   /**
    * Mostrar grupos por cantidad de miembros descendente
    */
-  mostrarGruposMiembrosDescendente(): void {
+  mostrarGruposMiembrosDescendente(): boolean {
     console.clear();
     const grupos = this.grupos.getAllElements();
     grupos.sort((a, b) => b.getMiembros().length - a.getMiembros().length);
@@ -1954,5 +2050,6 @@ export class Admin {
       console.log(grupos[i].nombre + " " + grupos[i].getMiembros().length);
     }
     this.volver(this.mostrarGrupos.bind(this));
+    return true;
   }
 }
